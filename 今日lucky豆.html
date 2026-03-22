@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵魂咖啡寻踪 - 深度风味分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#c4a484',
+                    },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c4a484;
+            --deep-black: #0a0a0c;
+            --soft-white: #f5f5f7;
+            --accent-orange: #d4a373;
+        }
+
+
+        body {
+            margin: 0;
+            background: var(--deep-black);
+            color: var(--soft-white);
+            font-family: 'Montserrat', 'Noto Serif SC', serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(196, 164, 132, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212, 163, 115, 0.05) 0%, transparent 40%);
+        }
+
+        #app {
+            width: min(100%, 72rem);
+            margin-inline: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        #quiz-screen,
+        #result-screen,
+        #loading-screen,
+        #start-screen {
+            width: 100%;
+        }
+
+        #quiz-screen .glass-card,
+        #result-screen .glass-card {
+            margin-inline: auto;
+        }
+
+        #quiz-screen .glass-card {
+            max-width: 54rem;
+        }
+
+        #question-number,
+        #category-tag,
+        #header-spacer {
+            min-width: 6rem;
+        }
+
+        #start-screen {
+            width: min(100%, 26rem);
+            min-height: calc(100vh - 2rem);
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #start-screen .icon-container,
+        #start-screen h1,
+        #start-screen p,
+        #start-screen button {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .option-btn {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+
+        .option-btn:hover {
+            background: rgba(196, 164, 132, 0.15);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .option-btn.selected {
+            background: var(--gold);
+            color: var(--deep-black);
+            border-color: var(--gold);
+        }
+
+
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .progress-bar {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+
+        /* 模拟光影漂浮 */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: float 20s infinite alternate;
+            pointer-events: none;
+        }
+
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
+        }
+
+
+        .icon-container svg {
+            filter: drop-shadow(0 0 8px rgba(196, 164, 132, 0.5));
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 1.5rem;
+            }
+
+            .orb {
+                filter: blur(56px);
+                opacity: 0.2;
+            }
+
+            .option-btn:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            main {
+                max-width: 100%;
+            }
+
+            #start-screen {
+                width: min(100%, 24rem);
+                min-height: calc(100vh - 1.5rem);
+            }
+
+            #category-tag {
+                max-width: 11rem;
+                text-align: right;
+                line-height: 1.4;
+                letter-spacing: 0.18em;
+            }
+
+            #options-container {
+                gap: 0.75rem;
+            }
+
+            #recommendations {
+                gap: 1rem;
+            }
+
+            .option-btn {
+                padding: 1rem;
+                font-size: 0.95rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-4">
+
+
+    <!-- 动态背景装饰 -->
+    <div class="orb w-64 h-64 sm:w-96 sm:h-96 bg-yellow-900 top-[10%] left-1/2 -translate-x-[62%]"></div>
+    <div class="orb w-56 h-56 sm:w-80 sm:h-80 bg-orange-900 bottom-[8%] left-1/2 translate-x-[8%]" style="animation-delay: -5s;"></div>
+
+
+    <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+    </div>
+
+
+    <main id="app" class="w-full max-w-4xl mx-auto">
+        <!-- 开始页面 -->
+        <section id="start-screen" class="text-center fade-in">
+            <div class="mb-6 sm:mb-8 flex justify-center">
+                <div class="icon-container">
+                    <!-- Coffee Bean SVG -->
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gold sm:w-20 sm:h-20">
+                        <path d="M12 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
+                        <path d="M12 2c-4 4-4 12 0 16"/>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-xs sm:text-sm uppercase tracking-[0.35em] text-gold/80 mb-3 sm:mb-4">亲爱的咖啡旅人</p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 gradient-text leading-tight">灵魂咖啡寻踪</h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-2">
+                穿越迷雾般的风味森林，在15个直觉瞬间中，
+                <span class="block sm:inline">发现那支跨越山海只为契合你的本命豆。</span>
+            </p>
+            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 sm:px-12 py-4 bg-transparent border border-gold text-gold rounded-full text-base sm:text-lg hover:bg-gold hover:text-black transition-all duration-500 tracking-[0.25em] sm:tracking-widest">
+                开启寻踪之旅
+            </button>
+        </section>
+
+
+        <!-- 问题页面 -->
+        <section id="quiz-screen" class="hidden">
+            <div class="glass-card p-5 sm:p-8 md:p-12">
+                <div class="grid grid-cols-[minmax(6rem,1fr)_auto_minmax(6rem,1fr)] items-start gap-3 sm:gap-4 mb-8 sm:mb-12">
+                    <span id="question-number" class="text-gold font-mono tracking-widest text-left">01 / 15</span>
+                    <span id="header-spacer" aria-hidden="true"></span>
+                    <span id="category-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 text-right">Sensory Sensory Perception</span>
+                </div>
+                
+                <div id="question-content" class="fade-in">
+                    <div id="question-icon" class="mb-4 sm:mb-6 flex justify-center h-16 sm:h-20"></div>
+                    <h2 id="question-text" class="text-xl sm:text-2xl md:text-3xl font-medium mb-6 sm:mb-10 text-center leading-tight"></h2>
+                    <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+
+                <div class="mt-8 sm:mt-12 flex justify-between items-center gap-4">
+                    <button id="prev-btn" onclick="prevQuestion()" class="text-sm sm:text-base text-gray-500 hover:text-white transition-colors disabled:opacity-0">
+                        ← 返回上一步
+                    </button>
+                    <div class="flex gap-2 shrink-0" id="dots-container"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 分析加载中 -->
+        <section id="loading-screen" class="hidden text-center fade-in py-10 sm:py-0">
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8">
+                <div class="absolute inset-0 border-2 border-gold opacity-20 rounded-full"></div>
+                <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-light tracking-[0.2em] sm:tracking-widest mb-4">风味罗盘校准中...</h2>
+            <p id="loading-text" class="text-sm sm:text-base text-gray-500 italic px-4">正在提取您的嗅觉潜意识...</p>
+        </section>
+
+
+        <!-- 结果报告页面 -->
+        <section id="result-screen" class="hidden fade-in">
+            <div class="glass-card overflow-hidden">
+                <div class="bg-gradient-to-r from-stone-900 to-black p-6 sm:p-10 text-center border-b border-white/10">
+                    <h3 class="text-gold uppercase tracking-[0.25em] sm:tracking-[0.4em] mb-4 text-xs sm:text-sm">风味人格分析报告</h3>
+                    <h2 id="personality-title" class="text-3xl sm:text-4xl font-bold mb-4 leading-tight"></h2>
+                    <p id="personality-desc" class="text-sm sm:text-base text-gray-400 max-w-xl mx-auto leading-relaxed"></p>
+                </div>
+                
+                <div class="p-5 sm:p-8 md:p-12">
+                    <h4 class="text-center text-lg sm:text-xl mb-6 sm:mb-10 tracking-[0.18em] sm:tracking-widest">—— 馆藏推荐 ——</h4>
+                    <div id="recommendations" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+                    
+                    <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 text-center">
+                        <button onclick="location.reload()" class="text-gold hover:underline tracking-widest text-sm">重新探索</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        // --- 核心数据配置 ---
+        const icons = {
+            fruit: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-orange-400"><path d="M12,2L13,4C16,4.2 19,6 20.5,8.5C22,11 22,14 21,17C20,20 17,22 14,22C11,22 8,20.5 6.5,18.5C5,16.5 4.5,14 5,11.5C5.5,9 7,6.5 9.5,5L12,2Z"/></svg>`,
+            forest: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-green-600"><path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/></svg>`,
+            night: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-blue-300"><path d="M12.1,22C10.3,22 8.6,21.5 7,20.5C3.3,18.5 1.4,14 2.8,10.1C3.6,7.8 5.3,6 7.5,5.1C7.9,4.9 8.3,5.2 8.3,5.6C8.3,5.7 8.3,5.8 8.2,5.9C7.4,7.8 7.6,9.9 8.7,11.6C9.8,13.3 11.7,14.4 13.8,14.5C14.1,14.5 14.4,14.7 14.5,15C14.6,15.3 14.5,15.7 14.2,15.9C13.6,16.3 12.8,16.7 12,16.7L12.1,22Z"/></svg>`,
+            fire: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-red-500"><path d="M17.66,11.2C17.43,10.9 17.15,10.64 16.89,10.38C16.22,9.7 15.46,9.02 15.16,8.14C14.82,7.13 15.05,6.11 15.4,5.17C15.55,4.77 15.71,4.37 15.84,3.97C15.94,3.61 15.9,3.23 15.73,2.9C15.46,2.41 14.94,2.13 14.4,2.21C13.28,2.37 12.23,2.91 11.33,3.61C9.6,4.96 8.5,7.03 8.5,9.25C8.5,9.3 8.5,9.36 8.5,9.41C8.4,9.4 8.3,9.4 8.2,9.4C6.43,9.4 5,10.83 5,12.6C5,13 5.08,13.38 5.22,13.73C4.5,14.63 4,15.76 4,17C4,19.76 6.24,22 9,22C11.76,22 14,19.76 14,17C14,16.63 13.96,16.27 13.88,15.92C15.1,15.41 16,14.2 16,12.8C16,12.21 15.82,11.66 15.5,11.2H17.66Z"/></svg>`,
+            sparkle: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-yellow-200"><path d="M12,2L14.5,8.5L21,11L14.5,13.5L12,20L9.5,13.5L3,11L9.5,8.5L12,2Z"/></svg>`
+        };
+
+
+        const questions = [
+            {
+                text: "如果清晨是一段旋律，你希望它是？",
+                icon: icons.sparkle,
+                options: [
+                    { text: "明亮轻快的长笛协奏曲", scores: { acid: 3, sweetness: 2 } },
+                    { text: "深沉悠远的大提琴独奏", scores: { bitterness: 3, body: 2 } },
+                    { text: "慵懒柔和的萨克斯风", scores: { body: 1, sweetness: 3 } },
+                    { text: "静谧清冷的钢琴练习曲", scores: { acid: 2, floral: 2 } }
+                ]
+            },
+            {
+                text: "当你走进果园，哪种香气最先吸引你？",
+                icon: icons.fruit,
+                options: [
+                    { text: "刚切开的新鲜柠檬", scores: { acid: 4, floral: 1 } },
+                    { text: "熟透坠地的红樱桃", scores: { sweetness: 3, acid: 2 } },
+                    { text: "在阳光下暴晒的柑橘皮", scores: { floral: 3, acid: 1 } },
+                    { text: "浓郁的葡萄果酱", scores: { sweetness: 4, body: 1 } }
+                ]
+            },
+            {
+                text: "你理想的午后光影是什么样的？",
+                icon: icons.night,
+                options: [
+                    { text: "斑驳的树影，充满未知", scores: { floral: 3, acid: 2 } },
+                    { text: "落日熔金，温暖厚重", scores: { body: 3, bitterness: 2 } },
+                    { text: "冷调月光，清冽干净", scores: { acid: 3, floral: 2 } },
+                    { text: "壁炉火光，焦糖甜香", scores: { sweetness: 4, bitterness: 1 } }
+                ]
+            },
+            {
+                text: "品尝黑巧克力时，你更迷恋？",
+                icon: icons.fire,
+                options: [
+                    { text: "那一抹持久的回甘", scores: { sweetness: 3, body: 2 } },
+                    { text: "充满力量的纯粹苦味", scores: { bitterness: 4, body: 3 } },
+                    { text: "夹杂其中的坚果香气", scores: { body: 2, sweetness: 2 } },
+                    { text: "略带发酵感的酒香", scores: { acid: 2, body: 3 } }
+                ]
+            },
+            // ... 为了保持代码简洁，这里演示填充后续逻辑，实际应用需补齐15题
+            { text: "旅行时，你更向往哪里？", icon: icons.forest, options: [{text:"云雾缭绕的高山庄园", scores:{acid:3, floral:3}}, {text:"充满香料气息的古老集市", scores:{bitterness:2, body:3}}, {text:"静谧的海边椰林", scores:{sweetness:3, body:1}}, {text:"清晨的森林深处", scores:{acid:2, floral:2}}] },
+            { text: "你对酸味的容忍度如何？", icon: icons.fruit, options: [{text:"像柠檬水般的明亮刺激", scores:{acid:5}}, {text:"像红酒般的微酸平衡", scores:{acid:3, sweetness:2}}, {text:"几乎感觉不到酸", scores:{bitterness:3, body:2}}, {text:"完全不喜欢酸", scores:{bitterness:5}}] },
+            { text: "口感上你更倾向于？", icon: icons.sparkle, options: [{text:"清澈如泉水，毫无负担", scores:{body:1}}, {text:"丝滑如绸缎，醇度适中", scores:{body:3, sweetness:2}}, {text:"浓稠如糖浆，包裹感强", scores:{body:5}}, {text:"带有颗粒感的原始野性", scores:{body:4, bitterness:2}}] },
+            { text: "你最喜欢的颜色调性？", icon: icons.night, options: [{text:"明艳的宝石蓝", scores:{acid:3}}, {text:"深邃的琥珀金", scores:{sweetness:3, body:2}}, {text:"原始的苔藓绿", scores:{floral:3}}, {text:"静谧的玄武岩", scores:{bitterness:3}}] },
+            { text: "在书店里，你会走向哪一区？", icon: icons.forest, options: [{text:"现代先锋诗集", scores:{acid:4}}, {text:"厚重的历史传记", scores:{body:4, bitterness:2}}, {text:"治愈系的散文随笔", scores:{sweetness:4}}, {text:"神秘的古典神话", scores:{floral:4}}] },
+            { text: "如果咖啡能带你去一个季节？", icon: icons.fire, options: [{text:"万物生长的暖春", scores:{floral:5}}, {text:"热情奔放的盛夏", scores:{acid:5}}, {text:"金灿灿的深秋", scores:{sweetness:5}}, {text:"壁炉旁的寒冬", scores:{bitterness:5, body:3}}] },
+            { text: "你更偏好哪类零食？", icon: icons.fruit, options: [{text:"蔓越莓干", scores:{acid:4}}, {text:"烘烤大杏仁", scores:{body:3, bitterness:2}}, {text:"手工太妃糖", scores:{sweetness:5}}, {text:"干花花瓣酥", scores:{floral:5}}] },
+            { text: "对待生活的态度？", icon: icons.sparkle, options: [{text:"精致且充满细节", scores:{floral:4, acid:2}}, {text:"从容且脚踏实地", scores:{body:4}}, {text:"激情且敢于冒险", scores:{acid:4, bitterness:1}}, {text:"平和且知足常乐", scores:{sweetness:4}}] },
+            { text: "你习惯的饮用场景？", icon: icons.night, options: [{text:"工作中的强效唤醒", scores:{bitterness:4, body:4}}, {text:"悠闲的周末早午餐", scores:{acid:3, sweetness:3}}, {text:"傍晚的独处冥想", scores:{floral:4}}, {text:"好友聚会的下午茶", scores:{sweetness:4, body:2}}] },
+            { text: "你对香气的期待？", icon: icons.forest, options: [{text:"爆发性的浓郁花香", scores:{floral:5}}, {text:"持久稳定的坚果余韵", scores:{body:4}}, {text:"清新的果汁感", scores:{acid:5}}, {text:"复杂的香料与木质调", scores:{bitterness:3, floral:2}}] },
+            { text: "最后一题：你此刻的心境？", icon: icons.sparkle, options: [{text:"渴望探索新奇", scores:{acid:4, floral:4}}, {text:"寻求温暖安慰", scores:{sweetness:4, body:2}}, {text:"需要清醒思考", scores:{bitterness:4}}, {text:"享受当下平衡", scores:{sweetness:3, acid:2, body:2}}] }
+        ];
+
+
+        const inventory = [
+            { name: "瑰夏·翡翠庄园", tags: ["花香", "柑橘", "极高海拔"], desc: "咖啡界的明珠，轻盈如丝，带有爆炸性的茉莉花香与红茶感。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 1 } },
+            { name: "埃塞俄比亚·耶加雪菲", tags: ["柠檬", "花香", "水洗"], desc: "纯净的柠檬酸质与清新的花香，如同清晨的第一缕阳光。", profile: { acid: 4, floral: 4, sweetness: 3, body: 2, bitterness: 2 } },
+            { name: "哥伦比亚·厌氧草莓", tags: ["草莓", "酒香", "甜度极高"], desc: "经过特殊发酵，拥有浓郁的成熟草莓气息与令人惊艳的甜感。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
+            { name: "苏门答腊·曼特宁", tags: ["草本", "醇厚", "低酸"], desc: "深邃的泥土香气与黑巧克力余韵，厚重而有力量感。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
+            { name: "危地马拉·花神", tags: ["烟草", "花香", "焦糖"], desc: "优雅的平衡感，在花香中带有一丝丝微妙的烟草与焦糖味。", profile: { acid: 3, floral: 3, sweetness: 4, body: 3, bitterness: 3 } },
+            { name: "巴西·喜拉多", tags: ["坚果", "巧克力", "柔和"], desc: "经典的巧克力坚果风味，柔和无酸，是入门的首选。", profile: { acid: 2, floral: 1, sweetness: 4, body: 3, bitterness: 2 } },
+            { name: "肯尼亚·SL28", tags: ["乌梅", "高酸", "厚重"], desc: "极具辨识度的乌梅与番茄酸质，酸度活泼，回甘持久。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 2 } }
+        ];
+
+
+        // --- 应用逻辑 ---
+        let currentIdx = 0;
+        let userScores = { acid: 0, bitterness: 0, body: 0, sweetness: 0, floral: 0 };
+        let history = [];
+        const traitMeta = {
+            acid: { label: "明亮酸质", tone: "你偏爱有棱角、会发光的风味", image: "像一口咬开新鲜果肉时的清醒感" },
+            bitterness: { label: "深色苦韵", tone: "你能欣赏更深沉、更有骨架的表达", image: "像夜色落下后依旧有层次的余韵" },
+            body: { label: "厚实醇感", tone: "你需要的是包裹感和落地感", image: "像手心握住一只温热陶杯的踏实" },
+            sweetness: { label: "柔和甜感", tone: "你会被圆润、温暖、让人放松的风味打动", image: "像甜点最后一口留在舌尖的安慰" },
+            floral: { label: "轻盈花香", tone: "你对细节、空气感和余味里的微光格外敏锐", image: "像风吹过花园时不经意扑来的香气" }
+        };
+
+        const beanVoice = {
+            "瑰夏·翡翠庄园": "它像一封写给高敏感味觉的情书，不靠浓烈取胜，而是靠层层展开的精致击中人心。",
+            "埃塞俄比亚·耶加雪菲": "它像把清晨折成一杯咖啡，干净、轻盈，适合那些一闻到香气就能决定今天心情的人。",
+            "哥伦比亚·厌氧草莓": "它自带舞台感，甜感和发酵香像灯光一层层推上来，很适合需要惊喜的人。",
+            "苏门答腊·曼特宁": "它不是讨巧型选手，而是那种越喝越让人安心的存在，像低声但有分量的回应。",
+            "危地马拉·花神": "它最迷人的地方在平衡，像一个很会拿捏分寸的人，温柔却不寡淡，复杂却不喧哗。",
+            "巴西·喜拉多": "它有一种日常里的高级感，不张扬，却能把舒服这件事做得非常完整。",
+            "肯尼亚·SL28": "它的锋利与厚度同时在线，像一个敢表达、也撑得住场面的灵魂。"
+        };
+
+        function getTopTraits(scores, count = 2) {
+            return Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, count)
+                .map(([key]) => key);
+        }
+
+        function buildRecommendationReason(item, rank, dominantTraits, personalityTitle) {
+            const voices = [
+                "如果说你的味觉人格有一条暗线，" + item.name + "正好踩在那条线最发亮的位置。",
+                item.name + "适合你，不是因为它单纯好喝，而是因为它和你的偏好节奏几乎天然同频。",
+                "把你的答案翻译成一杯咖啡，" + item.name + "会是其中最像你的那一种表达。"
+            ];
+            const closers = [
+                "所以它给你的不是单一风味命中，而是一种“这杯像我”的确认感。",
+                "喝到它时，你更容易在第一口就产生熟悉感，第二口开始上头，第三口想记住它。",
+                "对你来说，它不是推荐名单里的安全牌，而更像会被反复回购的那一支。"
+            ];
+            const [primaryTrait, secondaryTrait] = dominantTraits;
+            const primaryMeta = traitMeta[primaryTrait];
+            const secondaryMeta = traitMeta[secondaryTrait];
+
+            return [
+                voices[rank] || voices[0],
+                beanVoice[item.name],
+                `你的测试结果里，最突出的偏好是“${primaryMeta.label}”，其次是“${secondaryMeta.label}”。${primaryMeta.tone}，也会被${secondaryMeta.image}这样的细节打动。`,
+                `${item.name}刚好把这两种期待接在一起，让它既能呼应你“${personalityTitle}”这一面，又不会落进千篇一律的标准答案。`,
+                closers[rank] || closers[0]
+            ].join("");
+        }
+
+
+        function startQuiz() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            updateQuestion();
+        }
+
+
+        function updateQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById('question-number').innerText = `${String(currentIdx + 1).padStart(2, '0')} / 15`;
+            document.getElementById('question-text').innerText = q.text;
+            document.getElementById('question-icon').innerHTML = q.icon;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn p-6 text-left rounded-xl text-lg flex justify-between items-center';
+                btn.innerHTML = `<span>${opt.text}</span><span class="opacity-0 transition-opacity">→</span>`;
+                btn.onclick = () => selectOption(opt);
+                container.appendChild(btn);
+            });
+
+
+            document.getElementById('progressFill').style.width = `${((currentIdx) / 15) * 100}%`;
+            document.getElementById('prev-btn').disabled = currentIdx === 0;
+        }
+
+
+        function selectOption(opt) {
+            // 保存得分
+            history.push({ ...userScores });
+            for (let key in opt.scores) {
+                userScores[key] += opt.scores[key];
+            }
+
+
+            if (currentIdx < questions.length - 1) {
+                currentIdx++;
+                updateQuestion();
+            } else {
+                showLoading();
+            }
+        }
+
+
+        function prevQuestion() {
+            if (currentIdx > 0) {
+                currentIdx--;
+                userScores = history.pop();
+                updateQuestion();
+            }
+        }
+
+
+        function showLoading() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('loading-screen').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = `100%`;
+
+
+            const steps = ["提取风味指纹...", "匹配产区海拔...", "演算烘焙度契合率...", "最终报告生成中..."];
+            let step = 0;
+            const interval = setInterval(() => {
+                document.getElementById('loading-text').innerText = steps[step];
+                step++;
+                if (step >= steps.length) {
+                    clearInterval(interval);
+                    showResults();
+                }
+            }, 800);
+        }
+
+
+        function showResults() {
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+
+            // 计算人格
+            let title = "优雅的平衡主义者";
+            let desc = "你追求生活中的秩序与美感，既迷恋清晨的明亮，也懂得夜晚的深沉。你需要的咖啡不仅是一杯饮品，更是一场感官的交响乐。";
+            
+            if (userScores.acid > 25) {
+                title = "极光追寻者";
+                desc = "你天生好奇，热爱冒险。明亮的酸质正如你对世界不竭的探索欲，只有那抹带有爆发力的灵动才能满足你的灵魂。";
+            } else if (userScores.body > 25) {
+                title = "大地的守望者";
+                desc = "你性格稳重，珍视时间的沉淀。你迷恋那种厚重且真实的包裹感，咖啡对你而言是坚实的依靠与静谧的独处。";
+            } else if (userScores.sweetness > 25) {
+                title = "温柔的造梦师";
+                desc = "世界在你眼中充满了柔和的光影。你拒绝苦涩，拥抱所有的甘甜与温柔，你是那个总能在平凡日子里发现美好的人。";
+            }
+
+
+            document.getElementById('personality-title').innerText = title;
+            document.getElementById('personality-desc').innerText = desc;
+
+            const dominantTraits = getTopTraits(userScores, 2);
+
+            // 推荐逻辑：计算用户得分与每种豆子profile的相似度（欧几里得距离逆向）
+            const scoredInventory = inventory.map(item => {
+                let diff = 0;
+                for (let key in userScores) {
+                    // 归一化得分后再对比
+                    const normalizedUserScore = (userScores[key] / 30) * 5; 
+                    diff += Math.pow(normalizedUserScore - item.profile[key], 2);
+                }
+                return { ...item, match: 100 - Math.sqrt(diff) * 5 };
+            }).sort((a, b) => b.match - a.match);
+
+
+            const recContainer = document.getElementById('recommendations');
+            recContainer.innerHTML = '';
+            scoredInventory.slice(0, 3).forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = `glass-card p-5 sm:p-6 flex flex-col items-center text-center fade-in`;
+                card.style.animationDelay = `${idx * 0.2}s`;
+                const recommendationReason = buildRecommendationReason(item, idx, dominantTraits, title);
+                card.innerHTML = `
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 sm:mb-6 text-gold font-bold text-lg sm:text-xl">
+                        ${idx + 1}
+                    </div>
+                    <h5 class="text-lg sm:text-xl font-bold mb-2 leading-snug">${item.name}</h5>
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        ${item.tags.map(t => `<span class="text-[10px] border border-white/20 px-2 py-0.5 rounded-full text-gray-400">${t}</span>`).join('')}
+                    </div>
+                    <p class="text-sm text-gray-500 mb-5 sm:mb-6 flex-grow leading-relaxed">${item.desc}</p>
+                    <p class="text-left text-[13px] sm:text-sm text-stone-300 leading-7 mb-5 sm:mb-6 border-t border-white/10 pt-4">${recommendationReason}</p>
+                    <div class="text-gold text-sm tracking-[0.2em] sm:tracking-widest font-bold">匹配度 ${Math.round(item.match)}%</div>
+                `;
+                recContainer.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
