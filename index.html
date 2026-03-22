@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>灵魂咖啡寻踪 - 深度风味分析</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -25,6 +26,10 @@
             --accent-orange: #d4a373;
         }
 
+        * {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
 
         body {
             margin: 0;
@@ -44,53 +49,13 @@
             z-index: 10;
         }
 
-        #quiz-screen,
-        #result-screen,
-        #loading-screen,
-        #start-screen {
-            width: 100%;
-        }
-
-        #quiz-screen .glass-card,
-        #result-screen .glass-card {
-            margin-inline: auto;
-        }
-
-        #quiz-screen .glass-card {
-            max-width: 54rem;
-        }
-
-        #question-number,
-        #category-tag,
-        #header-spacer {
-            min-width: 6rem;
-        }
-
-        #start-screen {
-            width: min(100%, 26rem);
-            min-height: calc(100vh - 2rem);
-            margin-inline: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        #start-screen .icon-container,
-        #start-screen h1,
-        #start-screen p,
-        #start-screen button {
-            position: relative;
-            z-index: 1;
-        }
-
-
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 2rem;
         }
-
 
         .gradient-text {
             background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
@@ -98,35 +63,24 @@
             -webkit-text-fill-color: transparent;
         }
 
-
         .option-btn {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
+            position: relative;
+            z-index: 20;
         }
 
-
-        .option-btn:hover {
-            background: rgba(196, 164, 132, 0.15);
-            border-color: var(--gold);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        .option-btn:active {
+            background: rgba(196, 164, 132, 0.2);
+            transform: scale(0.98);
         }
-
-
-        .option-btn.selected {
-            background: var(--gold);
-            color: var(--deep-black);
-            border-color: var(--gold);
-        }
-
 
         .fade-in { animation: fadeIn 0.8s ease forwards; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
 
         .progress-bar {
             height: 2px;
@@ -139,7 +93,6 @@
             pointer-events: none;
         }
 
-
         .progress-fill {
             height: 100%;
             background: var(--gold);
@@ -147,8 +100,6 @@
             box-shadow: 0 0 15px var(--gold);
         }
 
-
-        /* 模拟光影漂浮 */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -159,89 +110,36 @@
             pointer-events: none;
         }
 
-
         @keyframes float {
             0% { transform: translate(0, 0); }
             100% { transform: translate(100px, 50px); }
         }
 
-
-        .icon-container svg {
-            filter: drop-shadow(0 0 8px rgba(196, 164, 132, 0.5));
-        }
-
         button {
             cursor: pointer;
+            touch-action: manipulation;
         }
 
-        @media (max-width: 768px) {
-            .glass-card {
-                border-radius: 1.5rem;
-            }
-
-            .orb {
-                filter: blur(56px);
-                opacity: 0.2;
-            }
-
-            .option-btn:hover {
-                transform: none;
-                box-shadow: none;
-            }
-        }
-
-        @media (max-width: 640px) {
-            main {
-                max-width: 100%;
-            }
-
-            #start-screen {
-                width: min(100%, 24rem);
-                min-height: calc(100vh - 1.5rem);
-            }
-
-            #category-tag {
-                max-width: 11rem;
-                text-align: right;
-                line-height: 1.4;
-                letter-spacing: 0.18em;
-            }
-
-            #options-container {
-                gap: 0.75rem;
-            }
-
-            #recommendations {
-                gap: 1rem;
-            }
-
-            .option-btn {
-                padding: 1rem;
-                font-size: 0.95rem;
-                align-items: flex-start;
-            }
+        #screenshot-area {
+            background: var(--deep-black);
+            padding: 20px;
         }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-3 sm:p-4">
 
-
-    <!-- 动态背景装饰 -->
     <div class="orb w-64 h-64 sm:w-96 sm:h-96 bg-yellow-900 top-[10%] left-1/2 -translate-x-[62%]"></div>
     <div class="orb w-56 h-56 sm:w-80 sm:h-80 bg-orange-900 bottom-[8%] left-1/2 translate-x-[8%]" style="animation-delay: -5s;"></div>
-
 
     <div class="progress-bar">
         <div id="progressFill" class="progress-fill" style="width: 0%"></div>
     </div>
-
 
     <main id="app" class="w-full max-w-4xl mx-auto">
         <!-- 开始页面 -->
         <section id="start-screen" class="text-center fade-in">
             <div class="mb-6 sm:mb-8 flex justify-center">
                 <div class="icon-container">
-                    <!-- Coffee Bean SVG -->
                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gold sm:w-20 sm:h-20">
                         <path d="M12 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
                         <path d="M12 2c-4 4-4 12 0 16"/>
@@ -254,19 +152,17 @@
                 穿越迷雾般的风味森林，在15个直觉瞬间中，
                 <span class="block sm:inline">发现那支跨越山海只为契合你的本命豆。</span>
             </p>
-            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 sm:px-12 py-4 bg-transparent border border-gold text-gold rounded-full text-base sm:text-lg hover:bg-gold hover:text-black transition-all duration-500 tracking-[0.25em] sm:tracking-widest">
+            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 sm:px-12 py-4 bg-transparent border border-gold text-gold rounded-full text-base sm:text-lg hover:bg-gold hover:text-black transition-all duration-500 tracking-[0.25em] sm:tracking-widest active:bg-gold active:text-black">
                 开启寻踪之旅
             </button>
         </section>
 
-
         <!-- 问题页面 -->
         <section id="quiz-screen" class="hidden">
             <div class="glass-card p-5 sm:p-8 md:p-12">
-                <div class="grid grid-cols-[minmax(6rem,1fr)_auto_minmax(6rem,1fr)] items-start gap-3 sm:gap-4 mb-8 sm:mb-12">
-                    <span id="question-number" class="text-gold font-mono tracking-widest text-left">01 / 15</span>
-                    <span id="header-spacer" aria-hidden="true"></span>
-                    <span id="category-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 text-right">Sensory Sensory Perception</span>
+                <div class="flex justify-between items-start mb-8 sm:mb-12">
+                    <span id="question-number" class="text-gold font-mono tracking-widest">01 / 15</span>
+                    <span id="category-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 text-right">Sensory Perception</span>
                 </div>
                 
                 <div id="question-content" class="fade-in">
@@ -275,16 +171,13 @@
                     <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
 
-
                 <div class="mt-8 sm:mt-12 flex justify-between items-center gap-4">
                     <button id="prev-btn" onclick="prevQuestion()" class="text-sm sm:text-base text-gray-500 hover:text-white transition-colors disabled:opacity-0">
                         ← 返回上一步
                     </button>
-                    <div class="flex gap-2 shrink-0" id="dots-container"></div>
                 </div>
             </div>
         </section>
-
 
         <!-- 分析加载中 -->
         <section id="loading-screen" class="hidden text-center fade-in py-10 sm:py-0">
@@ -292,35 +185,35 @@
                 <div class="absolute inset-0 border-2 border-gold opacity-20 rounded-full"></div>
                 <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
             </div>
-            <h2 class="text-xl sm:text-2xl font-light tracking-[0.2em] sm:tracking-widest mb-4">风味罗盘校准中...</h2>
+            <h2 class="text-xl sm:text-2xl font-light tracking-[0.2em] sm:tracking-widest mb-4 text-gold">风味罗盘校准中...</h2>
             <p id="loading-text" class="text-sm sm:text-base text-gray-500 italic px-4">正在提取您的嗅觉潜意识...</p>
         </section>
 
-
         <!-- 结果报告页面 -->
         <section id="result-screen" class="hidden fade-in">
-            <div class="glass-card overflow-hidden">
+            <div id="screenshot-area" class="glass-card overflow-hidden">
                 <div class="bg-gradient-to-r from-stone-900 to-black p-6 sm:p-10 text-center border-b border-white/10">
                     <h3 class="text-gold uppercase tracking-[0.25em] sm:tracking-[0.4em] mb-4 text-xs sm:text-sm">风味人格分析报告</h3>
-                    <h2 id="personality-title" class="text-3xl sm:text-4xl font-bold mb-4 leading-tight"></h2>
+                    <h2 id="personality-title" class="text-3xl sm:text-4xl font-bold mb-4 leading-tight gradient-text"></h2>
                     <p id="personality-desc" class="text-sm sm:text-base text-gray-400 max-w-xl mx-auto leading-relaxed"></p>
                 </div>
                 
                 <div class="p-5 sm:p-8 md:p-12">
                     <h4 class="text-center text-lg sm:text-xl mb-6 sm:mb-10 tracking-[0.18em] sm:tracking-widest">—— 馆藏推荐 ——</h4>
                     <div id="recommendations" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-                    
-                    <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 text-center">
-                        <button onclick="location.reload()" class="text-gold hover:underline tracking-widest text-sm">重新探索</button>
-                    </div>
                 </div>
+            </div>
+            
+            <div class="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="saveAsImage()" class="w-full sm:w-auto px-10 py-4 bg-gold text-black rounded-full font-bold tracking-widest hover:bg-white transition-all active:scale-95">
+                    保存报告图片
+                </button>
+                <button onclick="location.reload()" class="text-gray-500 hover:text-gold transition-colors tracking-widest text-sm">重新探索</button>
             </div>
         </section>
     </main>
 
-
     <script>
-        // --- 核心数据配置 ---
         const icons = {
             fruit: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-orange-400"><path d="M12,2L13,4C16,4.2 19,6 20.5,8.5C22,11 22,14 21,17C20,20 17,22 14,22C11,22 8,20.5 6.5,18.5C5,16.5 4.5,14 5,11.5C5.5,9 7,6.5 9.5,5L12,2Z"/></svg>`,
             forest: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-green-600"><path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/></svg>`,
@@ -329,49 +222,11 @@
             sparkle: `<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" class="text-yellow-200"><path d="M12,2L14.5,8.5L21,11L14.5,13.5L12,20L9.5,13.5L3,11L9.5,8.5L12,2Z"/></svg>`
         };
 
-
         const questions = [
-            {
-                text: "如果清晨是一段旋律，你希望它是？",
-                icon: icons.sparkle,
-                options: [
-                    { text: "明亮轻快的长笛协奏曲", scores: { acid: 3, sweetness: 2 } },
-                    { text: "深沉悠远的大提琴独奏", scores: { bitterness: 3, body: 2 } },
-                    { text: "慵懒柔和的萨克斯风", scores: { body: 1, sweetness: 3 } },
-                    { text: "静谧清冷的钢琴练习曲", scores: { acid: 2, floral: 2 } }
-                ]
-            },
-            {
-                text: "当你走进果园，哪种香气最先吸引你？",
-                icon: icons.fruit,
-                options: [
-                    { text: "刚切开的新鲜柠檬", scores: { acid: 4, floral: 1 } },
-                    { text: "熟透坠地的红樱桃", scores: { sweetness: 3, acid: 2 } },
-                    { text: "在阳光下暴晒的柑橘皮", scores: { floral: 3, acid: 1 } },
-                    { text: "浓郁的葡萄果酱", scores: { sweetness: 4, body: 1 } }
-                ]
-            },
-            {
-                text: "你理想的午后光影是什么样的？",
-                icon: icons.night,
-                options: [
-                    { text: "斑驳的树影，充满未知", scores: { floral: 3, acid: 2 } },
-                    { text: "落日熔金，温暖厚重", scores: { body: 3, bitterness: 2 } },
-                    { text: "冷调月光，清冽干净", scores: { acid: 3, floral: 2 } },
-                    { text: "壁炉火光，焦糖甜香", scores: { sweetness: 4, bitterness: 1 } }
-                ]
-            },
-            {
-                text: "品尝黑巧克力时，你更迷恋？",
-                icon: icons.fire,
-                options: [
-                    { text: "那一抹持久的回甘", scores: { sweetness: 3, body: 2 } },
-                    { text: "充满力量的纯粹苦味", scores: { bitterness: 4, body: 3 } },
-                    { text: "夹杂其中的坚果香气", scores: { body: 2, sweetness: 2 } },
-                    { text: "略带发酵感的酒香", scores: { acid: 2, body: 3 } }
-                ]
-            },
-            // ... 为了保持代码简洁，这里演示填充后续逻辑，实际应用需补齐15题
+            { text: "如果清晨是一段旋律，你希望它是？", icon: icons.sparkle, options: [{ text: "明亮轻快的长笛协奏曲", scores: { acid: 3, sweetness: 2 } }, { text: "深沉悠远的大提琴独奏", scores: { bitterness: 3, body: 2 } }, { text: "慵懒柔和的萨克斯风", scores: { body: 1, sweetness: 3 } }, { text: "静谧清冷的钢琴练习曲", scores: { acid: 2, floral: 2 } }] },
+            { text: "当你走进果园，哪种香气最先吸引你？", icon: icons.fruit, options: [{ text: "刚切开的新鲜柠檬", scores: { acid: 4, floral: 1 } }, { text: "熟透坠地的红樱桃", scores: { sweetness: 3, acid: 2 } }, { text: "在阳光下暴晒的柑橘皮", scores: { floral: 3, acid: 1 } }, { text: "浓郁的葡萄果酱", scores: { sweetness: 4, body: 1 } }] },
+            { text: "你理想的午后光影是什么样的？", icon: icons.night, options: [{ text: "斑驳的树影，充满未知", scores: { floral: 3, acid: 2 } }, { text: "落日熔金，温暖厚重", scores: { body: 3, bitterness: 2 } }, { text: "冷调月光，清冽干净", scores: { acid: 3, floral: 2 } }, { text: "壁炉火光，焦糖甜香", scores: { sweetness: 4, bitterness: 1 } }] },
+            { text: "品尝黑巧克力时，你更迷恋？", icon: icons.fire, options: [{ text: "那一抹持久的回甘", scores: { sweetness: 3, body: 2 } }, { text: "充满力量的纯粹苦味", scores: { bitterness: 4, body: 3 } }, { text: "夹杂其中的坚果香气", scores: { body: 2, sweetness: 2 } }, { text: "略带发酵感的酒香", scores: { acid: 2, body: 3 } }] },
             { text: "旅行时，你更向往哪里？", icon: icons.forest, options: [{text:"云雾缭绕的高山庄园", scores:{acid:3, floral:3}}, {text:"充满香料气息的古老集市", scores:{bitterness:2, body:3}}, {text:"静谧的海边椰林", scores:{sweetness:3, body:1}}, {text:"清晨的森林深处", scores:{acid:2, floral:2}}] },
             { text: "你对酸味的容忍度如何？", icon: icons.fruit, options: [{text:"像柠檬水般的明亮刺激", scores:{acid:5}}, {text:"像红酒般的微酸平衡", scores:{acid:3, sweetness:2}}, {text:"几乎感觉不到酸", scores:{bitterness:3, body:2}}, {text:"完全不喜欢酸", scores:{bitterness:5}}] },
             { text: "口感上你更倾向于？", icon: icons.sparkle, options: [{text:"清澈如泉水，毫无负担", scores:{body:1}}, {text:"丝滑如绸缎，醇度适中", scores:{body:3, sweetness:2}}, {text:"浓稠如糖浆，包裹感强", scores:{body:5}}, {text:"带有颗粒感的原始野性", scores:{body:4, bitterness:2}}] },
@@ -385,19 +240,32 @@
             { text: "最后一题：你此刻的心境？", icon: icons.sparkle, options: [{text:"渴望探索新奇", scores:{acid:4, floral:4}}, {text:"寻求温暖安慰", scores:{sweetness:4, body:2}}, {text:"需要清醒思考", scores:{bitterness:4}}, {text:"享受当下平衡", scores:{sweetness:3, acid:2, body:2}}] }
         ];
 
-
         const inventory = [
-            { name: "瑰夏·翡翠庄园", tags: ["花香", "柑橘", "极高海拔"], desc: "咖啡界的明珠，轻盈如丝，带有爆炸性的茉莉花香与红茶感。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 1 } },
-            { name: "埃塞俄比亚·耶加雪菲", tags: ["柠檬", "花香", "水洗"], desc: "纯净的柠檬酸质与清新的花香，如同清晨的第一缕阳光。", profile: { acid: 4, floral: 4, sweetness: 3, body: 2, bitterness: 2 } },
-            { name: "哥伦比亚·厌氧草莓", tags: ["草莓", "酒香", "甜度极高"], desc: "经过特殊发酵，拥有浓郁的成熟草莓气息与令人惊艳的甜感。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
-            { name: "苏门答腊·曼特宁", tags: ["草本", "醇厚", "低酸"], desc: "深邃的泥土香气与黑巧克力余韵，厚重而有力量感。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
-            { name: "危地马拉·花神", tags: ["烟草", "花香", "焦糖"], desc: "优雅的平衡感，在花香中带有一丝丝微妙的烟草与焦糖味。", profile: { acid: 3, floral: 3, sweetness: 4, body: 3, bitterness: 3 } },
-            { name: "巴西·喜拉多", tags: ["坚果", "巧克力", "柔和"], desc: "经典的巧克力坚果风味，柔和无酸，是入门的首选。", profile: { acid: 2, floral: 1, sweetness: 4, body: 3, bitterness: 2 } },
-            { name: "肯尼亚·SL28", tags: ["乌梅", "高酸", "厚重"], desc: "极具辨识度的乌梅与番茄酸质，酸度活泼，回甘持久。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 2 } }
+            { name: "特批雪莉", tags: ["洪都拉斯", "马萨瓜拉", "莫卡庄园"], desc: "饱满细腻的香草冰淇淋口感，浆果酸甜感，黄黄金奇异果，树莓奶油，牛奶花生饮料。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
+            { name: "云野", tags: ["埃塞俄比亚", "耶加雪菲", "水洗"], desc: "经典的柑橘类风味，柠檬，橙汁，清雅的茉莉花香，细致的乌龙茶香。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 } },
+            { name: "江南雨巷", tags: ["厄瓜多尔", "厌氧发酵"], desc: "主体风味来自云南保山小农契作，加入风味提取物增强，柑橘香气与酸度并存。", profile: { acid: 4, floral: 3, sweetness: 3, body: 3, bitterness: 2 } },
+            { name: "赤橘霞光", tags: ["云南", "思茅", "波本浸渍水洗"], desc: "馥郁柔和的酒香，黑朗姆酒，波本酒，黑加仑，酒渍黑樱桃，深色浆果味。", profile: { acid: 3, floral: 2, sweetness: 4, body: 4, bitterness: 3 } },
+            { name: "典藏曼特宁", tags: ["印度尼西亚", "卡亚纳", "湿刨处理"], desc: "柔和细腻的焦糖甜感，85%黑巧克力，雪松混合丁香香料味，醇厚浓郁。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
+            { name: "雨漫春尘", tags: ["哥伦比亚", "慧兰", "粉红波旁"], desc: "酸甜多汁的玫瑰提子，百香果，蓝莓，馥郁玫瑰花香，蜜瓜，芒果，层次丰富。", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 } },
+            { name: "丹荔露", tags: ["云南", "保山", "冰荔处理"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕，贯穿始终。", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "如梦令", tags: ["云南", "普洱", "布鲁增味水洗"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕，甜感细腻。", profile: { acid: 2, floral: 5, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "蓝山一号", tags: ["牙买加", "圣安德鲁", "水洗"], desc: "浓郁醇厚的黑巧克力风味，细腻奶油触感，焦糖奶油霜，烤杏仁风干橙皮香。", profile: { acid: 1, floral: 1, sweetness: 3, body: 5, bitterness: 3 } },
+            { name: "白鹿", tags: ["埃塞俄比亚", "耶加雪菲", "原生种水洗"], desc: "清新的黄柠檬香气，成熟杏桃甜香，白花香气，茉莉，白葡萄汁，余韵悠长。", profile: { acid: 4, floral: 5, sweetness: 4, body: 2, bitterness: 2 } },
+            { name: "Wonder of U", tags: ["哥伦比亚", "粉红波旁", "厌氧增味"], desc: "香甜的热带水果气息，荔枝，蛇皮果，香印青提，泰国小菠萝，椰子玫瑰花。", profile: { acid: 4, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "银河高速公路", tags: ["SOE 埃塞俄比亚", "西达摩", "日晒"], desc: "浓缩表现：橘皮，坚果，莓干；奶咖表现：太妃糖，黄油饼干，烤杏仁。", profile: { acid: 3, floral: 2, sweetness: 4, body: 4, bitterness: 3 } },
+            { name: "金标瑰夏", tags: ["埃塞俄比亚", "瑰夏村", "蜜处理"], desc: "强劲甜香的花香，玉兰，鸡蛋花，金银花，混合甜橙，黄柠檬，明亮花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 } },
+            { name: "White Petal", tags: ["巴拿马", "瑰夏", "水洗"], desc: "细致绵长的蜂蜜甜感，黄柠檬，葡萄柚，轻柔洋甘菊茉莉花香，饱满扎实。", profile: { acid: 4, floral: 5, sweetness: 4, body: 3, bitterness: 2 } },
+            { name: "洛神游", tags: ["哥斯达黎加", "瑰夏", "水洗"], desc: "干净清冽的浆果酸甜，红葡萄，草莓，奇异果，洛神，甜橙，栀子花香。", profile: { acid: 5, floral: 4, sweetness: 3, body: 2, bitterness: 2 } },
+            { name: "仲夏夜", tags: ["哥斯达黎加", "ET47", "黄蜜处理"], desc: "成熟轻柔的果汁触感，西番莲，沙棘果，核桃油杏仁香，草莓巧克力。", profile: { acid: 3, floral: 3, sweetness: 4, body: 3, bitterness: 2 } },
+            { name: "涅里黄昏", tags: ["肯尼亚", "涅里", "日晒处理"], desc: "成熟细腻的黄杏，黄桃，枇杷，橘子水果气息，蓝莓酱，杨桃，油柑。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 3 } },
+            { name: "拂晓", tags: ["埃塞俄比亚", "卡玛奇农场", "蜜处理"], desc: "细腻黄柠檬混合佛手柑，成熟草莓，杏桃血橙，覆盆子，风味清晰浓郁。", profile: { acid: 5, floral: 4, sweetness: 4, body: 2, bitterness: 2 } },
+            { name: "对山", tags: ["卢旺达", "红波旁", "水洗"], desc: "细腻奶油触感，龙井，碧螺春绿茶混合白花香气，柚子，杏桃，绿茶感。", profile: { acid: 3, floral: 4, sweetness: 3, body: 3, bitterness: 3 } },
+            { name: "芙蕾雅的吻", tags: ["哥斯达黎加", "瑰夏", "增味水洗"], desc: "成熟饱满的红色莓果，覆盆子，草莓，细致玫瑰花香，甜橙，沃柑，酒香。", profile: { acid: 4, floral: 5, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "维纳斯之泪", tags: ["巴拿马", "瑰夏", "水洗"], desc: "优雅的白色花香，姜花，玉兰，多汁葡萄，葡萄柚，杏子，杏仁，蜂蜜绿茶。", profile: { acid: 4, floral: 5, sweetness: 4, body: 3, bitterness: 2 } },
+            { name: "乌克丽丽小调", tags: ["肯尼亚", "SL28/34", "水洗"], desc: "明亮上扬的核果酸甜，青梅，李子，牛奶青枣，葡萄柚，沃柑，蜜香红茶。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 2 } },
+            { name: "沉舟", tags: ["印度尼西亚", "日晒", "雪莉酒桶"], desc: "浓缩表现：威士忌，橡木，果脯；奶咖表现：香草奶油，威士忌，榛子。", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 } }
         ];
 
-
-        // --- 应用逻辑 ---
         let currentIdx = 0;
         let userScores = { acid: 0, bitterness: 0, body: 0, sweetness: 0, floral: 0 };
         let history = [];
@@ -409,54 +277,11 @@
             floral: { label: "轻盈花香", tone: "你对细节、空气感和余味里的微光格外敏锐", image: "像风吹过花园时不经意扑来的香气" }
         };
 
-        const beanVoice = {
-            "瑰夏·翡翠庄园": "它像一封写给高敏感味觉的情书，不靠浓烈取胜，而是靠层层展开的精致击中人心。",
-            "埃塞俄比亚·耶加雪菲": "它像把清晨折成一杯咖啡，干净、轻盈，适合那些一闻到香气就能决定今天心情的人。",
-            "哥伦比亚·厌氧草莓": "它自带舞台感，甜感和发酵香像灯光一层层推上来，很适合需要惊喜的人。",
-            "苏门答腊·曼特宁": "它不是讨巧型选手，而是那种越喝越让人安心的存在，像低声但有分量的回应。",
-            "危地马拉·花神": "它最迷人的地方在平衡，像一个很会拿捏分寸的人，温柔却不寡淡，复杂却不喧哗。",
-            "巴西·喜拉多": "它有一种日常里的高级感，不张扬，却能把舒服这件事做得非常完整。",
-            "肯尼亚·SL28": "它的锋利与厚度同时在线，像一个敢表达、也撑得住场面的灵魂。"
-        };
-
-        function getTopTraits(scores, count = 2) {
-            return Object.entries(scores)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, count)
-                .map(([key]) => key);
-        }
-
-        function buildRecommendationReason(item, rank, dominantTraits, personalityTitle) {
-            const voices = [
-                "如果说你的味觉人格有一条暗线，" + item.name + "正好踩在那条线最发亮的位置。",
-                item.name + "适合你，不是因为它单纯好喝，而是因为它和你的偏好节奏几乎天然同频。",
-                "把你的答案翻译成一杯咖啡，" + item.name + "会是其中最像你的那一种表达。"
-            ];
-            const closers = [
-                "所以它给你的不是单一风味命中，而是一种“这杯像我”的确认感。",
-                "喝到它时，你更容易在第一口就产生熟悉感，第二口开始上头，第三口想记住它。",
-                "对你来说，它不是推荐名单里的安全牌，而更像会被反复回购的那一支。"
-            ];
-            const [primaryTrait, secondaryTrait] = dominantTraits;
-            const primaryMeta = traitMeta[primaryTrait];
-            const secondaryMeta = traitMeta[secondaryTrait];
-
-            return [
-                voices[rank] || voices[0],
-                beanVoice[item.name],
-                `你的测试结果里，最突出的偏好是“${primaryMeta.label}”，其次是“${secondaryMeta.label}”。${primaryMeta.tone}，也会被${secondaryMeta.image}这样的细节打动。`,
-                `${item.name}刚好把这两种期待接在一起，让它既能呼应你“${personalityTitle}”这一面，又不会落进千篇一律的标准答案。`,
-                closers[rank] || closers[0]
-            ].join("");
-        }
-
-
         function startQuiz() {
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
             updateQuestion();
         }
-
 
         function updateQuestion() {
             const q = questions[currentIdx];
@@ -467,27 +292,23 @@
             const container = document.getElementById('options-container');
             container.innerHTML = '';
             
-            q.options.forEach((opt, index) => {
+            q.options.forEach((opt) => {
                 const btn = document.createElement('button');
-                btn.className = 'option-btn p-6 text-left rounded-xl text-lg flex justify-between items-center';
-                btn.innerHTML = `<span>${opt.text}</span><span class="opacity-0 transition-opacity">→</span>`;
+                btn.className = 'option-btn p-6 text-left rounded-xl text-lg flex justify-between items-center bg-white/5 border border-white/10 hover:border-gold transition-all';
+                btn.innerHTML = `<span>${opt.text}</span><span class="text-gold">→</span>`;
                 btn.onclick = () => selectOption(opt);
                 container.appendChild(btn);
             });
 
-
             document.getElementById('progressFill').style.width = `${((currentIdx) / 15) * 100}%`;
-            document.getElementById('prev-btn').disabled = currentIdx === 0;
+            document.getElementById('prev-btn').style.opacity = currentIdx === 0 ? '0' : '1';
         }
 
-
         function selectOption(opt) {
-            // 保存得分
             history.push({ ...userScores });
             for (let key in opt.scores) {
                 userScores[key] += opt.scores[key];
             }
-
 
             if (currentIdx < questions.length - 1) {
                 currentIdx++;
@@ -497,7 +318,6 @@
             }
         }
 
-
         function prevQuestion() {
             if (currentIdx > 0) {
                 currentIdx--;
@@ -506,12 +326,10 @@
             }
         }
 
-
         function showLoading() {
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('loading-screen').classList.remove('hidden');
             document.getElementById('progressFill').style.width = `100%`;
-
 
             const steps = ["提取风味指纹...", "匹配产区海拔...", "演算烘焙度契合率...", "最终报告生成中..."];
             let step = 0;
@@ -525,66 +343,83 @@
             }, 800);
         }
 
-
         function showResults() {
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-
-            // 计算人格
             let title = "优雅的平衡主义者";
             let desc = "你追求生活中的秩序与美感，既迷恋清晨的明亮，也懂得夜晚的深沉。你需要的咖啡不仅是一杯饮品，更是一场感官的交响乐。";
             
-            if (userScores.acid > 25) {
-                title = "极光追寻者";
-                desc = "你天生好奇，热爱冒险。明亮的酸质正如你对世界不竭的探索欲，只有那抹带有爆发力的灵动才能满足你的灵魂。";
-            } else if (userScores.body > 25) {
-                title = "大地的守望者";
-                desc = "你性格稳重，珍视时间的沉淀。你迷恋那种厚重且真实的包裹感，咖啡对你而言是坚实的依靠与静谧的独处。";
-            } else if (userScores.sweetness > 25) {
-                title = "温柔的造梦师";
-                desc = "世界在你眼中充满了柔和的光影。你拒绝苦涩，拥抱所有的甘甜与温柔，你是那个总能在平凡日子里发现美好的人。";
-            }
+            const maxScore = Math.max(...Object.values(userScores));
+            const topTrait = Object.keys(userScores).find(key => userScores[key] === maxScore);
 
+            if (topTrait === 'acid') { title = "极光追寻者"; desc = "你天生好奇，热爱冒险。明亮的酸质正如你对世界不竭的探索欲。"; }
+            else if (topTrait === 'body') { title = "大地的守望者"; desc = "你性格稳重，珍视时间的沉淀。你迷恋那种厚重且真实的包裹感。"; }
+            else if (topTrait === 'sweetness') { title = "温柔的造梦师"; desc = "世界在你眼中充满了柔和的光影。你拒绝苦涩，拥抱所有的甘甜。"; }
+            else if (topTrait === 'floral') { title = "林间漫步者"; desc = "你对细节格外敏锐，喜欢空气感和余味里的微光。"; }
 
             document.getElementById('personality-title').innerText = title;
             document.getElementById('personality-desc').innerText = desc;
 
-            const dominantTraits = getTopTraits(userScores, 2);
-
-            // 推荐逻辑：计算用户得分与每种豆子profile的相似度（欧几里得距离逆向）
             const scoredInventory = inventory.map(item => {
                 let diff = 0;
                 for (let key in userScores) {
-                    // 归一化得分后再对比
                     const normalizedUserScore = (userScores[key] / 30) * 5; 
                     diff += Math.pow(normalizedUserScore - item.profile[key], 2);
                 }
                 return { ...item, match: 100 - Math.sqrt(diff) * 5 };
             }).sort((a, b) => b.match - a.match);
 
-
             const recContainer = document.getElementById('recommendations');
             recContainer.innerHTML = '';
             scoredInventory.slice(0, 3).forEach((item, idx) => {
                 const card = document.createElement('div');
-                card.className = `glass-card p-5 sm:p-6 flex flex-col items-center text-center fade-in`;
+                card.className = `glass-card p-6 flex flex-col items-center text-center fade-in bg-white/5 border border-white/10`;
                 card.style.animationDelay = `${idx * 0.2}s`;
-                const recommendationReason = buildRecommendationReason(item, idx, dominantTraits, title);
                 card.innerHTML = `
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 sm:mb-6 text-gold font-bold text-lg sm:text-xl">
+                    <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4 text-gold font-bold">
                         ${idx + 1}
                     </div>
-                    <h5 class="text-lg sm:text-xl font-bold mb-2 leading-snug">${item.name}</h5>
-                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                    <h5 class="text-xl font-bold mb-2">${item.name}</h5>
+                    <div class="flex flex-wrap justify-center gap-1 mb-3">
                         ${item.tags.map(t => `<span class="text-[10px] border border-white/20 px-2 py-0.5 rounded-full text-gray-400">${t}</span>`).join('')}
                     </div>
-                    <p class="text-sm text-gray-500 mb-5 sm:mb-6 flex-grow leading-relaxed">${item.desc}</p>
-                    <p class="text-left text-[13px] sm:text-sm text-stone-300 leading-7 mb-5 sm:mb-6 border-t border-white/10 pt-4">${recommendationReason}</p>
-                    <div class="text-gold text-sm tracking-[0.2em] sm:tracking-widest font-bold">匹配度 ${Math.round(item.match)}%</div>
+                    <p class="text-xs text-gray-400 mb-4 flex-grow leading-relaxed">${item.desc}</p>
+                    <div class="text-gold text-sm font-bold mt-auto pt-4 border-t border-white/5 w-full">匹配度 ${Math.round(item.match)}%</div>
                 `;
                 recContainer.appendChild(card);
             });
+        }
+
+        async function saveAsImage() {
+            const btn = event.currentTarget;
+            const originalText = btn.innerText;
+            btn.innerText = "正在生成...";
+            btn.disabled = true;
+
+            try {
+                const canvas = await html2canvas(document.getElementById('screenshot-area'), {
+                    backgroundColor: '#0a0a0c',
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `咖啡风味报告-${new Date().getTime()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                btn.innerText = "保存成功";
+            } catch (e) {
+                console.error(e);
+                alert("保存失败，请截图分享");
+                btn.innerText = "保存失败";
+            } finally {
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }
         }
     </script>
 </body>
