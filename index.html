@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>灵魂咖啡寻踪 - 深度风味分析</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -29,6 +29,7 @@
         * {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            box-sizing: border-box;
         }
 
         body {
@@ -37,14 +38,24 @@
             color: var(--soft-white);
             font-family: 'Montserrat', 'Noto Serif SC', serif;
             overflow-x: hidden;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(196, 164, 132, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(212, 163, 115, 0.05) 0%, transparent 40%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html {
+            height: -webkit-fill-available;
         }
 
         #app {
-            width: min(100%, 72rem);
-            margin-inline: auto;
+            width: 100%;
+            max-width: 600px; /* 移动端优先，限制最大宽度 */
+            padding: 1rem;
             position: relative;
             z-index: 10;
         }
@@ -54,7 +65,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 2rem;
+            border-radius: 1.5rem;
         }
 
         .gradient-text {
@@ -64,11 +75,12 @@
         }
 
         .option-btn {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             position: relative;
             z-index: 20;
+            width: 100%;
         }
 
         .option-btn:active {
@@ -76,15 +88,15 @@
             transform: scale(0.98);
         }
 
-        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        .fade-in { animation: fadeIn 0.6s ease forwards; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .progress-bar {
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
             width: 100%;
             position: fixed;
             top: 0;
@@ -96,83 +108,146 @@
         .progress-fill {
             height: 100%;
             background: var(--gold);
-            transition: width 0.5s ease;
-            box-shadow: 0 0 15px var(--gold);
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--gold);
         }
 
         .orb {
-            position: absolute;
+            position: fixed;
             border-radius: 50%;
             filter: blur(80px);
             z-index: -1;
-            opacity: 0.3;
-            animation: float 20s infinite alternate;
+            opacity: 0.2;
+            animation: float 15s infinite alternate;
             pointer-events: none;
         }
 
         @keyframes float {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 50px); }
+            100% { transform: translate(30px, 30px); }
         }
 
-        button {
-            cursor: pointer;
-            touch-action: manipulation;
+        /* 专门为保存图片设计的海报样式 */
+        #poster-container {
+            position: fixed;
+            left: -9999px;
+            width: 375px;
+            background: #0a0a0c;
+            color: #f5f5f7;
+            padding: 30px;
+            font-family: 'Montserrat', 'Noto Serif SC', serif;
         }
 
-        #screenshot-area {
-            background: var(--deep-black);
-            padding: 20px;
+        .poster-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(196, 164, 132, 0.3);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .poster-title {
+            color: #c4a484;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .poster-personality {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fff 0%, #c4a484 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .poster-desc {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .poster-recommendation {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .poster-bean-name {
+            color: #c4a484;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .poster-bean-desc {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .poster-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 2px;
+        }
+
+        /* 移动端全屏适配优化 */
+        @media (max-height: 700px) {
+            #app { padding-top: 0.5rem; }
+            h1 { font-size: 2.5rem !important; }
+            .option-btn { padding: 0.75rem !important; }
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-3 sm:p-4">
+<body>
 
-    <div class="orb w-64 h-64 sm:w-96 sm:h-96 bg-yellow-900 top-[10%] left-1/2 -translate-x-[62%]"></div>
-    <div class="orb w-56 h-56 sm:w-80 sm:h-80 bg-orange-900 bottom-[8%] left-1/2 translate-x-[8%]" style="animation-delay: -5s;"></div>
+    <div class="orb w-64 h-64 bg-yellow-900 top-[10%] left-[-10%]"></div>
+    <div class="orb w-56 h-56 bg-orange-900 bottom-[10%] right-[-10%]" style="animation-delay: -5s;"></div>
 
     <div class="progress-bar">
         <div id="progressFill" class="progress-fill" style="width: 0%"></div>
     </div>
 
-    <main id="app" class="w-full max-w-4xl mx-auto">
+    <main id="app">
         <!-- 开始页面 -->
         <section id="start-screen" class="text-center fade-in">
-            <div class="mb-6 sm:mb-8 flex justify-center">
-                <div class="icon-container">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gold sm:w-20 sm:h-20">
-                        <path d="M12 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
-                        <path d="M12 2c-4 4-4 12 0 16"/>
-                    </svg>
-                </div>
+            <div class="mb-8 flex justify-center">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#c4a484" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
+                    <path d="M12 2c-4 4-4 12 0 16"/>
+                </svg>
             </div>
-            <p class="text-xs sm:text-sm uppercase tracking-[0.35em] text-gold/80 mb-3 sm:mb-4">亲爱的咖啡旅人</p>
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 gradient-text leading-tight">灵魂咖啡寻踪</h1>
-            <p class="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-2">
+            <p class="text-xs uppercase tracking-[0.3em] text-gold/80 mb-4">亲爱的咖啡旅人</p>
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6 gradient-text leading-tight">灵魂咖啡寻踪</h1>
+            <p class="text-sm sm:text-base text-gray-400 mb-10 leading-relaxed px-4">
                 穿越迷雾般的风味森林，在15个直觉瞬间中，
-                <span class="block sm:inline">发现那支跨越山海只为契合你的本命豆。</span>
+                发现那支跨越山海只为契合你的本命豆。
             </p>
-            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 sm:px-12 py-4 bg-transparent border border-gold text-gold rounded-full text-base sm:text-lg hover:bg-gold hover:text-black transition-all duration-500 tracking-[0.25em] sm:tracking-widest active:bg-gold active:text-black">
+            <button onclick="startQuiz()" class="w-full px-12 py-4 bg-transparent border border-gold text-gold rounded-full text-lg hover:bg-gold hover:text-black transition-all active:scale-95">
                 开启寻踪之旅
             </button>
         </section>
 
         <!-- 问题页面 -->
         <section id="quiz-screen" class="hidden">
-            <div class="glass-card p-5 sm:p-8 md:p-12">
-                <div class="flex justify-between items-start mb-8 sm:mb-12">
-                    <span id="question-number" class="text-gold font-mono tracking-widest">01 / 15</span>
-                    <span id="category-tag" class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-500 text-right">Sensory Perception</span>
+            <div class="glass-card p-6 sm:p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <span id="question-number" class="text-gold font-mono tracking-widest text-sm">01 / 15</span>
+                    <span id="category-tag" class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Sensory Perception</span>
                 </div>
                 
                 <div id="question-content" class="fade-in">
-                    <div id="question-icon" class="mb-4 sm:mb-6 flex justify-center h-16 sm:h-20"></div>
-                    <h2 id="question-text" class="text-xl sm:text-2xl md:text-3xl font-medium mb-6 sm:mb-10 text-center leading-tight"></h2>
-                    <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    <div id="question-icon" class="mb-6 flex justify-center h-16"></div>
+                    <h2 id="question-text" class="text-xl sm:text-2xl font-medium mb-8 text-center leading-tight min-h-[3.5rem]"></h2>
+                    <div id="options-container" class="grid grid-cols-1 gap-3"></div>
                 </div>
 
-                <div class="mt-8 sm:mt-12 flex justify-between items-center gap-4">
-                    <button id="prev-btn" onclick="prevQuestion()" class="text-sm sm:text-base text-gray-500 hover:text-white transition-colors disabled:opacity-0">
+                <div class="mt-8 flex justify-start">
+                    <button id="prev-btn" onclick="prevQuestion()" class="text-sm text-gray-500 hover:text-white transition-colors">
                         ← 返回上一步
                     </button>
                 </div>
@@ -180,38 +255,54 @@
         </section>
 
         <!-- 分析加载中 -->
-        <section id="loading-screen" class="hidden text-center fade-in py-10 sm:py-0">
-            <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 sm:mb-8">
-                <div class="absolute inset-0 border-2 border-gold opacity-20 rounded-full"></div>
+        <section id="loading-screen" class="hidden text-center fade-in py-12">
+            <div class="relative w-20 h-20 mx-auto mb-8">
+                <div class="absolute inset-0 border-2 border-gold opacity-10 rounded-full"></div>
                 <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
             </div>
-            <h2 class="text-xl sm:text-2xl font-light tracking-[0.2em] sm:tracking-widest mb-4 text-gold">风味罗盘校准中...</h2>
-            <p id="loading-text" class="text-sm sm:text-base text-gray-500 italic px-4">正在提取您的嗅觉潜意识...</p>
+            <h2 class="text-xl font-light tracking-widest mb-4 text-gold">风味罗盘校准中...</h2>
+            <p id="loading-text" class="text-xs text-gray-500 italic px-4">正在提取您的嗅觉潜意识...</p>
         </section>
 
         <!-- 结果报告页面 -->
         <section id="result-screen" class="hidden fade-in">
-            <div id="screenshot-area" class="glass-card overflow-hidden">
-                <div class="bg-gradient-to-r from-stone-900 to-black p-6 sm:p-10 text-center border-b border-white/10">
-                    <h3 class="text-gold uppercase tracking-[0.25em] sm:tracking-[0.4em] mb-4 text-xs sm:text-sm">风味人格分析报告</h3>
-                    <h2 id="personality-title" class="text-3xl sm:text-4xl font-bold mb-4 leading-tight gradient-text"></h2>
-                    <p id="personality-desc" class="text-sm sm:text-base text-gray-400 max-w-xl mx-auto leading-relaxed"></p>
+            <div class="glass-card overflow-hidden mb-8 shadow-2xl">
+                <div class="bg-gradient-to-b from-stone-900 to-black p-8 text-center border-b border-white/5">
+                    <h3 class="text-gold uppercase tracking-[0.3em] mb-4 text-[10px]">风味人格分析报告</h3>
+                    <h2 id="personality-title" class="text-3xl font-bold mb-4 gradient-text"></h2>
+                    <p id="personality-desc" class="text-xs sm:text-sm text-gray-400 leading-relaxed"></p>
                 </div>
                 
-                <div class="p-5 sm:p-8 md:p-12">
-                    <h4 class="text-center text-lg sm:text-xl mb-6 sm:mb-10 tracking-[0.18em] sm:tracking-widest">—— 馆藏推荐 ——</h4>
-                    <div id="recommendations" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+                <div class="p-6">
+                    <h4 class="text-center text-xs mb-6 tracking-widest text-gray-500 uppercase">—— 馆藏推荐 ——</h4>
+                    <div id="recommendations" class="space-y-4"></div>
                 </div>
             </div>
             
-            <div class="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button onclick="saveAsImage()" class="w-full sm:w-auto px-10 py-4 bg-gold text-black rounded-full font-bold tracking-widest hover:bg-white transition-all active:scale-95">
-                    保存报告图片
+            <div class="flex flex-col gap-4">
+                <button onclick="saveAsImage()" id="save-btn" class="w-full py-4 bg-gold text-black rounded-full font-bold tracking-widest active:scale-95 transition-all shadow-lg shadow-gold/20">
+                    生成海报图片
                 </button>
-                <button onclick="location.reload()" class="text-gray-500 hover:text-gold transition-colors tracking-widest text-sm">重新探索</button>
+                <button onclick="location.reload()" class="w-full py-4 bg-white/5 text-gray-400 rounded-full text-sm hover:text-white transition-all">
+                    重新开始测试
+                </button>
             </div>
         </section>
     </main>
+
+    <!-- 隐藏的海报生成模板 -->
+    <div id="poster-container">
+        <div class="poster-header">
+            <div class="poster-title">灵魂咖啡寻踪</div>
+            <div class="poster-personality" id="poster-personality-title"></div>
+            <div class="poster-desc" id="poster-personality-desc"></div>
+        </div>
+        <div id="poster-recommendations-list"></div>
+        <div class="poster-footer">
+            EXPLORE YOUR COFFEE SOUL<br>
+            @luckycoffee.top
+        </div>
+    </div>
 
     <script>
         const icons = {
@@ -227,7 +318,7 @@
             { text: "当你走进果园，哪种香气最先吸引你？", icon: icons.fruit, options: [{ text: "刚切开的新鲜柠檬", scores: { acid: 4, floral: 1 } }, { text: "熟透坠地的红樱桃", scores: { sweetness: 3, acid: 2 } }, { text: "在阳光下暴晒的柑橘皮", scores: { floral: 3, acid: 1 } }, { text: "浓郁的葡萄果酱", scores: { sweetness: 4, body: 1 } }] },
             { text: "你理想的午后光影是什么样的？", icon: icons.night, options: [{ text: "斑驳的树影，充满未知", scores: { floral: 3, acid: 2 } }, { text: "落日熔金，温暖厚重", scores: { body: 3, bitterness: 2 } }, { text: "冷调月光，清冽干净", scores: { acid: 3, floral: 2 } }, { text: "壁炉火光，焦糖甜香", scores: { sweetness: 4, bitterness: 1 } }] },
             { text: "品尝黑巧克力时，你更迷恋？", icon: icons.fire, options: [{ text: "那一抹持久的回甘", scores: { sweetness: 3, body: 2 } }, { text: "充满力量的纯粹苦味", scores: { bitterness: 4, body: 3 } }, { text: "夹杂其中的坚果香气", scores: { body: 2, sweetness: 2 } }, { text: "略带发酵感的酒香", scores: { acid: 2, body: 3 } }] },
-            { text: "旅行时，你更向往哪里？", icon: icons.forest, options: [{text:"云雾缭绕的高山庄园", scores:{acid:3, floral:3}}, {text:"充满香料气息的古老集市", scores:{bitterness:2, body:3}}, {text:"静谧的海边椰林", scores:{sweetness:3, body:1}}, {text:"清晨的森林深处", scores:{acid:2, floral:2}}] },
+            { text: "旅行时，你更向往哪里？", icon: icons.forest, options: [{text:"云雾缭绕的高山庄园", scores:{acid:3, floral:3}}, {text:"香料气息的古老集市", scores:{bitterness:2, body:3}}, {text:"静谧的海边椰林", scores:{sweetness:3, body:1}}, {text:"清晨的森林深处", scores:{acid:2, floral:2}}] },
             { text: "你对酸味的容忍度如何？", icon: icons.fruit, options: [{text:"像柠檬水般的明亮刺激", scores:{acid:5}}, {text:"像红酒般的微酸平衡", scores:{acid:3, sweetness:2}}, {text:"几乎感觉不到酸", scores:{bitterness:3, body:2}}, {text:"完全不喜欢酸", scores:{bitterness:5}}] },
             { text: "口感上你更倾向于？", icon: icons.sparkle, options: [{text:"清澈如泉水，毫无负担", scores:{body:1}}, {text:"丝滑如绸缎，醇度适中", scores:{body:3, sweetness:2}}, {text:"浓稠如糖浆，包裹感强", scores:{body:5}}, {text:"带有颗粒感的原始野性", scores:{body:4, bitterness:2}}] },
             { text: "你最喜欢的颜色调性？", icon: icons.night, options: [{text:"明艳的宝石蓝", scores:{acid:3}}, {text:"深邃的琥珀金", scores:{sweetness:3, body:2}}, {text:"原始的苔藓绿", scores:{floral:3}}, {text:"静谧的玄武岩", scores:{bitterness:3}}] },
@@ -241,41 +332,26 @@
         ];
 
         const inventory = [
-            { name: "特批雪莉", tags: ["洪都拉斯", "马萨瓜拉", "莫卡庄园"], desc: "饱满细腻的香草冰淇淋口感，浆果酸甜感，黄黄金奇异果，树莓奶油，牛奶花生饮料。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
-            { name: "云野", tags: ["埃塞俄比亚", "耶加雪菲", "水洗"], desc: "经典的柑橘类风味，柠檬，橙汁，清雅的茉莉花香，细致的乌龙茶香。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 } },
-            { name: "江南雨巷", tags: ["厄瓜多尔", "厌氧发酵"], desc: "主体风味来自云南保山小农契作，加入风味提取物增强，柑橘香气与酸度并存。", profile: { acid: 4, floral: 3, sweetness: 3, body: 3, bitterness: 2 } },
-            { name: "赤橘霞光", tags: ["云南", "思茅", "波本浸渍水洗"], desc: "馥郁柔和的酒香，黑朗姆酒，波本酒，黑加仑，酒渍黑樱桃，深色浆果味。", profile: { acid: 3, floral: 2, sweetness: 4, body: 4, bitterness: 3 } },
-            { name: "典藏曼特宁", tags: ["印度尼西亚", "卡亚纳", "湿刨处理"], desc: "柔和细腻的焦糖甜感，85%黑巧克力，雪松混合丁香香料味，醇厚浓郁。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
-            { name: "雨漫春尘", tags: ["哥伦比亚", "慧兰", "粉红波旁"], desc: "酸甜多汁的玫瑰提子，百香果，蓝莓，馥郁玫瑰花香，蜜瓜，芒果，层次丰富。", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 } },
-            { name: "丹荔露", tags: ["云南", "保山", "冰荔处理"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕，贯穿始终。", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
-            { name: "如梦令", tags: ["云南", "普洱", "布鲁增味水洗"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕，甜感细腻。", profile: { acid: 2, floral: 5, sweetness: 5, body: 3, bitterness: 2 } },
-            { name: "蓝山一号", tags: ["牙买加", "圣安德鲁", "水洗"], desc: "浓郁醇厚的黑巧克力风味，细腻奶油触感，焦糖奶油霜，烤杏仁风干橙皮香。", profile: { acid: 1, floral: 1, sweetness: 3, body: 5, bitterness: 3 } },
-            { name: "白鹿", tags: ["埃塞俄比亚", "耶加雪菲", "原生种水洗"], desc: "清新的黄柠檬香气，成熟杏桃甜香，白花香气，茉莉，白葡萄汁，余韵悠长。", profile: { acid: 4, floral: 5, sweetness: 4, body: 2, bitterness: 2 } },
-            { name: "Wonder of U", tags: ["哥伦比亚", "粉红波旁", "厌氧增味"], desc: "香甜的热带水果气息，荔枝，蛇皮果，香印青提，泰国小菠萝，椰子玫瑰花。", profile: { acid: 4, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
-            { name: "银河高速公路", tags: ["SOE 埃塞俄比亚", "西达摩", "日晒"], desc: "浓缩表现：橘皮，坚果，莓干；奶咖表现：太妃糖，黄油饼干，烤杏仁。", profile: { acid: 3, floral: 2, sweetness: 4, body: 4, bitterness: 3 } },
-            { name: "金标瑰夏", tags: ["埃塞俄比亚", "瑰夏村", "蜜处理"], desc: "强劲甜香的花香，玉兰，鸡蛋花，金银花，混合甜橙，黄柠檬，明亮花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 } },
-            { name: "White Petal", tags: ["巴拿马", "瑰夏", "水洗"], desc: "细致绵长的蜂蜜甜感，黄柠檬，葡萄柚，轻柔洋甘菊茉莉花香，饱满扎实。", profile: { acid: 4, floral: 5, sweetness: 4, body: 3, bitterness: 2 } },
-            { name: "洛神游", tags: ["哥斯达黎加", "瑰夏", "水洗"], desc: "干净清冽的浆果酸甜，红葡萄，草莓，奇异果，洛神，甜橙，栀子花香。", profile: { acid: 5, floral: 4, sweetness: 3, body: 2, bitterness: 2 } },
-            { name: "仲夏夜", tags: ["哥斯达黎加", "ET47", "黄蜜处理"], desc: "成熟轻柔的果汁触感，西番莲，沙棘果，核桃油杏仁香，草莓巧克力。", profile: { acid: 3, floral: 3, sweetness: 4, body: 3, bitterness: 2 } },
-            { name: "涅里黄昏", tags: ["肯尼亚", "涅里", "日晒处理"], desc: "成熟细腻的黄杏，黄桃，枇杷，橘子水果气息，蓝莓酱，杨桃，油柑。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 3 } },
-            { name: "拂晓", tags: ["埃塞俄比亚", "卡玛奇农场", "蜜处理"], desc: "细腻黄柠檬混合佛手柑，成熟草莓，杏桃血橙，覆盆子，风味清晰浓郁。", profile: { acid: 5, floral: 4, sweetness: 4, body: 2, bitterness: 2 } },
-            { name: "对山", tags: ["卢旺达", "红波旁", "水洗"], desc: "细腻奶油触感，龙井，碧螺春绿茶混合白花香气，柚子，杏桃，绿茶感。", profile: { acid: 3, floral: 4, sweetness: 3, body: 3, bitterness: 3 } },
-            { name: "芙蕾雅的吻", tags: ["哥斯达黎加", "瑰夏", "增味水洗"], desc: "成熟饱满的红色莓果，覆盆子，草莓，细致玫瑰花香，甜橙，沃柑，酒香。", profile: { acid: 4, floral: 5, sweetness: 5, body: 3, bitterness: 2 } },
-            { name: "维纳斯之泪", tags: ["巴拿马", "瑰夏", "水洗"], desc: "优雅的白色花香，姜花，玉兰，多汁葡萄，葡萄柚，杏子，杏仁，蜂蜜绿茶。", profile: { acid: 4, floral: 5, sweetness: 4, body: 3, bitterness: 2 } },
-            { name: "乌克丽丽小调", tags: ["肯尼亚", "SL28/34", "水洗"], desc: "明亮上扬的核果酸甜，青梅，李子，牛奶青枣，葡萄柚，沃柑，蜜香红茶。", profile: { acid: 5, floral: 2, sweetness: 3, body: 4, bitterness: 2 } },
-            { name: "沉舟", tags: ["印度尼西亚", "日晒", "雪莉酒桶"], desc: "浓缩表现：威士忌，橡木，果脯；奶咖表现：香草奶油，威士忌，榛子。", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 } }
+            { name: "特批雪莉", tags: ["洪都拉斯", "莫卡庄园"], desc: "饱满细腻的香草冰淇淋口感，浆果酸甜感，树莓奶油，牛奶花生饮料。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
+            { name: "云野", tags: ["埃塞俄比亚", "水洗"], desc: "经典的柑橘类风味，柠檬，橙汁，清雅的茉莉花香，细致的乌龙茶香。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 } },
+            { name: "江南雨巷", tags: ["厄瓜多尔", "厌氧发酵"], desc: "主体风味来自云南保山，柑橘香气与酸度并存，口感清新。", profile: { acid: 4, floral: 3, sweetness: 3, body: 3, bitterness: 2 } },
+            { name: "赤橘霞光", tags: ["云南", "波本浸渍"], desc: "馥郁柔和的酒香，黑朗姆酒，波本酒，黑加仑，深色浆果味。", profile: { acid: 3, floral: 2, sweetness: 4, body: 4, bitterness: 3 } },
+            { name: "典藏曼特宁", tags: ["印尼", "湿刨处理"], desc: "柔和细腻的焦糖甜感，85%黑巧克力，雪松混合丁香香料味。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
+            { name: "雨漫春尘", tags: ["哥伦比亚", "粉红波旁"], desc: "酸甜多汁的玫瑰提子，百香果，蓝莓，馥郁玫瑰花香，层次丰富。", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 } },
+            { name: "丹荔露", tags: ["云南", "冰荔处理"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕。", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "如梦令", tags: ["云南", "增味水洗"], desc: "强劲浓郁的蓝莓气息，紫色花香，利宾纳葡萄汁，甜感细腻。", profile: { acid: 2, floral: 5, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "蓝山一号", tags: ["牙买加", "水洗"], desc: "浓郁醇厚的黑巧克力风味，细腻奶油触感，焦糖奶油霜。", profile: { acid: 1, floral: 1, sweetness: 3, body: 5, bitterness: 3 } },
+            { name: "白鹿", tags: ["耶加雪菲", "原生种"], desc: "清新的黄柠檬香气，成熟杏桃甜香，白花香气，茉莉，余韵悠长。", profile: { acid: 4, floral: 5, sweetness: 4, body: 2, bitterness: 2 } },
+            { name: "Wonder of U", tags: ["哥伦比亚", "粉红波旁"], desc: "香甜的热带水果气息，荔枝，蛇皮果，香印青提，泰国小菠萝。", profile: { acid: 4, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
+            { name: "金标瑰夏", tags: ["瑰夏村", "蜜处理"], desc: "强劲甜香的花香，玉兰，混合甜橙，黄柠檬，明亮花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 } },
+            { name: "White Petal", tags: ["巴拿马", "瑰夏"], desc: "细致绵长的蜂蜜甜感，黄柠檬，轻柔洋甘菊茉莉花香，饱满扎实。", profile: { acid: 4, floral: 5, sweetness: 4, body: 3, bitterness: 2 } },
+            { name: "洛神游", tags: ["哥斯达黎加", "瑰夏"], desc: "干净清冽的浆果酸甜，红葡萄，草莓，洛神，甜橙，栀子花香。", profile: { acid: 5, floral: 4, sweetness: 3, body: 2, bitterness: 2 } },
+            { name: "沉舟", tags: ["印尼", "雪莉酒桶"], desc: "威士忌，橡木，果脯；奶咖表现：香草奶油，威士忌，榛子。", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 } }
         ];
 
         let currentIdx = 0;
         let userScores = { acid: 0, bitterness: 0, body: 0, sweetness: 0, floral: 0 };
         let history = [];
-        const traitMeta = {
-            acid: { label: "明亮酸质", tone: "你偏爱有棱角、会发光的风味", image: "像一口咬开新鲜果肉时的清醒感" },
-            bitterness: { label: "深色苦韵", tone: "你能欣赏更深沉、更有骨架的表达", image: "像夜色落下后依旧有层次的余韵" },
-            body: { label: "厚实醇感", tone: "你需要的是包裹感和落地感", image: "像手心握住一只温热陶杯的踏实" },
-            sweetness: { label: "柔和甜感", tone: "你会被圆润、温暖、让人放松的风味打动", image: "像甜点最后一口留在舌尖的安慰" },
-            floral: { label: "轻盈花香", tone: "你对细节、空气感和余味里的微光格外敏锐", image: "像风吹过花园时不经意扑来的香气" }
-        };
 
         function startQuiz() {
             document.getElementById('start-screen').classList.add('hidden');
@@ -294,7 +370,7 @@
             
             q.options.forEach((opt) => {
                 const btn = document.createElement('button');
-                btn.className = 'option-btn p-6 text-left rounded-xl text-lg flex justify-between items-center bg-white/5 border border-white/10 hover:border-gold transition-all';
+                btn.className = 'option-btn p-4 text-left rounded-xl text-base flex justify-between items-center bg-white/5 border border-white/10 hover:border-gold transition-all';
                 btn.innerHTML = `<span>${opt.text}</span><span class="text-gold">→</span>`;
                 btn.onclick = () => selectOption(opt);
                 container.appendChild(btn);
@@ -340,7 +416,7 @@
                     clearInterval(interval);
                     showResults();
                 }
-            }, 800);
+            }, 600);
         }
 
         function showResults() {
@@ -360,6 +436,10 @@
 
             document.getElementById('personality-title').innerText = title;
             document.getElementById('personality-desc').innerText = desc;
+            
+            // 同步到海报
+            document.getElementById('poster-personality-title').innerText = title;
+            document.getElementById('poster-personality-desc').innerText = desc;
 
             const scoredInventory = inventory.map(item => {
                 let diff = 0;
@@ -371,49 +451,61 @@
             }).sort((a, b) => b.match - a.match);
 
             const recContainer = document.getElementById('recommendations');
+            const posterRecList = document.getElementById('poster-recommendations-list');
             recContainer.innerHTML = '';
+            posterRecList.innerHTML = '';
+
             scoredInventory.slice(0, 3).forEach((item, idx) => {
+                // 页面展示卡片
                 const card = document.createElement('div');
-                card.className = `glass-card p-6 flex flex-col items-center text-center fade-in bg-white/5 border border-white/10`;
-                card.style.animationDelay = `${idx * 0.2}s`;
+                card.className = `glass-card p-4 flex flex-col bg-white/5 border border-white/10 fade-in`;
+                card.style.animationDelay = `${idx * 0.1}s`;
                 card.innerHTML = `
-                    <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4 text-gold font-bold">
-                        ${idx + 1}
+                    <div class="flex justify-between items-center mb-2">
+                        <h5 class="text-lg font-bold text-gold">${item.name}</h5>
+                        <span class="text-[10px] text-gray-500 font-mono">MATCH ${Math.round(item.match)}%</span>
                     </div>
-                    <h5 class="text-xl font-bold mb-2">${item.name}</h5>
-                    <div class="flex flex-wrap justify-center gap-1 mb-3">
-                        ${item.tags.map(t => `<span class="text-[10px] border border-white/20 px-2 py-0.5 rounded-full text-gray-400">${t}</span>`).join('')}
-                    </div>
-                    <p class="text-xs text-gray-400 mb-4 flex-grow leading-relaxed">${item.desc}</p>
-                    <div class="text-gold text-sm font-bold mt-auto pt-4 border-t border-white/5 w-full">匹配度 ${Math.round(item.match)}%</div>
+                    <p class="text-[10px] text-gray-400 leading-relaxed">${item.desc}</p>
                 `;
                 recContainer.appendChild(card);
+
+                // 海报内部卡片
+                const posterCard = document.createElement('div');
+                posterCard.className = 'poster-recommendation';
+                posterCard.innerHTML = `
+                    <div class="poster-bean-name">${item.name} <span style="float:right; font-size:10px; opacity:0.5;">${Math.round(item.match)}%</span></div>
+                    <div class="poster-bean-desc">${item.desc}</div>
+                `;
+                posterRecList.appendChild(posterCard);
             });
         }
 
         async function saveAsImage() {
-            const btn = event.currentTarget;
+            const btn = document.getElementById('save-btn');
             const originalText = btn.innerText;
-            btn.innerText = "正在生成...";
+            btn.innerText = "正在生成海报...";
             btn.disabled = true;
 
+            // 确保海报区域在渲染前是准备好的
+            const poster = document.getElementById('poster-container');
+            
             try {
-                const canvas = await html2canvas(document.getElementById('screenshot-area'), {
+                const canvas = await html2canvas(poster, {
                     backgroundColor: '#0a0a0c',
-                    scale: 2,
+                    scale: 3, // 提高清晰度
                     useCORS: true,
                     logging: false
                 });
                 
                 const link = document.createElement('a');
-                link.download = `咖啡风味报告-${new Date().getTime()}.png`;
+                link.download = `luckycoffee-report-${new Date().getTime()}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
                 btn.innerText = "保存成功";
             } catch (e) {
                 console.error(e);
-                alert("保存失败，请截图分享");
-                btn.innerText = "保存失败";
+                alert("生成失败，请长按截图分享");
+                btn.innerText = "生成失败";
             } finally {
                 setTimeout(() => {
                     btn.innerText = originalText;
