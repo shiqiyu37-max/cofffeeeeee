@@ -118,7 +118,7 @@
         }
 
         .poster-title {
-            font-size: 12px;
+            font-size: 10px;
             letter-spacing: 4px;
             color: #c4a484;
             text-transform: uppercase;
@@ -130,43 +130,41 @@
             font-size: 32px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #fff 0%, #c4a484 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            color: #fff; /* 移除色块和渐变，使用纯白 */
         }
 
         .poster-insight-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #c4a484;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .poster-insight-title {
             font-size: 14px;
             color: #c4a484;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         .poster-insight-content {
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.7;
             color: #ccc;
         }
 
         .poster-bean-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .poster-bean-info {
-            flex: 1;
+        .poster-bean-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
         }
 
         .poster-bean-name {
@@ -181,10 +179,33 @@
             font-family: monospace;
         }
 
-        .poster-footer {
-            margin-top: 40px;
+        .poster-bean-reason {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .poster-promo-box {
+            background: rgba(196, 164, 132, 0.1);
+            border: 1px dashed #c4a484;
+            padding: 12px;
+            margin: 20px 0;
             text-align: center;
-            font-size: 10px;
+            border-radius: 8px;
+        }
+
+        .poster-promo-text {
+            font-size: 12px;
+            color: #c4a484;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .poster-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 9px;
             color: #444;
             letter-spacing: 2px;
         }
@@ -258,6 +279,11 @@
                 <div class="p-8">
                     <h4 class="text-center text-[10px] mb-8 tracking-widest text-gray-500 uppercase">馆藏豆单推荐</h4>
                     <div id="recommendations" class="space-y-4"></div>
+                    <div class="mt-6 p-4 bg-gold/10 border border-dashed border-gold rounded-xl text-center">
+                        <p class="text-[10px] text-gold font-bold leading-relaxed">
+                            购买后上传此截图为备注<br>将收到随机惊喜试喝装 (15g)
+                        </p>
+                    </div>
                 </div>
             </div>
             
@@ -284,6 +310,12 @@
 
         <div style="margin-bottom: 10px; font-size: 10px; color: #666; letter-spacing: 2px;">推荐豆单 / Recommended</div>
         <div id="poster-beans"></div>
+
+        <div class="poster-promo-box">
+            <div class="poster-promo-text">
+                购买后上传此截图为备注<br>将收到随机惊喜试喝装 (15g)
+            </div>
+        </div>
 
         <div class="poster-footer">
             COFFEE SOUL EXPLORER<br>
@@ -377,13 +409,13 @@
         ];
 
         const inventory = [
-            { name: "特批雪莉", tags: ["洪都拉斯", "酒桶发酵"], desc: "饱满的香草冰淇淋触感，树莓奶油，牛奶花生饮料。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 } },
-            { name: "云野", tags: ["埃塞俄比亚", "水洗"], desc: "经典的柑橘类风味，清雅的茉莉花香，细致的乌龙茶感。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 } },
-            { name: "典藏曼特宁", tags: ["印尼", "湿刨"], desc: "柔和细腻的焦糖甜感，85%黑巧克力，雪松混合丁香。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 } },
-            { name: "雨漫春尘", tags: ["哥伦比亚", "粉红波旁"], desc: "酸甜多汁的玫瑰提子，百香果，蓝莓，馥郁玫瑰花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 } },
-            { name: "丹荔露", tags: ["云南", "冰荔处理"], desc: "强劲浓郁的蓝莓气息，利宾纳葡萄汁，蓝莓奶油蛋糕。", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 } },
-            { name: "金标瑰夏", tags: ["瑰夏村", "蜜处理"], desc: "强劲甜香的花香，玉兰，混合甜橙，黄柠檬，明亮花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 } },
-            { name: "沉舟", tags: ["印尼", "雪莉酒桶"], desc: "威士忌，橡木，果脯；香草奶油，威士忌，榛子。", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 } }
+            { name: "特批雪莉", tags: ["洪都拉斯", "酒桶发酵"], desc: "饱满的香草冰淇淋触感，树莓奶油，牛奶花生饮料。", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 }, reasons: { acid: "平衡你对明亮感的追求，同时补充你需要的甜感。", body: "厚实的酒桶发酵风味完美契合你稳重的性格。", sweetness: "极致的甜感是你温柔造梦的最佳搭档。", floral: "酒香与花香的交织，满足你对细节的挑剔。", bitterness: "复杂的风味层次能陪伴你深度思考。" } },
+            { name: "云野", tags: ["埃塞俄比亚", "水洗"], desc: "经典的柑橘类风味，清雅的茉莉花香，细致的乌龙茶感。", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 }, reasons: { acid: "极致的柠檬酸质，呼应你锐利而透明的灵魂底色。", body: "轻盈的口感能为你稳重的性格带来一丝灵动。", sweetness: "清新的回甘是给造梦师的一份轻盈礼物。", floral: "茉莉与茶香是林间漫步者的天然归宿。", bitterness: "纯净的茶感能过滤你内心的杂质。" } },
+            { name: "典藏曼特宁", tags: ["印尼", "湿刨"], desc: "柔和细腻的焦糖甜感，85%黑巧克力，雪松混合丁香。", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 }, reasons: { acid: "极低的酸度能安抚你跳跃而锐利的感官。", body: "如泥土般厚实的醇度，是你稳重性格的真实投影。", sweetness: "焦糖的微甜能化解你内心偶尔的紧绷。", floral: "厚重的森林气息是你寻求安稳感的坚实依靠。", bitterness: "黑巧克力的苦韵是你深度沉思时的最佳盟友。" } },
+            { name: "雨漫春尘", tags: ["哥伦比亚", "粉红波旁"], desc: "酸甜多汁的玫瑰提子，百香果，蓝莓，馥郁玫瑰花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 }, reasons: { acid: "多汁的水果酸质，完美契合你对未知的探险欲。", body: "适中的醇厚度能托住那些瑰丽的花香细节。", sweetness: "如提子般的果甜，是你温柔造梦的具象化表达。", floral: "馥郁的玫瑰香气，是你对极致浪漫的最高敬意。", bitterness: "极低的苦感让你的思维保持绝对的轻盈。" } },
+            { name: "丹荔露", tags: ["云南", "冰荔处理"], desc: "强劲浓郁的蓝莓气息，利宾纳葡萄汁，蓝莓奶油蛋糕。", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 }, reasons: { acid: "克制的酸度让爆发性的甜感更有层次感。", body: "奶油蛋糕般的触感，是对你性格稳定性的温柔奖赏。", sweetness: "强劲的葡萄甜感，是造梦师手中最明亮的画笔。", floral: "紫色花香的神秘感，契合你内心花园的深处。", bitterness: "微弱的苦感能衬托出整体风味的丰盈。" } },
+            { name: "金标瑰夏", tags: ["瑰夏村", "蜜处理"], desc: "强劲甜香的花香，玉兰，混合甜橙，黄柠檬，明亮花香。", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 }, reasons: { acid: "明亮上扬的酸质，是你极光追寻路上的指引标。", body: "轻盈如丝的质感，让你的灵魂得以彻底释放。", sweetness: "蜂蜜般的甜润，是你在探险途中最温暖的补给。", floral: "强劲的玉兰香气，是你内心细节敏锐度的终极共鸣。", bitterness: "几乎不留痕迹的苦感，保持了风味的绝对高雅。" } },
+            { name: "沉舟", tags: ["印尼", "雪莉酒桶"], desc: "威士忌，橡木，果脯；香草奶油，威士忌，榛子。", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 }, reasons: { acid: "微弱的果酸在酒香中闪烁，像你理性的火花。", body: "橡木桶的沉稳感，与你大地的底色完美同频。", sweetness: "香草奶油的甜感，是你厚重外壳下的柔软内心。", floral: "酒香的复杂性，满足你对深度的偏执追求。", bitterness: "威士忌般的苦韵，是你独处时最深刻的对白。" } }
         ];
 
         const insights = {
@@ -508,6 +540,8 @@
             posterBeans.innerHTML = '';
 
             scoredInventory.slice(0, 3).forEach((item, idx) => {
+                const reason = item.reasons[topTrait] || "这款豆子的风味能精准呼应你当下的内心状态。";
+                
                 const card = document.createElement('div');
                 card.className = `glass-card p-4 flex flex-col bg-white/5 border border-white/10 fade-in`;
                 card.style.animationDelay = `${idx * 0.1}s`;
@@ -516,18 +550,19 @@
                         <h5 class="text-base font-bold text-gold">${item.name}</h5>
                         <span class="text-[10px] text-gray-500 font-mono">${Math.round(item.match)}%</span>
                     </div>
-                    <p class="text-[10px] text-gray-400 leading-relaxed">${item.desc}</p>
+                    <p class="text-[10px] text-gray-400 leading-relaxed mb-2">${item.desc}</p>
+                    <p class="text-[9px] text-gold/60 italic leading-snug border-t border-white/5 pt-2">【为何推荐】${reason}</p>
                 `;
                 recContainer.appendChild(card);
 
                 const pItem = document.createElement('div');
                 pItem.className = 'poster-bean-item';
                 pItem.innerHTML = `
-                    <div class="poster-bean-info">
+                    <div class="poster-bean-header">
                         <div class="poster-bean-name">${item.name}</div>
-                        <div style="font-size:10px; color:#888;">${item.desc}</div>
+                        <div class="poster-bean-match">${Math.round(item.match)}%</div>
                     </div>
-                    <div class="poster-bean-match">${Math.round(item.match)}%</div>
+                    <div class="poster-bean-reason">${reason}</div>
                 `;
                 posterBeans.appendChild(pItem);
             });
