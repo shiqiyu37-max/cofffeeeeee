@@ -131,7 +131,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 25px;
-            color: #fff; /* 移除色块和渐变，使用纯白 */
+            color: #fff;
         }
 
         .poster-insight-box {
@@ -242,7 +242,7 @@
         <section id="quiz-screen" class="hidden">
             <div class="flex justify-between items-center mb-10">
                 <span id="question-number" class="text-gold font-mono tracking-widest text-xs">01 / 09</span>
-                <span class="text-[10px] uppercase tracking-widest text-gray-600">Intuition Test</span>
+                <span class="text-[10px] uppercase tracking-widest text-gray-600">Sensory & Intuition</span>
             </div>
             
             <div id="question-content" class="fade-in">
@@ -326,6 +326,24 @@
     <script>
         const questions = [
             {
+                text: "你的味蕾对哪种水果香气最没有抵抗力？",
+                options: [
+                    { text: "柠檬或青苹果的清爽", scores: { acid: 5, floral: 1 } },
+                    { text: "熟透的草莓或荔枝", scores: { sweetness: 4, floral: 2 } },
+                    { text: "烘烤后的坚果或巧克力", scores: { body: 4, bitterness: 2 } },
+                    { text: "淡淡的茉莉或佛手柑", scores: { floral: 5, acid: 2 } }
+                ]
+            },
+            {
+                text: "你理想中的咖啡在口中的触感（Body）更接近？",
+                options: [
+                    { text: "清澈如水，毫无负担", scores: { body: 1, floral: 2 } },
+                    { text: "丝滑如绸缎，醇度适中", scores: { body: 3, sweetness: 2 } },
+                    { text: "浓稠如糖浆，包裹感强", scores: { body: 5, sweetness: 3 } },
+                    { text: "带有微小颗粒的原始质感", scores: { body: 4, bitterness: 2 } }
+                ]
+            },
+            {
                 text: "如果此时窗外正在下雨，你会选择哪种声音作为背景？",
                 options: [
                     { text: "壁炉里木材燃烧的噼啪声", scores: { body: 3, sweetness: 2 } },
@@ -335,12 +353,12 @@
                 ]
             },
             {
-                text: "当你走进一家陌生的书店，你会被什么颜色吸引？",
+                text: "你对“酸度”的接受上限是？",
                 options: [
-                    { text: "明亮的柠檬黄", scores: { acid: 4 } },
-                    { text: "深邃的午夜蓝", scores: { bitterness: 3, body: 2 } },
-                    { text: "柔和的奶茶色", scores: { sweetness: 4 } },
-                    { text: "生机盎然的森林绿", scores: { floral: 4 } }
+                    { text: "像喝一口新鲜柠檬汁", scores: { acid: 5 } },
+                    { text: "像品尝一颗成熟葡萄", scores: { acid: 3, sweetness: 3 } },
+                    { text: "像喝红茶时的一丝回甘", scores: { acid: 1, floral: 3 } },
+                    { text: "最好完全感觉不到酸", scores: { bitterness: 4, body: 2 } }
                 ]
             },
             {
@@ -353,30 +371,12 @@
                 ]
             },
             {
-                text: "如果人生是一场旅行，你更希望目的地是？",
+                text: "你通常喜欢在什么时候开启一杯咖啡？",
                 options: [
-                    { text: "云雾缭绕的高山孤岛", scores: { acid: 3, floral: 3 } },
-                    { text: "烟火气十足的古老集市", scores: { bitterness: 2, body: 3 } },
-                    { text: "只有阳光和棕榈树的荒岛", scores: { sweetness: 4 } },
-                    { text: "秩序井然的先锋美术馆", scores: { acid: 4, body: 1 } }
-                ]
-            },
-            {
-                text: "你如何处理那些突如其来的负面情绪？",
-                options: [
-                    { text: "独自咀嚼，在沉默中消化", scores: { bitterness: 4, body: 2 } },
-                    { text: "寻找甜食，用多巴胺对抗", scores: { sweetness: 5 } },
-                    { text: "投身创作，将它转化为灵感", scores: { acid: 4, floral: 2 } },
-                    { text: "找人倾诉，让它随风散去", scores: { floral: 3, sweetness: 2 } }
-                ]
-            },
-            {
-                text: "哪种材质的触感最让你感到治愈？",
-                options: [
-                    { text: "略带粗糙质感的天然亚麻", scores: { body: 3, bitterness: 2 } },
-                    { text: "丝滑凉爽的重磅真丝", scores: { floral: 4, acid: 1 } },
-                    { text: "厚实温暖的纯羊毛毯", scores: { body: 4, sweetness: 2 } },
-                    { text: "清冽冰凉的打磨大理石", scores: { acid: 4 } }
+                    { text: "清晨需要强效唤醒", scores: { bitterness: 4, body: 4 } },
+                    { text: "悠闲的周末早午餐", scores: { acid: 3, sweetness: 3 } },
+                    { text: "深夜静谧的独处时刻", scores: { floral: 4 } },
+                    { text: "聚会时的分享与交流", scores: { sweetness: 4, body: 2 } }
                 ]
             },
             {
@@ -389,12 +389,12 @@
                 ]
             },
             {
-                text: "对于未来，你的潜意识里充满了？",
+                text: "如果给这杯咖啡加一个注脚，你希望是？",
                 options: [
-                    { text: "对未知冒险的跃跃欲试", scores: { acid: 4, floral: 2 } },
-                    { text: "对安稳现状的精心守护", scores: { sweetness: 3, body: 3 } },
-                    { text: "对极致完美的偏执追求", scores: { acid: 2, bitterness: 3 } },
-                    { text: "对顺其自然的随遇而安", scores: { floral: 3, sweetness: 3 } }
+                    { text: "“极致的纯净”", scores: { acid: 3, floral: 3 } },
+                    { text: "“温暖的厚重”", scores: { body: 4, sweetness: 2 } },
+                    { text: "“复杂的野性”", scores: { bitterness: 4, body: 3 } },
+                    { text: "“柔和的陪伴”", scores: { sweetness: 5 } }
                 ]
             },
             {
@@ -498,7 +498,7 @@
             document.getElementById('loading-screen').classList.remove('hidden');
             document.getElementById('progressFill').style.width = `100%`;
 
-            const steps = ["读取感官切片...", "校准潜意识坐标...", "重构风味图谱...", "正在导出灵魂报告..."];
+            const steps = ["提取感官切片...", "校准潜意识坐标...", "重构风味图谱...", "正在导出灵魂报告..."];
             let step = 0;
             const interval = setInterval(() => {
                 document.getElementById('loading-text').innerText = steps[step];
