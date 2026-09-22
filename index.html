@@ -1,606 +1,249 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>灵魂咖啡寻踪 - 深度风味分析</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: '#c4a484',
-                        accent: '#d4a373',
-                    },
-                },
-            },
-        };
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #c4a484;
-            --deep-black: #0a0a0c;
-            --soft-white: #f5f5f7;
-        }
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light"><meta name="referrer" content="no-referrer">
+<title>海市咖啡 · 顾客选豆</title>
+<style>@charset "UTF-8";
+:root{--paper:#f5f2e9;--white:#fffdf7;--ink:#193d32;--soft:#5d6c61;--line:#d7dbcf;--green:#254c3c;--orange:#bb512d;--pale:#e7eadc;--serif:"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif;--sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;--shadow:0 20px 70px #102d2224}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}body.locked{overflow:hidden}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}button{cursor:pointer}a{color:inherit;text-decoration:none}button{border:0}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--orange);outline-offset:4px}img{display:block;width:100%;height:auto}button svg{pointer-events:none}p,h1,h2,h3{margin:0}button{min-height:44px}a.action{min-height:44px;display:inline-flex;align-items:center;justify-content:center}button,textarea,input{border-radius:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.wrap{width:calc(100% - 36px);max-width:1280px;margin-inline:auto}.preview-bar{background:#e7e9de;color:#4e5d50;padding:7px 18px;text-align:center;font-size:11px;letter-spacing:.025em}.site-header{border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-name{font-family:var(--serif);font-size:23px;letter-spacing:.14em;font-weight:700;white-space:nowrap}.brand small{font-size:9px;line-height:1.3;letter-spacing:.19em;padding-left:12px;border-left:1px solid #9dad9e;display:none}.nav-links{display:flex;gap:20px;align-items:center;font-size:12px}.nav-links .optional{display:none}.nav-links a{padding:10px 0}.nav-list{display:inline-flex;align-items:center;gap:7px;background:transparent;font-size:12px;white-space:nowrap}.count-badge{min-width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--white);display:inline-flex;align-items:center;justify-content:center;font-size:11px}.hero{padding:36px 0 30px;display:grid;gap:25px;align-items:center}.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";width:24px;height:1px;background:currentColor}.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,8.7vw,68px);line-height:1.28;letter-spacing:-.03em;margin:18px 0}.hero h1 em{font-weight:500;font-style:normal;color:var(--orange)}.hero-copy>p{font-size:14px;line-height:1.95;color:var(--soft);max-width:410px}.hero-actions{display:flex;gap:20px;align-items:center;margin-top:22px}.primary{background:var(--ink);color:var(--white);padding:12px 21px;min-height:46px;border-radius:3px;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:24px}.primary .arrow{font-size:19px;line-height:1}.text-link{font-size:12px;border-bottom:1px solid;padding:6px 0}.hero-visual{position:relative;background:#e1e5d6;overflow:hidden;border-radius:2px;aspect-ratio:1.4}.hero-visual img{height:100%;object-fit:cover}.visual-label{position:absolute;left:18px;top:14px;font-size:10px;letter-spacing:.17em}.visual-caption{position:absolute;right:14px;bottom:12px;font-size:10px;color:#455547;background:#eef0e6df;padding:2px 7px}.hero-footnote{display:flex;gap:18px;font-size:10px;letter-spacing:.05em;color:var(--soft);margin-top:26px}.hero-footnote span{display:flex;align-items:center;gap:6px}.hero-footnote span:before{content:"";width:4px;height:4px;border-radius:50%;background:var(--orange)}.section-heading{display:flex;gap:15px;align-items:flex-end;justify-content:space-between;margin:28px 0 18px}.section-heading h2{font:500 26px/1.3 var(--serif)}.section-heading p{color:var(--soft);font-size:12px;margin-top:6px}.section-heading>a{font-size:12px;white-space:nowrap;padding:10px 0}.number-kicker{font:12px Georgia,serif;letter-spacing:.12em;color:var(--orange);margin-bottom:7px}.curation{display:grid;gap:0;background:#e7eadf;border:1px solid #d8ddcd;border-radius:3px;overflow:hidden}.curation-intro{padding:21px 20px}.curation-intro h2{font:500 25px/1.4 var(--serif);margin:7px 0}.curation-intro p{font-size:12px;color:var(--soft);line-height:1.8}.curation-items{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;border-top:1px solid #d2d9c8}.curated-item{background:transparent;padding:12px 8px;text-align:left;display:flex;flex-direction:column;gap:6px;border-left:1px solid #d2d9c8;min-width:0}.curated-item:first-child{border-left:0}.curated-item img{aspect-ratio:1.2;object-fit:cover;border-radius:2px}.curated-item strong{font:500 15px/1.4 var(--serif);margin-top:3px;overflow-wrap:anywhere}.curated-item small{font-size:10px;color:var(--soft);line-height:1.5}.filters{display:flex;flex-direction:column;gap:13px;margin-bottom:23px}.filter-pills{display:flex;gap:6px;flex-wrap:wrap}.filter-pill{font-size:12px;padding:8px 13px;border:1px solid #bfc8b9;border-radius:40px;background:transparent;min-height:40px}.filter-pill[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}.search-box{display:flex;align-items:center;border-bottom:1px solid #afbba9;gap:8px;width:100%;padding:0 3px}.search-box svg{width:18px;height:18px;flex-shrink:0}.search-box input{border:0;background:transparent;width:100%;min-width:0;outline-offset:0;min-height:46px;font-size:16px}.search-box input::placeholder{color:#7a8576;font-size:12px}.result-line{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:var(--soft);margin-bottom:14px}.clear-filter{background:transparent;text-decoration:underline;font-size:11px;min-height:36px}.product-grid{display:grid;grid-template-columns:1fr;gap:28px}.product-card{min-width:0;padding-bottom:22px;border-bottom:1px solid var(--line);position:relative}.cover-button{padding:0;position:relative;display:block;width:100%;overflow:hidden;background:#e4e5d9;border-radius:3px;aspect-ratio:1.5;text-align:left}.cover-button img{height:100%;object-fit:cover;transition:transform .5s ease}.cover-index{position:absolute;left:15px;top:13px;font:11px Georgia,serif;letter-spacing:.2em;color:#243a2c;background:#faf7eadd;padding:3px 7px;border-radius:2px}.cover-theme{position:absolute;left:16px;bottom:14px;padding:4px 8px;background:#faf7eae8;font-size:11px;color:#263d2e}.card-origin{font-size:11px;color:var(--soft);margin:15px 0 5px;letter-spacing:.04em}.card-title{display:flex;justify-content:space-between;gap:12px;align-items:center}.title-button{background:transparent;text-align:left;font:500 25px/1.3 var(--serif);padding:0;min-height:36px}.detail-arrow{font-size:23px;color:var(--soft)}.card-flavor{font-size:12px;color:#53634f;margin:5px 0 13px;min-height:20px}.size-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}.size-btn{min-height:36px;font-size:11px;padding:5px 12px;border:1px solid var(--line);border-radius:3px;background:transparent;line-height:1.4}.size-btn[aria-pressed=true]{border-color:var(--ink);background:var(--pale);font-weight:600}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.price{font:500 26px/1.2 Georgia,serif;letter-spacing:-.03em;white-space:nowrap}.price small{font:12px var(--sans);margin-right:3px}.price-caption{display:block;font:10px var(--sans);color:var(--soft);margin-top:4px;letter-spacing:0}.add-btn{font-size:12px;padding:9px 12px;border:1px solid #aab8a4;border-radius:3px;background:transparent;min-height:44px}.add-btn.selected{background:var(--ink);color:var(--white);border-color:var(--ink)}.leader-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.leader-prices .price{font-size:23px}.leader-prices .price-caption{margin-top:0;margin-bottom:5px}.leader-prices .price.secondary{font-size:20px;color:var(--soft)}.leader-gain{font-size:11px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:9px 0;display:flex;justify-content:space-between;gap:5px;margin-bottom:12px}.leader-gain strong{color:var(--orange);font-weight:500}.card-tools{display:flex;gap:8px}.card-tools>*{flex:1}.copy-one{background:transparent;font-size:11px;min-height:44px;border:1px solid var(--line);border-radius:3px}.empty-state{padding:48px 15px;text-align:center;background:#e8eadd;border-radius:3px;grid-column:1/-1}.empty-state h3{font:500 23px var(--serif);margin-bottom:10px}.empty-state p{font-size:12px;color:var(--soft)}.guide{margin-top:46px;padding:27px 22px;background:var(--ink);color:var(--white);border-radius:3px;display:grid;gap:23px}.guide h2{font:500 27px/1.4 var(--serif);margin-bottom:10px}.guide>div>p{color:#c6d0c3;font-size:12px;line-height:1.9}.guide-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.guide-option{border-top:1px solid #577264;padding-top:13px}.guide-option strong{display:block;font:500 23px Georgia,serif}.guide-option small{display:block;font-size:10px;color:#c6d0c3;margin:5px 0}.guide-option span{font-size:11px}.guide-note{font-size:10px;color:#c6d0c3;grid-column:1/-1;margin-top:-5px}.shipping-note{display:flex;gap:12px;align-items:flex-start;padding:22px 0;font-size:12px;line-height:1.85;border-bottom:1px solid var(--line)}.shipping-note strong{white-space:nowrap;font-weight:500;color:var(--orange)}.site-footer{padding:28px 0 110px;display:flex;justify-content:space-between;gap:22px;color:var(--soft);font-size:10px;line-height:1.8}.site-footer .footer-brand{font:20px var(--serif);color:var(--ink);margin-bottom:8px}.site-footer .right{text-align:right}.selection-bar{position:fixed;left:12px;right:12px;bottom:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:25;padding:11px 12px;background:#163b2ff5;box-shadow:0 6px 24px #11332436;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fffdf7;border-radius:6px;max-width:780px;margin:auto}.selection-bar button{background:#f0eddf;color:var(--ink);padding:10px 16px;border-radius:3px;font-size:12px;min-height:44px;white-space:nowrap}.selection-bar strong{font-weight:500;font-size:13px;display:block}.selection-bar small{display:block;font-size:10px;color:#c4d1bf}.overlay{position:fixed;inset:0;background:#071c1bc2;z-index:50;display:none;align-items:flex-end;justify-content:center;padding:8px 8px 0}.overlay.open{display:flex}.sheet{position:relative;background:var(--paper);width:100%;max-height:92vh;max-height:92dvh;overflow:auto;overscroll-behavior:contain;border-radius:10px 10px 0 0;padding:25px 20px 28px;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}.sheet-close{position:absolute;right:12px;top:10px;width:44px;height:44px;background:#f4f2e6ed;border:1px solid var(--line);border-radius:50%;font-size:23px;z-index:2}.sheet-title{font:500 28px/1.4 var(--serif);padding-right:44px}.sheet-subtitle{font-size:12px;color:var(--soft);margin:6px 0 21px}.detail-layout{display:grid;gap:24px}.detail-art{border-radius:4px;overflow:hidden;aspect-ratio:1.55}.detail-art img{height:100%;object-fit:cover}.detail-copy .eyebrow{margin-bottom:10px}.detail-copy h2{font:500 34px/1.25 var(--serif);padding-right:40px}.detail-flavor{font:500 19px/1.65 var(--serif);color:var(--orange);margin:13px 0}.detail-description{font-size:13px;line-height:1.9;color:var(--soft)}.detail-facts{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:22px 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.detail-facts dt{font-size:10px;color:var(--soft)}.detail-facts dd{margin:4px 0 0;font-size:12px}.detail-size-label{font-size:11px;margin-bottom:8px}.detail-estimate{font-size:11px;color:var(--soft);margin:12px 0}.detail-note{font-size:10px;color:var(--soft);line-height:1.8;margin-top:18px}.selection-list{display:grid;gap:0}.selection-item{display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}.selection-thumb{width:58px;height:65px;object-fit:cover;border-radius:3px}.selection-item h3{font:500 18px/1.4 var(--serif);margin-bottom:4px}.selection-item p{font-size:11px;color:var(--soft)}.remove-item{font-size:11px;background:transparent;min-height:44px;padding:7px;color:var(--soft);text-decoration:underline}.quantity{display:flex;align-items:center;gap:3px;flex-wrap:wrap}.quantity button{width:36px;min-height:36px;background:#e8eadd;border-radius:3px}.quantity span{min-width:24px;text-align:center;font-size:12px}.selected-price{font:18px Georgia,serif;margin:5px 0}.selection-totals{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0}.selection-totals strong{font:28px Georgia,serif}.selection-help{font-size:11px;color:var(--soft);line-height:1.8;margin-bottom:18px}.sheet-actions{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.sheet-actions button{flex:1;min-width:120px}.secondary-btn{border:1px solid #aebaa8;background:transparent;font-size:12px;border-radius:3px;padding:10px 15px;min-height:46px}.draft-label{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;margin-top:24px;margin-bottom:9px}.draft-box{width:100%;min-height:175px;resize:vertical;border:1px solid #b9c5b2;background:var(--white);border-radius:3px;font-size:14px;line-height:1.8;padding:14px}.material-note{display:flex;gap:10px;align-items:center;border:1px dashed #b5c0ac;padding:15px;font-size:11px;color:var(--soft);margin:18px 0;border-radius:3px}.material-note strong{display:block;font-size:12px;color:var(--ink);font-weight:500}.toast{position:fixed;left:20px;right:20px;top:20px;z-index:100;background:var(--ink);color:var(--white);padding:13px 18px;border-radius:4px;box-shadow:var(--shadow);font-size:12px;max-width:430px;margin:auto;text-align:center;display:none}.toast.visible{display:block}.leader .hero-visual{background:#dce3cf}.leader .hero h1 em{color:#6b784f}.leader-statline{display:flex;gap:28px;margin-top:28px;padding-top:19px;border-top:1px solid var(--line);width:fit-content}.leader-statline strong{font:29px Georgia,serif;font-weight:400;display:block}.leader-statline span{font-size:10px;color:var(--soft)}.curation-select{margin-top:14px;background:transparent;padding:7px 0;border-bottom:1px solid;font-size:12px;min-height:38px}.preview-home{max-width:750px;margin:55px auto;padding:28px}.preview-home h1{font:500 42px var(--serif);margin:16px 0}.preview-home>p{color:var(--soft);line-height:1.9}.preview-links{display:grid;gap:16px;margin:32px 0}.preview-card{border:1px solid var(--line);padding:24px;background:var(--white);border-radius:4px}.preview-card h2{font:500 25px var(--serif);margin-bottom:10px}.preview-card p{font-size:13px;margin-bottom:18px;color:var(--soft)}
+@media (hover:hover) and (pointer:fine){.cover-button:hover img{transform:scale(1.025)}.add-btn:hover,.secondary-btn:hover{background:var(--pale)}.add-btn.selected:hover{background:#315b45}.primary:hover{background:#315b45}.curated-item:hover{background:#dce2d1}}
+@media (pointer:coarse){.size-btn,.filter-pill{min-height:44px}.quantity button{width:44px;min-height:44px}.title-button{min-height:44px}}
+@media (min-width:420px){.brand small{display:block}.curated-item{padding:14px 12px}.hero-visual{aspect-ratio:1.5}}
+@media (min-width:540px){.wrap{width:calc(100% - 48px)}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 22px}.cover-button{aspect-ratio:1.25}.curation{grid-template-columns:1fr 1.6fr;align-items:stretch}.curation-items{border-top:0;border-left:1px solid #d2d9c8;align-items:center}.curated-item{padding:17px 10px;height:100%;justify-content:center}.curation-intro{padding:22px}.hero-visual{aspect-ratio:1.8}.sheet{padding:32px 26px}.preview-links{grid-template-columns:1fr 1fr}.nav-links .optional{display:block}}
+@media (min-width:768px){.wrap{width:calc(100% - 70px)}.hero{grid-template-columns:1.05fr 1fr;gap:30px;padding:48px 0}.hero h1{font-size:clamp(42px,5.2vw,68px)}.hero-visual{aspect-ratio:1.07}.hero-actions{gap:28px}.hero-copy>p{font-size:13px}.hero-footnote{gap:20px}.filters{flex-direction:row;align-items:center;justify-content:space-between;gap:20px}.search-box{width:220px;flex-shrink:0}.guide{grid-template-columns:1fr 1.15fr;align-items:center;padding:32px 34px}.guide-note{grid-column:2}.site-footer{padding-bottom:110px}.overlay{align-items:center;padding:24px}.sheet{border-radius:6px;max-width:710px;max-height:90vh;max-height:90dvh;padding:36px}.detail-sheet{max-width:940px}.detail-layout{grid-template-columns:.95fr 1.05fr;gap:32px}.detail-art{aspect-ratio:.85}.detail-copy h2{font-size:35px}.detail-facts{margin:17px 0;padding:15px 0}.selection-bar{padding:12px 18px;bottom:18px;left:28px;right:28px}.selection-bar strong{font-size:14px}.selection-bar small{font-size:11px}.section-heading{margin-top:44px}.curation{grid-template-columns:1fr 1.7fr}.curation-items{padding:9px}.curated-item{padding:12px 13px}.curated-item img{aspect-ratio:1.65}.curation-intro{padding:25px 28px}}
+@media (min-width:1050px){.wrap{width:calc(100% - 120px)}.nav{min-height:92px}.nav-links{gap:32px}.brand-name{font-size:27px}.brand small{font-size:10px}.hero{gap:80px;padding:52px 0 48px}.hero-visual{aspect-ratio:1.15}.hero-copy>p{font-size:14px}.hero-footnote{margin-top:36px}.hero-actions{margin-top:27px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 26px}.cover-button{aspect-ratio:1.36}.curation{grid-template-columns:1fr 2fr}.curation-intro{padding:30px}.curated-item{display:grid;grid-template-columns:84px 1fr;align-content:center;gap:0 14px;border-left:1px solid #cbd4bf}.curated-item img{width:84px;height:87px;grid-row:1/3;aspect-ratio:auto}.curated-item strong{font-size:17px;align-self:end;margin-bottom:5px}.curated-item small{align-self:start}.section-heading h2{font-size:32px}.guide{padding:38px 44px;gap:55px}.guide-note{margin-top:-35px}.guide-options{gap:24px}.guide-option strong{font-size:29px}}
+@media (max-width:359px){.wrap{width:calc(100% - 28px)}.nav-links{gap:6px}.hero h1{font-size:34px}.hero-footnote{gap:10px;font-size:9px}.filter-pill{padding:8px 11px}.curation-intro{padding:18px}.curated-item strong{font-size:14px}.curated-item small{font-size:9px}.guide{padding:23px 17px}.guide-option strong{font-size:21px}.selection-bar{left:8px;right:8px}.selection-bar small{font-size:9px}.sheet{padding:25px 16px}.selection-item{grid-template-columns:44px 1fr auto;gap:8px}.selection-thumb{width:44px;height:54px}.selection-item h3{font-size:16px}.quantity{gap:0}.quantity button{width:32px}.quantity span{min-width:20px}.site-footer{font-size:9px}.brand-name{font-size:21px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+@media (pointer:coarse){.brand{min-height:44px}.quantity button{width:44px;min-height:44px}.draft-box{font-size:16px}.remove-item{min-width:44px}.clear-filter{min-height:44px}}
+@media print{.preview-bar,.selection-bar,.overlay,.toast,.hero-actions,.nav-list,.search-box,.card-tools,.add-btn{display:none!important}.wrap{width:100%}.product-grid{grid-template-columns:repeat(3,1fr)}.product-card{break-inside:avoid}.site-footer{padding-bottom:0}body{background:white}.hero{padding:20px 0}}
 
-        * {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            box-sizing: border-box;
-        }
+/* Pricing metrics wrap on narrow screens; explanations remain visible on touch devices. */
+.leader-gain{flex-wrap:wrap;gap:7px 12px}.leader-gain>span{white-space:nowrap}.leader-gain .gain-basis{flex-basis:100%;font-size:10px;line-height:1.7;color:var(--soft)}
 
-        body {
-            margin: 0;
-            background: var(--deep-black);
-            color: var(--soft-white);
-            font-family: 'Noto Sans SC', 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #app {
-            width: 100%;
-            max-width: 500px;
-            padding: 1.25rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .option-btn {
-            transition: all 0.2s ease;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 1.15rem;
-            text-align: left;
-            width: 100%;
-            font-size: 1.05rem;
-            margin-bottom: 0.65rem;
-            font-weight: 500;
-        }
-
-        .option-btn:active {
-            background: var(--gold);
-            color: var(--deep-black);
-            transform: scale(0.98);
-        }
-
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gold);
-            transition: width 0.4s ease;
-        }
-
-        /* 海报专用样式 */
-        #poster-wrapper {
-            position: fixed;
-            left: -9999px;
-            width: 375px;
-            background: #0a0a0c;
-            color: #f5f5f7;
-            padding: 40px 25px;
-            border: 1px solid #1a1a1a;
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-
-        .poster-title {
-            font-size: 10px;
-            letter-spacing: 3px;
-            color: #c4a484;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        .poster-main-title {
-            font-size: 30px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #fff;
-        }
-
-        .poster-insight-box {
-            background: rgba(255, 255, 255, 0.02);
-            border-left: 3px solid #c4a484;
-            padding: 18px;
-            margin-bottom: 25px;
-        }
-
-        .poster-insight-title {
-            font-size: 13px;
-            color: #c4a484;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .poster-insight-content {
-            font-size: 13px;
-            line-height: 1.7;
-            color: #bbb;
-        }
-
-        .poster-bean-item {
-            margin-bottom: 15px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-        }
-
-        .poster-bean-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .poster-bean-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #eee;
-        }
-
-        .poster-bean-match {
-            font-size: 11px;
-            color: #c4a484;
-            font-family: monospace;
-        }
-
-        .poster-review-box {
-            font-size: 11px;
-            color: #777;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        .poster-promo-box {
-            background: rgba(196, 164, 132, 0.08);
-            border: 1px dashed #c4a484;
-            padding: 12px;
-            margin: 20px 0;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        .poster-promo-text {
-            font-size: 11px;
-            color: #c4a484;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        .poster-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 9px;
-            color: #333;
-            letter-spacing: 2px;
-        }
-
-        .review-bubble {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            padding: 8px 12px;
-            margin-top: 8px;
-        }
-        
-        .review-nickname {
-            font-size: 10px;
-            color: #888;
-            margin-bottom: 2px;
-            display: block;
-        }
-        
-        .review-content {
-            font-size: 11px;
-            color: #999;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        .bean-icon {
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-        }
-    </style>
+/* Product information: selection first, brewing and origin available on demand. */
+.profile-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}.profile-tags span{font-size:11px;border:1px solid #c4cdbc;padding:3px 8px;border-radius:3px;color:var(--soft);line-height:1.5}.profile-tags .enhanced-tag{background:#ece4d4;color:#755638;border-color:#d9c9ae}.profile-tags .pending-tag{border-style:dashed;color:#755638}.card-pitch{font-size:12px;line-height:1.85;color:var(--soft);margin:0 0 15px}.card-cup,.detail-estimate{display:flex;flex-wrap:wrap;gap:5px 12px;font-size:11px;color:var(--soft);line-height:1.7;margin-top:13px}.card-cup small,.detail-estimate small{flex-basis:100%;font-size:10px}.detail-copy>.detail-description{margin-top:12px}.selection-advice{margin:17px 0 23px;padding:13px 15px;background:#e7eadf;border-left:2px solid #81936e}.selection-advice strong{display:block;font-size:11px;font-weight:600;margin-bottom:5px}.selection-advice p{font-size:12px;color:var(--soft);line-height:1.9}.taste-story{margin:25px 0 20px}.taste-story h3,.brew-pending h3{font:500 20px/1.5 var(--serif);margin-bottom:8px}.taste-story p,.brew-pending p{font-size:13px;line-height:1.95;color:var(--soft)}.info-fold{border-top:1px solid var(--line);margin-top:0}.info-fold:last-of-type{border-bottom:1px solid var(--line)}.info-fold summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;padding:16px 0;min-height:58px;cursor:pointer;font:500 19px/1.5 var(--serif);touch-action:manipulation}.info-fold summary::-webkit-details-marker{display:none}.info-fold summary small{display:block;font:11px/1.7 var(--sans);color:var(--soft);margin-top:3px}.info-fold summary:focus-visible{outline:3px solid var(--orange);outline-offset:4px}.fold-sign{font:20px/1 var(--sans);transition:transform .2s ease}.info-fold[open] .fold-sign{transform:rotate(45deg)}.fold-body{padding:0 0 20px}.fold-body .detail-facts{margin:0 0 13px;border:0;padding:4px 0}.detail-facts>div{min-width:0}.detail-facts dd{overflow-wrap:anywhere}.brew-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;background:#e7eadf;margin-bottom:14px}.brew-summary small{display:block;font-size:10px;color:var(--soft)}.brew-summary strong{display:block;font:500 22px/1.6 Georgia,serif;margin-top:3px;overflow-wrap:anywhere}.brew-reference{white-space:pre-line;overflow-wrap:anywhere;font-size:12px;line-height:2;color:var(--ink)}.reference-note{font-size:10px;line-height:1.85;color:var(--soft);margin-top:12px}.copy-brew{margin-top:14px;width:100%}.brew-pending{padding:17px 0;border-top:1px solid var(--line)}.brew-pending p{font-size:12px}.detail-sheet .detail-copy{min-width:0}
+@media (min-width:768px){.detail-sheet .detail-art{position:sticky;top:0}.card-pitch{min-height:45px}}
+@media (prefers-reduced-motion:reduce){.fold-sign{transition:none}}
+</style>
 </head>
-<body>
+<body class="customer" data-role="customer">
+<div class="preview-bar">九月豆单 · 选好风味，复制下单文案</div>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="#top" aria-label="海市咖啡首页"><span class="brand-name">海市咖啡</span><small>COFFEE<br>SELECTION</small></a><nav class="nav-links" aria-label="主导航"><a class="optional" href="#catalog">选一支豆</a><a class="optional" href="#guide">选多少合适</a><button class="nav-list" data-action="selection">我的选豆单 <span class="count-badge" data-pick-count>0</span></button></nav></div></header>
+<main class="wrap" id="top">
+<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><div class="eyebrow">SEPTEMBER SELECTION · 九月选豆</div><h1 id="hero-title">下一杯，<br><em>想喝什么味道？</em></h1><p>从花果的清亮，到坚果与黑巧的醇厚。<br>按喜欢的味道，挑一支今天想喝的豆子。</p><div class="hero-actions"><a class="primary action" href="#catalog">看看这期的豆<span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="#guide">选一份适合自己的量</a></div><div class="hero-footnote"><span>风味与处理方式写清楚</span><span>按自己的用量选规格</span></div></div><div class="hero-visual"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuaKveixoemjjuWRs+WNoeeJh+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9Ijc4MCIgZmlsbD0iI2U5ZTRkMiIvPgoKPGRlZnM+CjxwYXR0ZXJuIGlkPSJwYXBlciIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNMSAzaDJNOCAxMGgyIiBzdHJva2U9IiMyNDRiM2MiIHN0cm9rZS13aWR0aD0iLjc1IiBvcGFjaXR5PSIuMTAiLz48L3BhdHRlcm4+CjxjbGlwUGF0aCBpZD0iY2xpcC1hIj48cmVjdCB3aWR0aD0iMzU1IiBoZWlnaHQ9IjQ2MiIgcng9IjIiLz48L2NsaXBQYXRoPgo8Y2xpcFBhdGggaWQ9ImNsaXAtYiI+PHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIi8+PC9jbGlwUGF0aD4KPGNsaXBQYXRoIGlkPSJjbGlwLWMiPjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIvPjwvY2xpcFBhdGg+CjwvZGVmcz4KPGNpcmNsZSBjeD0iNDU5IiBjeT0iMzcyIiByPSIzMDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q0YzlhYyIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxjaXJjbGUgY3g9IjQ1OSIgY3k9IjM3MiIgcj0iMzM2IiBmaWxsPSJub25lIiBzdHJva2U9IiNkNGM5YWMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQyIi8+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwNiAxMzApIHJvdGF0ZSgtMTMgMTc3IDIzMSkiPgo8cmVjdCB4PSI5IiB5PSIxMiIgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjYzljM2E5Ii8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIgZmlsbD0iIzI0NGIzYyIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcC1hKSI+CjxjaXJjbGUgY3g9IjI0MSIgY3k9IjIwMSIgcj0iMTgyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGU3ZDAiIHN0cm9rZS13aWR0aD0iNjciLz4KPGNpcmNsZSBjeD0iMjQxIiBjeT0iMjAxIiByPSIyMjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlkYTc4NCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0tNDEgNDMwQzI0IDIxMyA5NSAxNDQgMTUxIDEyOGM0NiAxNDQtMTcgMjU3LTE5MiAzMDJaIiBmaWxsPSIjOWRhNzg0Ii8+CjxwYXRoIGQ9Ik0xMSAzNzRjMzYtNzkgNzItMTQ2IDEwOC0xOTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NGIzYyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiBmaWxsPSJ1cmwoI3BhcGVyKSIvPgo8L2c+PC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzODAgMTEzKSByb3RhdGUoMTMgMTc3IDIzMSkiPgo8cmVjdCB4PSI5IiB5PSIxMiIgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjYzljM2E5Ii8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIgZmlsbD0iI2Y3ZjBkYSIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcC1iKSI+CjxwYXRoIGQ9Ik0tNTQgNDgwYy00My0xODggOTMtMzc3IDI3NS0zNTcgMTAxIDExIDE2MSAxMTEgMTQzIDIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjY2U4MjViIiBzdHJva2Utd2lkdGg9Ijk1Ii8+CjxwYXRoIGQ9Ik0tMzAgNDc4Yy0zMi0xNjMgODQtMzQwIDI0Ny0zMjMgODMgOSAxMzAgOTYgMTE5IDE4MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQ0YjNjIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTg1IiBjeT0iMzE5IiByPSI5MSIgZmlsbD0iIzI0NGIzYyIvPgo8cGF0aCBkPSJNMTM0IDI5N2MzMy0yNSA2Ni0xOSA5NyAxMU0xMjQgMzEzYzM5LTI1IDc5LTE5IDExMiAxMk0xMjIgMzMyYzM4LTI1IDc5LTE5IDExMiAxMk0xMzAgMzUxYzM0LTIwIDY1LTE1IDk1IDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZjBkYSIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIGZpbGw9InVybCgjcGFwZXIpIi8+CjwvZz48L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwMCAyODMpIHJvdGF0ZSgtNCAxNzcgMjMxKSI+CjxyZWN0IHg9IjgiIHk9IjEyIiB3aWR0aD0iMzU1IiBoZWlnaHQ9IjQ2MiIgcng9IjIiIGZpbGw9IiNjOWMzYTkiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjY2U4MjViIi8+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLWMpIj4KPHBhdGggZD0iTS03MSAzNDRDLTc3IDk4IDE0MiAxOCAzNDYgMTIxIiBmaWxsPSJub25lIiBzdHJva2U9IiNmN2YwZGEiIHN0cm9rZS13aWR0aD0iOTMiLz4KPHBhdGggZD0iTS02OCAzODJDLTg4IDExMyAxNTAtNCAzODIgOTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NGIzYyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0tNjYgNDAwQy05NCAxMDYgMTUxLTI4IDM5NCA3MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQ0YjNjIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii41Ii8+CjxwYXRoIGQ9Ik0xNzAgNDM0QzE0NiAyNjMgMjM3IDE3NyAzNjkgMTkzYy01IDE0NC03MCAyMTktMTk5IDI0MVoiIGZpbGw9IiMyNDRiM2MiLz4KPHBhdGggZD0iTTE5NiAzODljNDYtNzQgODgtMTIzIDEyNS0xNTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZjBkYSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjEwNCIgY3k9IjI4NiIgcj0iMjYiIGZpbGw9IiNmN2YwZGEiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIGZpbGw9InVybCgjcGFwZXIpIi8+CjwvZz48L2c+Cgo8L3N2Zz4K" alt="花果、坚果与香气方向的抽象风味插画" width="900" height="780" fetchpriority="high"><span class="visual-label">TASTE NOTES / 09</span><span class="visual-caption">风味示意插画 · 非商品实拍</span></div></section>
+<section class="curation" aria-labelledby="curation-title"><div class="curation-intro"><div class="number-kicker">THE EDIT / 01</div><h2 id="curation-title">这一期，先看这三支</h2><p>三种不同的风味方向。<br>这里是选豆提案，从熟悉的味道开始也很好。</p></div><div class="curation-items"><button class="curated-item" data-action="detail" data-id="item-02" aria-label="查看典藏曼特宁"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuWFuOiXj+abvOeJueWugemjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzE2M2YzNCIvPgoKPGNpcmNsZSBjeD0iMzgxIiBjeT0iMjM5IiByPSIyMTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2QyYWQ3OCIgc3Ryb2tlLXdpZHRoPSI0OSIvPgo8Y2lyY2xlIGN4PSIzODEiIGN5PSIyMzkiIHI9IjE3MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWZlNWNkIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMzgxIiBjeT0iMjM5IiByPSIxMTgiIGZpbGw9IiMzZjY1NGUiLz4KPHBhdGggZD0iTTI0NyAzMDhDMTgyIDI1MCAxNjMgMTc3IDIwNyAxMjJjNjYtMTcgMTQ1IDEzIDE3MCA3NiAyNCA3MC0zOSAxMjktMTMwIDExMFoiIGZpbGw9IiNlZmU1Y2QiLz4KPHBhdGggZD0iTTIxOCAxNDRjNDEgMzEgNzcgODIgMTExIDE0OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTYzZjM0IiBzdHJva2Utd2lkdGg9IjMiLz4KPHBhdGggZD0iTTQ1NSAxNTBjNTggMTUgOTAgNjMgNjggMTA1LTUxIDIwLTEwMyAwLTEyMC00NC0xMi0zMSAxMi01OCA1Mi02MVoiIGZpbGw9IiNkMmFkNzgiLz4KPHBhdGggZD0ibTQyMSAxOTMgODggNDEiIHN0cm9rZT0iIzE2M2YzNCIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxwYXRoIGQ9Ik0tMTAgNDA1Yzk2LTEwMiAxODAtMTIxIDI0NS05MkMxNTAgNDAxIDY3IDQ0MS0xMCA0NDlaIiBmaWxsPSIjM2Y2NTRlIi8+CjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VmZTVjZCIgb3BhY2l0eT0iLjI1Ij48cGF0aCBkPSJNMzIgMzgwYzczLTMyIDExMi0zOSAxNTgtMzlNMzEgMzg5YzczLTMxIDExMi0zOCAxNTktMzlNMzAgMzk5Yzc0LTMxIDExMy0zOCAxNjAtMzkiLz48L2c+Cgo8L3N2Zz4K" alt="" width="600" height="440"><strong>典藏曼特宁</strong><small>焦糖 · 黑巧</small></button><button class="curated-item" data-action="detail" data-id="item-03" aria-label="查看丹荔盏"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuS4ueiNlOebj+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iI2ViYzBiNSIvPgoKPHBhdGggZD0iTTMzNS00MGMzMCAxMTUgMTA4IDE3NiAyMTUgMTkxLTE4LTExNy0xMDItMTg1LTIxNS0xOTFaIiBmaWxsPSIjMzE1ZDQzIi8+CjxwYXRoIGQ9Ik0zNTIgMjBjNTcgNjggMTEyIDk2IDE3MCAxMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZWVkNyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0yNjUgNzJDMTMwIDg5IDkwIDIyMCAxNzEgMzI0YzY0IDQ5IDE0NSAyOCAxODQtMzAgMzgtNzYgMTAtMTc0LTkwLTIyMloiIGZpbGw9IiNhZjRkNTciLz4KPGcgc3Ryb2tlPSIjZWJjMGI1IiBzdHJva2Utd2lkdGg9IjEuMSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjY4Ij48cGF0aCBkPSJNMTkwIDEyNiAzMTMgMjcyTTE3MyAxNDQgMjk4IDI5MU0xNTkgMTYzIDI4MCAzMDZNMTUwIDE4NSAyNTggMzEwTTE3OSAyODkgMzI0IDE2Nk0xNjQgMjY5IDMxMSAxNDNNMTU0IDI0NyAyOTUgMTIzTTE1MSAyMjIgMjc2IDEwOCIvPjwvZz4KPGVsbGlwc2UgY3g9IjM3MyIgY3k9IjI3OSIgcng9IjExMCIgcnk9IjEzMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjggMzczIDI3OSkiIGZpbGw9IiNmN2VlZDciLz4KPHBhdGggZD0iTTM2MiAyMDZjNDcgOSA2NSA0MyA0OCA3OC0xMiAyMy0zNCAzOS01NCA0My0zNS0yNS00MS01Ny0yMy04NyAxMC0xNyAxOC0yNCAyOS0zNFoiIGZpbGw9IiNhZjRkNTciLz4KPHBhdGggZD0iTS0zMCA0MjFjNTMtMTI5IDE0NC0xNDEgMjMxLTc1LTY0IDY3LTEzOSA4MS0yMzEgNzVaIiBmaWxsPSIjMzE1ZDQzIi8+CjxwYXRoIGQ9Ik0zNyAzOTFjNDQtMTcgOTItMjUgMTI1LTMzIiBmaWxsPSJub25lIiBzdHJva2U9IiNmN2VlZDciIHN0cm9rZS13aWR0aD0iMiIvPgoKPC9zdmc+Cg==" alt="" width="600" height="440"><strong>丹荔盏</strong><small>荔枝甜香</small></button><button class="curated-item" data-action="detail" data-id="item-08" aria-label="查看74158"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPjc0MTU46aOO5ZGz56S65oSPPC90aXRsZT4KPGRlc2MgaWQ9ImFydC1kZXNjIj7ku6Xmir3osaHlh6DkvZXooajnjrDpo47lkbPnmoToo4XppbDmj5LnlLvvvIzpnZ7kuqflk4HmiJbkuqflnLDlrp7mi43jgII8L2Rlc2M+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDQwIiBmaWxsPSIjZjBjMjc2Ii8+Cgo8cGF0aCBkPSJNNDY0LTMwYy0xMjcgNzAtMTM4IDE4My02NSAyNTMgMTE2LTQ3IDE0NS0xNDIgNjUtMjUzWiIgZmlsbD0iIzU5NzQ1MSIvPgo8cGF0aCBkPSJNNDU5IDI4IDQwNyAxODkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y5ZWRkMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxlbGxpcHNlIGN4PSIyNTEiIGN5PSIyNzgiIHJ4PSIxNTEiIHJ5PSIxNDYiIGZpbGw9IiNjZTgzNGMiLz4KPGVsbGlwc2UgY3g9IjI5NyIgY3k9IjI2NSIgcng9IjkzIiByeT0iMTE5IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTcgMjk3IDI2NSkiIGZpbGw9IiNmOWVkZDAiLz4KPHBhdGggZD0iTTMxNSAxOTdjMjQgMjYgMzUgNjYgMjAgOTEtMTMgMjItMjcgMzUtNDggNDItMjUtMjYtMzItNjItMTYtODkgMTAtMTcgMjYtMzQgNDQtNDRaIiBmaWxsPSIjY2U4MzRjIi8+CjxnIGZpbGw9IiNmOWVkZDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1NSAxMDUpIj48ZWxsaXBzZSBjeT0iLTI2IiByeD0iMjEiIHJ5PSIzOSIvPjxlbGxpcHNlIGN5PSItMjYiIHJ4PSIyMSIgcnk9IjM5IiB0cmFuc2Zvcm09InJvdGF0ZSg3MikiLz48ZWxsaXBzZSBjeT0iLTI2IiByeD0iMjEiIHJ5PSIzOSIgdHJhbnNmb3JtPSJyb3RhdGUoMTQ0KSIvPjxlbGxpcHNlIGN5PSItMjYiIHJ4PSIyMSIgcnk9IjM5IiB0cmFuc2Zvcm09InJvdGF0ZSgyMTYpIi8+PGVsbGlwc2UgY3k9Ii0yNiIgcng9IjIxIiByeT0iMzkiIHRyYW5zZm9ybT0icm90YXRlKDI4OCkiLz48L2c+CjxjaXJjbGUgY3g9IjE1NSIgY3k9IjEwNSIgcj0iMTMiIGZpbGw9IiNjZTgzNGMiLz4KPHBhdGggZD0iTTQ1MyA0MDNjMzEtNjkgOTMtOTEgMTU3LTU1LTM4IDU2LTg2IDY5LTE1NyA1NVoiIGZpbGw9IiM1OTc0NTEiLz4KPHBhdGggZD0ibTQ3OSAzODYgMTAxLTI1IiBzdHJva2U9IiNmOWVkZDAiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cgo8L3N2Zz4K" alt="" width="600" height="440"><strong>74158</strong><small>白花 · 杏桃</small></button></div></section>
+<section id="catalog" aria-labelledby="catalog-title"><div class="section-heading"><div><div class="number-kicker">THE COFFEE LIST / 02</div><h2 id="catalog-title">喜欢的味道，都在这里</h2><p>先看风味，再决定这次想喝多少。</p></div><a href="#guide">规格怎么选 ↗</a></div>
+<div class="filters"><div class="filter-pills" aria-label="按风味筛选"><button class="filter-pill" data-action="filter" data-filter="all" aria-pressed="true">全部豆子</button><button class="filter-pill" data-action="filter" data-filter="fruit" aria-pressed="false">花果清甜</button><button class="filter-pill" data-action="filter" data-filter="rich" aria-pressed="false">坚果黑巧</button><button class="filter-pill" data-action="filter" data-filter="aroma" aria-pressed="false">独特香气</button></div><label class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span class="sr-only">搜索豆名、产地、烘焙或风味</span><input id="search" type="search" placeholder="豆名、产地、烘焙或风味" autocomplete="off"></label></div>
+<div class="result-line"><span id="result-count" role="status" aria-live="polite">9 支豆</span><button class="clear-filter" data-action="reset" id="clear-filter" hidden>清除筛选</button></div>
+<div class="product-grid" id="product-grid"></div>
+<noscript><p>请使用支持JavaScript的浏览器打开这份页面，以查看商品和价格。</p></noscript>
 
-    <div class="progress-bar">
-        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
-    </div>
+</section>
+<section class="guide" id="guide" aria-labelledby="guide-title"><div><div class="eyebrow">FIND YOUR SIZE</div><h2 id="guide-title">刚刚好的量，<br>留给每一天。</h2><p>先尝一小包，喜欢再慢慢加量。<br>按自己的饮用频率选，比囤很多更自在。</p></div><div class="guide-options"><div class="guide-option"><strong>100g</strong><small>约6.7杯</small><span>先尝尝新风味</span></div><div class="guide-option"><strong>227g</strong><small>约15.1杯</small><span>留给日常一杯</span></div><div class="guide-option"><strong>454g</strong><small>约30.3杯</small><span>常喝或一起喝</span></div></div><p class="guide-note">按每杯15g估算；实际用量随器具与个人习惯调整，并非保鲜期限。</p></section>
+<div class="shipping-note"><strong>关于包邮</strong><p>同一顾客、同一收货地址的一单，优惠后商品实付满188元包邮，不含运费。未满门槛的运费，在下单时向团长确认。</p></div>
+</main>
+<footer class="wrap site-footer"><div><div class="footer-brand">海市咖啡</div><p>这一杯，按自己的喜欢来。</p></div><div class="right"><p>展示插画非包装实拍 · 商品可供及批次另行确认</p></div></footer>
+<div class="selection-bar"><div><strong id="bar-title"></strong><small id="bar-subtitle"></small></div><button data-action="selection">查看选豆单 <span aria-hidden="true">↗</span></button></div>
+<div class="overlay" id="detail-overlay" aria-hidden="true"><section class="sheet detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title"><button class="sheet-close" data-action="close" aria-label="关闭商品详情">×</button><div id="detail-content"></div></section></div>
+<div class="overlay" id="selection-overlay" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="selection-title"><button class="sheet-close" data-action="close" aria-label="关闭清单">×</button><h2 class="sheet-title" id="selection-title">这次，想喝这些</h2><p class="sheet-subtitle">复制下单文案发给团长，确认金额后付款。</p><div class="selection-list" id="selection-list"></div><div class="selection-totals"><span>商品小计</span><strong id="selection-total">¥0</strong></div><p class="selection-help" id="selection-help"></p><div class="draft-label"><label for="draft-text">发给团长的下单文案</label><span>可以修改</span></div><textarea class="draft-box" id="draft-text" spellcheck="false"></textarea><div class="sheet-actions"><button class="primary" id="copy-draft" data-action="copy-draft">复制下单文案</button></div></section></div>
+<div class="overlay" id="copy-overlay" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="copy-title"><button class="sheet-close" data-action="close" aria-label="关闭复制窗口">×</button><h2 class="sheet-title" id="copy-title">文字已准备好</h2><p class="sheet-subtitle">当前浏览器未允许直接复制。长按下方文字，或先点全选再复制。</p><label class="sr-only" for="manual-copy-text">待复制文字</label><textarea id="manual-copy-text" class="draft-box" readonly></textarea><div class="sheet-actions"><button class="primary" data-action="select-manual">全选文字</button><button class="secondary-btn" data-action="close">完成</button></div></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="application/json" id="catalog-data">[{"id": "item-01", "name": "特批雪莉", "origin": "洪都拉斯 · 马萨瓜拉", "process": "雪莉酒桶（增味处理）", "descriptor": "浆果 · 香草 · 奶香", "sizes": [{"grams": 100, "retailCents": 7950}, {"grams": 227, "retailCents": 15100}, {"grams": 454, "retailCents": 28500}], "profile": {"beanId": "HS-001", "roast": "浅烘焙", "altitude": "1500～1700m", "variety": "卡杜拉/卡杜艾/帕卡斯", "place": "莫卡庄园 · 马萨瓜拉", "enhanced": true, "pitch": "酒香、香草与奶油余韵，适合想试试鲜明香气时留意。", "guide": "酒香与奶香方向", "guideText": "喜欢酒香、香草或奶油风味，也愿意尝试增味处理。", "taste": "干香：酒香，香草，奶香。湿香：香草，奶香，蜜糖。啜吸：干净清甜的浆果触感，完熟的蜜瓜和黄金奇异果，香草冰淇淋，树莓奶油挞，牛奶花生，奶香余韵持久。凉掉之后酒味更明显，低温萃取更香。", "agtron": "83.3 / 118.6", "brew": {"temperature": "82–85℃", "powderG": 20, "waterMinG": 290, "waterMaxG": 290, "text": "研磨：迈赫迪平刀 4 档 ｜ 滤杯：V60-01 ｜ 水：弱碱性过滤水\n水温 82–85℃ · 粉 20g / 水 290g（1 : 14.5）\n总时间 1 分 50 秒，2 次断水\n低温萃取更香，凉掉之后酒味更明显"}, "infoDate": "2026-09-20"}}, {"id": "item-02", "name": "典藏曼特宁", "origin": "印度尼西亚 · 苏门答腊", "process": "湿刨", "descriptor": "焦糖 · 黑巧 · 烤榛子", "sizes": [{"grams": 100, "retailCents": 5800}, {"grams": 227, "retailCents": 9900}, {"grams": 454, "retailCents": 19200}], "profile": {"beanId": "HS-033", "roast": "偏深烘焙", "altitude": "1100～1600m", "variety": "Timtim，Borbor", "place": "卡亚纳处理厂 · 苏门答腊", "enhanced": false, "pitch": "焦糖、黑巧和烤榛子，偏醇厚的日常风味。", "guide": "醇厚黑巧方向", "guideText": "偏好巧克力、坚果和较厚实的口感；资料也给出了奶咖方向的描述。", "taste": "干香气：可可，香料，坚果。湿香气：可可，香料，雪松。啜吸：柔和细腻的焦糖甜感，85%巧克力，清香的雪松混合丁香等棕色香料风味，烤榛子，轻微的可可酸质，整体醇厚浓郁。", "agtron": "46.0 / 54.8", "brew": {"temperature": "90℃", "powderG": 20, "waterMinG": 280, "waterMaxG": 320, "text": "研磨：大富士 4 档 ｜ 滤杯：V60 ｜ 水：ppm 18\n水温 90℃ · 粉 20g / 水 280–320g\n总时间 3 分 20 秒内，6 次断水"}, "infoDate": "2026-09-20", "roastNote": "新资料标注为深烘焙，供应资料也有中深焙表述，具体以批次为准。"}}, {"id": "item-03", "name": "丹荔盏", "origin": "中国 · 云南 · 保山 · 潞江坝", "process": "厌氧增味水洗", "descriptor": "荔枝方向甜香", "sizes": [{"grams": 100, "retailCents": 7900}, {"grams": 227, "retailCents": 13500}, {"grams": 454, "retailCents": 26000}], "profile": {"beanId": "HS-006", "roast": "浅烘焙", "altitude": "1600m", "variety": "卡蒂姆", "place": "保山小农契作批次 · 冰荔", "enhanced": true, "pitch": "荔枝甜香方向，处理方式和风味偏好一起看。", "guide": "鲜明果香方向", "guideText": "想试荔枝方向的香气，并能接受增味处理；详细风味记录仍待补充。", "taste": "荔枝方向甜香。详细风味记录尚待补充。", "agtron": null, "brew": null, "infoDate": "2026-09-20"}}, {"id": "item-04", "name": "如梦令", "origin": "中国 · 云南 · 普洱 · 孟连", "process": "增味厌氧水洗", "descriptor": "蓝莓 · 葡萄 · 花香", "sizes": [{"grams": 100, "retailCents": 7900}, {"grams": 227, "retailCents": 13600}, {"grams": 454, "retailCents": 26200}], "profile": {"beanId": "HS-008", "roast": "浅烘焙", "altitude": "1750m", "variety": "卡蒂姆", "place": "孟连契作批次 · 布鲁", "enhanced": true, "pitch": "蓝莓、葡萄与紫色花香，带着奶油蛋糕和蜜饯的风味联想。", "guide": "蓝莓葡萄方向", "guideText": "喜欢浓郁莓果香气，并能接受增味处理。", "taste": "干湿香都是强劲浓郁的蓝莓气息，啜吸是馥郁的紫色花香，利宾纳葡萄汁，蓝莓奶油蛋糕，蜜饯的甜感，蓝莓和葡萄汁风味贯穿整个饮用过程。", "agtron": "68.2 / 100.2", "brew": {"temperature": "82℃", "powderG": 20, "waterMinG": 320, "waterMaxG": 320, "text": "研磨：C40 30 格 ｜ 滤杯：V60-01 ｜ 水：弱碱性过滤水\n水温 82℃ · 粉 20g / 水 320g\n总时间 1 分 40 秒，2 次断水"}, "infoDate": "2026-09-20"}}, {"id": "item-05", "name": "银河高速公路", "origin": "埃塞俄比亚 · 西达摩", "process": "日晒", "descriptor": "浓缩：橘皮 · 坚果 · 莓干", "sizes": [{"grams": 227, "retailCents": 8500}, {"grams": 454, "retailCents": 13900}], "profile": {"beanId": "HS-035", "roast": "中深烘焙", "altitude": "1800m", "variety": "sayisa", "place": "西达摩 · sayisa", "enhanced": false, "pitch": "浓缩有橘皮、坚果与莓干；奶咖偏太妃糖、黄油饼干。", "guide": "意式 / 奶咖方向", "guideText": "家里用意式机、常做奶咖，可以先了解这一支；萃取配方还在补充。", "taste": "浓缩：橘皮、坚果、莓干；奶啡：太妃糖、黄油饼干、烤杏仁", "agtron": null, "brew": null, "infoDate": "2026-09-20"}}, {"id": "item-06", "name": "满庭芳", "origin": "秘鲁", "process": "水洗", "descriptor": "白花 · 白葡萄 · 青柠", "sizes": [{"grams": 100, "retailCents": 15600}, {"grams": 227, "retailCents": 32000}, {"grams": 454, "retailCents": 59900}], "profile": {"beanId": "HS-024", "roast": "浅烘焙", "altitude": "1940m", "variety": "瑰夏", "place": "桑图阿里奥之花庄园", "enhanced": false, "pitch": "白花和白葡萄，温度降低后还有梨与青柑普洱的风味联想。", "guide": "花香与细致酸甜", "guideText": "偏好白色花香和水果酸甜，也想留意不同温度下的风味变化。", "taste": "干净而细致的白色花香，栀子，姜花，成熟的白葡萄酸甜感，兼具青柠，黄桃，释迦等水果气息，饱满的坚果油脂香气，低温则是秋月梨，青柑普洱的风味。", "agtron": "68.7 / 91.9", "brew": {"temperature": "85℃", "powderG": 20, "waterMinG": 345, "waterMaxG": 345, "text": "研磨：ultra 13 档（C40 30 格）｜ 滤杯：V60-01 ｜ 水：弱碱性过滤水\n水温 85℃ · 粉 20g / 水 345g\n总时间 2 分 22 秒，3 次断水"}, "infoDate": "2026-09-20"}}, {"id": "item-07", "name": "蓝山·脂玉", "origin": "牙买加 · 蓝山", "process": "红蜜", "descriptor": "黑巧 · 坚果 · 焦糖奶油", "sizes": [{"grams": 100, "retailCents": 10900}, {"grams": 227, "retailCents": 21800}, {"grams": 454, "retailCents": 39900}], "profile": {"beanId": "HS-043", "roast": "中烘焙", "altitude": "1642m", "variety": "铁皮卡", "place": "斯东尼庄园 · 蓝山", "enhanced": false, "pitch": "黑巧与坚果，接着是橙皮和焦糖奶油的余韵。", "guide": "坚果奶油方向", "guideText": "喜欢巧克力、烤坚果及饱满口感，可以从这一组风味认识它。", "taste": "浓郁醇厚的黑巧克力风味，烤榛子，松子、杏仁等坚果的香气，细腻饱满的脂类触感，微酸的橙皮干，焦糖奶油余韵", "agtron": null, "brew": {"temperature": "88-90℃", "powderG": 15, "waterMinG": 240, "waterMaxG": 240, "text": "研磨：C40 24-26 格（中粗）｜ 滤杯：V60-01 ｜ 水：弱碱性软水 TDS 80-120ppm\n水温 88-90℃ · 粉 15g / 水 240g（按15g粉 / 240g水，为1:16）\n闷蒸 30 秒注水 40g → 小水流绕圈至 150g → 大水流中心注水至 240g\n总时间 2 分 10 秒 - 2 分 30 秒"}, "infoDate": "2026-09-20"}}, {"id": "item-08", "name": "74158", "origin": "埃塞俄比亚 · 西达摩 · 阿贝格纳", "process": "水洗", "descriptor": "白花 · 杏桃 · 茉莉青提", "sizes": [{"grams": 100, "retailCents": 8700}, {"grams": 227, "retailCents": 17300}, {"grams": 454, "retailCents": 31000}], "profile": {"beanId": "HS-030", "roast": "浅烘焙", "altitude": "2300m", "variety": "74158", "place": "阿贝格纳 · 亚耶处理站", "enhanced": false, "pitch": "白花、杏桃与柑橘，尾韵带着蜜香红茶的风味联想。", "guide": "水洗花果方向", "guideText": "偏好花香、柑橘与水果酸甜，想找水洗处理的花果风味。", "taste": "强劲馥郁的白色花香气，鸡蛋花，茉莉，入口是饱满的杏桃混合橙子的复合水果气息，柠檬，甜橘子，多汁的茉莉青提酸质，尾韵是淡淡的蜜香红茶。", "agtron": "70.8 / 100.0", "brew": {"temperature": "85℃", "powderG": 20, "waterMinG": 340, "waterMaxG": 340, "text": "研磨：C40 30 格 ｜ 滤杯：V60-01 ｜ 水：弱碱性过滤水\n水温 85℃ · 粉 20g / 水 340g（低温慢萃，保住花香）\n总时间 2 分 15 秒，4 次断水"}, "infoDate": "2026-09-20"}}, {"id": "item-09", "name": "花间", "origin": "哥伦比亚", "process": "百香果酵母增味蜜处理", "descriptor": "荔枝 · 百香果 · 黄桃", "sizes": [{"grams": 100, "retailCents": 9000}, {"grams": 227, "retailCents": 17500}, {"grams": 454, "retailCents": 32800}], "profile": {"beanId": "HS-042", "roast": "浅烘焙", "altitude": "1500m", "variety": "卡斯蒂略", "place": "圣莫尼卡庄园", "enhanced": true, "pitch": "荔枝、百香果与黄桃，接着是柠檬饼干和葡萄的风味联想。", "guide": "热带水果方向", "guideText": "喜欢鲜明热带水果香气，并能接受增味处理。", "taste": "浓郁强劲的热带水果气息，荔枝，百香果，黄桃，夹杂着些许柠檬草的香料风味，黄柠檬饼干，晴王葡萄，整体细腻甜香。", "agtron": "70.0 / 103.0", "brew": {"temperature": "80℃", "powderG": 20, "waterMinG": 340, "waterMaxG": 340, "text": "研磨：迈赫迪平刀 4 档 ｜ 滤杯：V60-01 ｜ 水：弱碱性过滤水\n水温 80℃ · 粉 20g / 水 340g · 总时间 2 分钟内，3 次断水\n闷蒸 40g（40 秒）→ 160g 大水流搅拌 → 70g 中心注入 → 70g 中心注入"}, "infoDate": "2026-09-20"}}]</script>
+<script>const coffeeAssets={"item-01": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPueJueaJuembquiOiemjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzUxMmE0MCIvPgoKPGRlZnM+PHBhdHRlcm4gaWQ9ImdyYWluIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDEyIDEyIDAiIHN0cm9rZT0iI2YwZGZjYyIgc3Ryb2tlLXdpZHRoPSIuNiIgb3BhY2l0eT0iLjEyIi8+PC9wYXR0ZXJuPjwvZGVmcz4KPHBhdGggZD0iTS02MCA0MDVBMzA2IDMwNiAwIDAgMSA1MTUgNTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2E3NTk3MCIgc3Ryb2tlLXdpZHRoPSI3NiIvPgo8cGF0aCBkPSJNMzQwIDQzQzQzMCA0NiA0NzYgMTI1IDQ3NiAyMjJTNDMwIDM5NyAzNDAgMzk5TDIzMCAzNzBDMTcxIDMzNyAxNTMgMjcxIDE1OCAyMDdTMTgzIDgyIDIzMSA1OVoiIGZpbGw9IiNmMGRmY2MiLz4KPHBhdGggZD0iTTI1NyA1NkMxOTkgMTQ5IDE5OCAyODggMjU3IDM3N00zMjkgNDNDMjg0IDE1MSAyODIgMjkwIDMyNSAzOTdNMzk5IDY1QzM3NSAxNTYgMzcyIDI4NSAzOTYgMzc1IiBmaWxsPSJub25lIiBzdHJva2U9IiM1MTJhNDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8cGF0aCBkPSJNMTc2IDEzOSA0NjYgMTQ5TTE2MCAyNzMgNDY1IDI3OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTEyYTQwIiBzdHJva2Utd2lkdGg9IjE4Ii8+CjxjaXJjbGUgY3g9IjQ1NSIgY3k9IjMzMCIgcj0iNzQiIGZpbGw9IiNhNzU5NzAiLz48Y2lyY2xlIGN4PSI1MTciIGN5PSIyNzQiIHI9IjQxIiBmaWxsPSIjMzUxZTMwIi8+PGNpcmNsZSBjeD0iNTE4IiBjeT0iMzY0IiByPSI0MyIgZmlsbD0iIzM1MWUzMCIvPgo8cGF0aCBkPSJNNDUzIDIzN2MxMi0zNSAzOS01NSA2OS02Mi02IDM4LTMzIDYyLTY5IDYyWiIgZmlsbD0iI2YwZGZjYyIvPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0idXJsKCNncmFpbikiLz4KCjwvc3ZnPgo=", "item-02": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuWFuOiXj+abvOeJueWugemjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzE2M2YzNCIvPgoKPGNpcmNsZSBjeD0iMzgxIiBjeT0iMjM5IiByPSIyMTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2QyYWQ3OCIgc3Ryb2tlLXdpZHRoPSI0OSIvPgo8Y2lyY2xlIGN4PSIzODEiIGN5PSIyMzkiIHI9IjE3MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWZlNWNkIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMzgxIiBjeT0iMjM5IiByPSIxMTgiIGZpbGw9IiMzZjY1NGUiLz4KPHBhdGggZD0iTTI0NyAzMDhDMTgyIDI1MCAxNjMgMTc3IDIwNyAxMjJjNjYtMTcgMTQ1IDEzIDE3MCA3NiAyNCA3MC0zOSAxMjktMTMwIDExMFoiIGZpbGw9IiNlZmU1Y2QiLz4KPHBhdGggZD0iTTIxOCAxNDRjNDEgMzEgNzcgODIgMTExIDE0OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTYzZjM0IiBzdHJva2Utd2lkdGg9IjMiLz4KPHBhdGggZD0iTTQ1NSAxNTBjNTggMTUgOTAgNjMgNjggMTA1LTUxIDIwLTEwMyAwLTEyMC00NC0xMi0zMSAxMi01OCA1Mi02MVoiIGZpbGw9IiNkMmFkNzgiLz4KPHBhdGggZD0ibTQyMSAxOTMgODggNDEiIHN0cm9rZT0iIzE2M2YzNCIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxwYXRoIGQ9Ik0tMTAgNDA1Yzk2LTEwMiAxODAtMTIxIDI0NS05MkMxNTAgNDAxIDY3IDQ0MS0xMCA0NDlaIiBmaWxsPSIjM2Y2NTRlIi8+CjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VmZTVjZCIgb3BhY2l0eT0iLjI1Ij48cGF0aCBkPSJNMzIgMzgwYzczLTMyIDExMi0zOSAxNTgtMzlNMzEgMzg5YzczLTMxIDExMi0zOCAxNTktMzlNMzAgMzk5Yzc0LTMxIDExMy0zOCAxNjAtMzkiLz48L2c+Cgo8L3N2Zz4K", "item-03": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuS4ueiNlOebj+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iI2ViYzBiNSIvPgoKPHBhdGggZD0iTTMzNS00MGMzMCAxMTUgMTA4IDE3NiAyMTUgMTkxLTE4LTExNy0xMDItMTg1LTIxNS0xOTFaIiBmaWxsPSIjMzE1ZDQzIi8+CjxwYXRoIGQ9Ik0zNTIgMjBjNTcgNjggMTEyIDk2IDE3MCAxMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZWVkNyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0yNjUgNzJDMTMwIDg5IDkwIDIyMCAxNzEgMzI0YzY0IDQ5IDE0NSAyOCAxODQtMzAgMzgtNzYgMTAtMTc0LTkwLTIyMloiIGZpbGw9IiNhZjRkNTciLz4KPGcgc3Ryb2tlPSIjZWJjMGI1IiBzdHJva2Utd2lkdGg9IjEuMSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjY4Ij48cGF0aCBkPSJNMTkwIDEyNiAzMTMgMjcyTTE3MyAxNDQgMjk4IDI5MU0xNTkgMTYzIDI4MCAzMDZNMTUwIDE4NSAyNTggMzEwTTE3OSAyODkgMzI0IDE2Nk0xNjQgMjY5IDMxMSAxNDNNMTU0IDI0NyAyOTUgMTIzTTE1MSAyMjIgMjc2IDEwOCIvPjwvZz4KPGVsbGlwc2UgY3g9IjM3MyIgY3k9IjI3OSIgcng9IjExMCIgcnk9IjEzMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjggMzczIDI3OSkiIGZpbGw9IiNmN2VlZDciLz4KPHBhdGggZD0iTTM2MiAyMDZjNDcgOSA2NSA0MyA0OCA3OC0xMiAyMy0zNCAzOS01NCA0My0zNS0yNS00MS01Ny0yMy04NyAxMC0xNyAxOC0yNCAyOS0zNFoiIGZpbGw9IiNhZjRkNTciLz4KPHBhdGggZD0iTS0zMCA0MjFjNTMtMTI5IDE0NC0xNDEgMjMxLTc1LTY0IDY3LTEzOSA4MS0yMzEgNzVaIiBmaWxsPSIjMzE1ZDQzIi8+CjxwYXRoIGQ9Ik0zNyAzOTFjNDQtMTcgOTItMjUgMTI1LTMzIiBmaWxsPSJub25lIiBzdHJva2U9IiNmN2VlZDciIHN0cm9rZS13aWR0aD0iMiIvPgoKPC9zdmc+Cg==", "item-07": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuiTneWxseiEgueOiemjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzIyNGQ0NSIvPgoKPGNpcmNsZSBjeD0iMzkyIiBjeT0iMTM3IiByPSIxMzkiIGZpbGw9IiNlNmRmYzUiLz4KPHBhdGggZD0iTS04MCA0NTEgMjA4IDU1IDQ1NSA0NDFaIiBmaWxsPSIjODNhOThjIi8+CjxwYXRoIGQ9Im0yMDggNTUgMjkgMjI2IDY1IDIyIDI4IDEzN0g0NTVaIiBmaWxsPSIjYThjOWI1Ii8+CjxwYXRoIGQ9Ik0xMTEgNDUxIDM3MSAxNTggNjQxIDQ0OFoiIGZpbGw9IiMyMjRkNDUiLz4KPHBhdGggZD0ibTM3MSAxNTggMjMgMTcwIDU2IDUgNjIgMTEyaDEyOVoiIGZpbGw9IiM4M2E5OGMiLz4KPHBhdGggZD0iTS0yMiAzODRoMTY2bDYxLTY5aDEwNmw2NyA4MGg5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTZkZmM1IiBzdHJva2Utd2lkdGg9IjMiLz4KPHBhdGggZD0iTS0yMiA0MDBoMTc0bDYxLTY5aDkxbDY3IDgwaDk3IiBmaWxsPSJub25lIiBzdHJva2U9IiNlNmRmYzUiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjU1Ii8+CjxwYXRoIGQ9Ik04OSAzMXYyNU03NyA0M2gyNSIgc3Ryb2tlPSIjYThjOWI1IiBzdHJva2Utd2lkdGg9IjIiLz4KCjwvc3ZnPgo=", "item-06": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPua7oeW6reiKs+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iI2RlZDliOSIvPgoKPHBhdGggZD0iTS03MCA0MzVDNjQgMjM3IDE5OSAxOTIgMzM3IDIzNlM1NjQgMzYwIDY1MiAyMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY3N2E1NCIgc3Ryb2tlLXdpZHRoPSIxMTQiLz4KPHBhdGggZD0iTTM5MSAyNzljMzgtMzAgODAtNTggMTIyLTkxLTIwIDU2LTUwIDg4LTEwOSAxMTAiIGZpbGw9IiNiNDllNjMiLz4KPGcgZmlsbD0iI2Y3ZjBkOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjg1IDE5MSkiPjxlbGxpcHNlIGN5PSItNzkiIHJ4PSI0OSIgcnk9IjEwMyIvPjxlbGxpcHNlIGN5PSItNzkiIHJ4PSI0OSIgcnk9IjEwMyIgdHJhbnNmb3JtPSJyb3RhdGUoNzIpIi8+PGVsbGlwc2UgY3k9Ii03OSIgcng9IjQ5IiByeT0iMTAzIiB0cmFuc2Zvcm09InJvdGF0ZSgxNDQpIi8+PGVsbGlwc2UgY3k9Ii03OSIgcng9IjQ5IiByeT0iMTAzIiB0cmFuc2Zvcm09InJvdGF0ZSgyMTYpIi8+PGVsbGlwc2UgY3k9Ii03OSIgcng9IjQ5IiByeT0iMTAzIiB0cmFuc2Zvcm09InJvdGF0ZSgyODgpIi8+PC9nPgo8Y2lyY2xlIGN4PSIyODUiIGN5PSIxOTEiIHI9IjM2IiBmaWxsPSIjYjQ5ZTYzIi8+CjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY3N2E1NCIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9Ii41NSI+PHBhdGggZD0iTTI3OSAxMzUgMjc2IDY5TTMwNiAxNjNsNjQtNDNNMzE0IDIwN2w2MyAyNU0yODkgMjI1bC02IDc0TTI1OCAxOThsLTcyIDEzIi8+PC9nPgo8Y2lyY2xlIGN4PSI1MDciIGN5PSI2NCIgcj0iMjIiIGZpbGw9IiNmN2YwZDkiLz4KCjwvc3ZnPgo=", "item-04": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuWmguaipuS7pOmjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzM5MzQ0ZSIvPgoKPGNpcmNsZSBjeD0iNDI4IiBjeT0iMTIyIiByPSIxMTgiIGZpbGw9IiNlZGRmYzUiLz4KPGNpcmNsZSBjeD0iNDc1IiBjeT0iODYiIHI9IjEwNSIgZmlsbD0iIzM5MzQ0ZSIvPgo8cGF0aCBkPSJNLTMxIDM3M0MxMjMgMTY2IDMwNSAxNjEgNjQ5IDI3OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjBiOGIxIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTS0zMSAzODlDMTI1IDE4NSAzMDUgMTgwIDY0OSAyOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2IwYjhiMSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNDUiLz4KPGcgZmlsbD0iIzdlNzE5YyI+PGNpcmNsZSBjeD0iMjEyIiBjeT0iMTQ5IiByPSI3MSIvPjxjaXJjbGUgY3g9IjMxOSIgY3k9IjE4MyIgcj0iNzEiLz48Y2lyY2xlIGN4PSIxNzYiIGN5PSIyNTMiIHI9IjcxIi8+PGNpcmNsZSBjeD0iMjg1IiBjeT0iMjg4IiByPSI3MSIvPjxjaXJjbGUgY3g9IjIzMSIgY3k9IjM2OSIgcj0iNzEiLz48L2c+CjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VkZGZjNSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9Ii43NSI+PHBhdGggZD0iTTE2OCAxMzJjNy0yNSAzMi00MyA1Ni0zOU0yNzUgMTY3YzctMjUgMzItNDMgNTYtMzlNMTMzIDIzN2M3LTI1IDMyLTQzIDU2LTM5TTI0MyAyNzBjNy0yNSAzMi00MyA1Ni0zOU0xODkgMzUzYzctMjUgMzItNDMgNTYtMzkiLz48L2c+CjxwYXRoIGQ9Ik0yMjQgODhjMTQtNjUgNTMtODQgMTA1LTc1LTE3IDQzLTU3IDY4LTEwNSA3NVoiIGZpbGw9IiNiMGI4YjEiLz4KPGNpcmNsZSBjeD0iNTQ4IiBjeT0iMzU2IiByPSI3IiBmaWxsPSIjZWRkZmM1Ii8+Cgo8L3N2Zz4K", "item-05": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPumTtuays+mrmOmAn+WFrOi3r+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzEzMmY0MyIvPgoKPGVsbGlwc2UgY3g9IjI4NiIgY3k9IjIzNiIgcng9IjM0NSIgcnk9IjExNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTMxIDI4NiAyMzYpIiBmaWxsPSJub25lIiBzdHJva2U9IiMzZjY3NzQiIHN0cm9rZS13aWR0aD0iNzAiLz4KPGVsbGlwc2UgY3g9IjI4NiIgY3k9IjIzNiIgcng9IjM0NiIgcnk9IjExNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTMxIDI4NiAyMzYpIiBmaWxsPSJub25lIiBzdHJva2U9IiNkY2Q1YzEiIHN0cm9rZS13aWR0aD0iMiIvPgo8ZWxsaXBzZSBjeD0iMjg2IiBjeT0iMjM2IiByeD0iMzQ1IiByeT0iOTAiIHRyYW5zZm9ybT0icm90YXRlKC0zMSAyODYgMjM2KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGNkNWMxIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii40MiIvPgo8Y2lyY2xlIGN4PSIyOTUiIGN5PSIyMDgiIHI9IjExMiIgZmlsbD0iI2NmOWQ2NiIvPgo8cGF0aCBkPSJNMTg0IDIxNmM3My0yNSAxNTAtMTcgMjE4IDE5TTE4OCAyMzRjNzItMjMgMTQyLTEzIDIwNyAxN00xOTkgMjU0YzY0LTE2IDEyNC03IDE4MiAxN00yMTUgMjc1YzQ2LTggOTMtMyAxMzkgMTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzEzMmY0MyIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIuNDQiLz4KPHBhdGggZD0ibTk3IDc2IDYgMTkgMjAgNS0yMCA2LTYgMjAtNS0yMC0yMC02IDIwLTVaIiBmaWxsPSIjZGNkNWMxIi8+CjxjaXJjbGUgY3g9IjQ5MSIgY3k9IjMxMiIgcj0iMTgiIGZpbGw9IiNkY2Q1YzEiLz48Y2lyY2xlIGN4PSI1MTEiIGN5PSI4NCIgcj0iNCIgZmlsbD0iI2NmOWQ2NiIvPgoKPC9zdmc+Cg==", "hero": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MDAgNzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuaKveixoemjjuWRs+WNoeeJh+mjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9Ijc4MCIgZmlsbD0iI2U5ZTRkMiIvPgoKPGRlZnM+CjxwYXR0ZXJuIGlkPSJwYXBlciIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNMSAzaDJNOCAxMGgyIiBzdHJva2U9IiMyNDRiM2MiIHN0cm9rZS13aWR0aD0iLjc1IiBvcGFjaXR5PSIuMTAiLz48L3BhdHRlcm4+CjxjbGlwUGF0aCBpZD0iY2xpcC1hIj48cmVjdCB3aWR0aD0iMzU1IiBoZWlnaHQ9IjQ2MiIgcng9IjIiLz48L2NsaXBQYXRoPgo8Y2xpcFBhdGggaWQ9ImNsaXAtYiI+PHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIi8+PC9jbGlwUGF0aD4KPGNsaXBQYXRoIGlkPSJjbGlwLWMiPjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIvPjwvY2xpcFBhdGg+CjwvZGVmcz4KPGNpcmNsZSBjeD0iNDU5IiBjeT0iMzcyIiByPSIzMDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q0YzlhYyIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxjaXJjbGUgY3g9IjQ1OSIgY3k9IjM3MiIgcj0iMzM2IiBmaWxsPSJub25lIiBzdHJva2U9IiNkNGM5YWMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQyIi8+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwNiAxMzApIHJvdGF0ZSgtMTMgMTc3IDIzMSkiPgo8cmVjdCB4PSI5IiB5PSIxMiIgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjYzljM2E5Ii8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIgZmlsbD0iIzI0NGIzYyIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcC1hKSI+CjxjaXJjbGUgY3g9IjI0MSIgY3k9IjIwMSIgcj0iMTgyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGU3ZDAiIHN0cm9rZS13aWR0aD0iNjciLz4KPGNpcmNsZSBjeD0iMjQxIiBjeT0iMjAxIiByPSIyMjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlkYTc4NCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0tNDEgNDMwQzI0IDIxMyA5NSAxNDQgMTUxIDEyOGM0NiAxNDQtMTcgMjU3LTE5MiAzMDJaIiBmaWxsPSIjOWRhNzg0Ii8+CjxwYXRoIGQ9Ik0xMSAzNzRjMzYtNzkgNzItMTQ2IDEwOC0xOTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NGIzYyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiBmaWxsPSJ1cmwoI3BhcGVyKSIvPgo8L2c+PC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzODAgMTEzKSByb3RhdGUoMTMgMTc3IDIzMSkiPgo8cmVjdCB4PSI5IiB5PSIxMiIgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjYzljM2E5Ii8+CjxyZWN0IHdpZHRoPSIzNTUiIGhlaWdodD0iNDYyIiByeD0iMiIgZmlsbD0iI2Y3ZjBkYSIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcC1iKSI+CjxwYXRoIGQ9Ik0tNTQgNDgwYy00My0xODggOTMtMzc3IDI3NS0zNTcgMTAxIDExIDE2MSAxMTEgMTQzIDIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjY2U4MjViIiBzdHJva2Utd2lkdGg9Ijk1Ii8+CjxwYXRoIGQ9Ik0tMzAgNDc4Yy0zMi0xNjMgODQtMzQwIDI0Ny0zMjMgODMgOSAxMzAgOTYgMTE5IDE4MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQ0YjNjIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTg1IiBjeT0iMzE5IiByPSI5MSIgZmlsbD0iIzI0NGIzYyIvPgo8cGF0aCBkPSJNMTM0IDI5N2MzMy0yNSA2Ni0xOSA5NyAxMU0xMjQgMzEzYzM5LTI1IDc5LTE5IDExMiAxMk0xMjIgMzMyYzM4LTI1IDc5LTE5IDExMiAxMk0xMzAgMzUxYzM0LTIwIDY1LTE1IDk1IDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZjBkYSIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIGZpbGw9InVybCgjcGFwZXIpIi8+CjwvZz48L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwMCAyODMpIHJvdGF0ZSgtNCAxNzcgMjMxKSI+CjxyZWN0IHg9IjgiIHk9IjEyIiB3aWR0aD0iMzU1IiBoZWlnaHQ9IjQ2MiIgcng9IjIiIGZpbGw9IiNjOWMzYTkiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIHJ4PSIyIiBmaWxsPSIjY2U4MjViIi8+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLWMpIj4KPHBhdGggZD0iTS03MSAzNDRDLTc3IDk4IDE0MiAxOCAzNDYgMTIxIiBmaWxsPSJub25lIiBzdHJva2U9IiNmN2YwZGEiIHN0cm9rZS13aWR0aD0iOTMiLz4KPHBhdGggZD0iTS02OCAzODJDLTg4IDExMyAxNTAtNCAzODIgOTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NGIzYyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0tNjYgNDAwQy05NCAxMDYgMTUxLTI4IDM5NCA3MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQ0YjNjIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii41Ii8+CjxwYXRoIGQ9Ik0xNzAgNDM0QzE0NiAyNjMgMjM3IDE3NyAzNjkgMTkzYy01IDE0NC03MCAyMTktMTk5IDI0MVoiIGZpbGw9IiMyNDRiM2MiLz4KPHBhdGggZD0iTTE5NiAzODljNDYtNzQgODgtMTIzIDEyNS0xNTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZjBkYSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjEwNCIgY3k9IjI4NiIgcj0iMjYiIGZpbGw9IiNmN2YwZGEiLz4KPHJlY3Qgd2lkdGg9IjM1NSIgaGVpZ2h0PSI0NjIiIGZpbGw9InVybCgjcGFwZXIpIi8+CjwvZz48L2c+Cgo8L3N2Zz4K", "item-08": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPjc0MTU46aOO5ZGz56S65oSPPC90aXRsZT4KPGRlc2MgaWQ9ImFydC1kZXNjIj7ku6Xmir3osaHlh6DkvZXooajnjrDpo47lkbPnmoToo4XppbDmj5LnlLvvvIzpnZ7kuqflk4HmiJbkuqflnLDlrp7mi43jgII8L2Rlc2M+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDQwIiBmaWxsPSIjZjBjMjc2Ii8+Cgo8cGF0aCBkPSJNNDY0LTMwYy0xMjcgNzAtMTM4IDE4My02NSAyNTMgMTE2LTQ3IDE0NS0xNDIgNjUtMjUzWiIgZmlsbD0iIzU5NzQ1MSIvPgo8cGF0aCBkPSJNNDU5IDI4IDQwNyAxODkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y5ZWRkMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxlbGxpcHNlIGN4PSIyNTEiIGN5PSIyNzgiIHJ4PSIxNTEiIHJ5PSIxNDYiIGZpbGw9IiNjZTgzNGMiLz4KPGVsbGlwc2UgY3g9IjI5NyIgY3k9IjI2NSIgcng9IjkzIiByeT0iMTE5IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTcgMjk3IDI2NSkiIGZpbGw9IiNmOWVkZDAiLz4KPHBhdGggZD0iTTMxNSAxOTdjMjQgMjYgMzUgNjYgMjAgOTEtMTMgMjItMjcgMzUtNDggNDItMjUtMjYtMzItNjItMTYtODkgMTAtMTcgMjYtMzQgNDQtNDRaIiBmaWxsPSIjY2U4MzRjIi8+CjxnIGZpbGw9IiNmOWVkZDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1NSAxMDUpIj48ZWxsaXBzZSBjeT0iLTI2IiByeD0iMjEiIHJ5PSIzOSIvPjxlbGxpcHNlIGN5PSItMjYiIHJ4PSIyMSIgcnk9IjM5IiB0cmFuc2Zvcm09InJvdGF0ZSg3MikiLz48ZWxsaXBzZSBjeT0iLTI2IiByeD0iMjEiIHJ5PSIzOSIgdHJhbnNmb3JtPSJyb3RhdGUoMTQ0KSIvPjxlbGxpcHNlIGN5PSItMjYiIHJ4PSIyMSIgcnk9IjM5IiB0cmFuc2Zvcm09InJvdGF0ZSgyMTYpIi8+PGVsbGlwc2UgY3k9Ii0yNiIgcng9IjIxIiByeT0iMzkiIHRyYW5zZm9ybT0icm90YXRlKDI4OCkiLz48L2c+CjxjaXJjbGUgY3g9IjE1NSIgY3k9IjEwNSIgcj0iMTMiIGZpbGw9IiNjZTgzNGMiLz4KPHBhdGggZD0iTTQ1MyA0MDNjMzEtNjkgOTMtOTEgMTU3LTU1LTM4IDU2LTg2IDY5LTE1NyA1NVoiIGZpbGw9IiM1OTc0NTEiLz4KPHBhdGggZD0ibTQ3OSAzODYgMTAxLTI1IiBzdHJva2U9IiNmOWVkZDAiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cgo8L3N2Zz4K", "item-09": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDQwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0iYXJ0LXRpdGxlIGFydC1kZXNjIj4KPHRpdGxlIGlkPSJhcnQtdGl0bGUiPuiKsemXtOmjjuWRs+ekuuaEjzwvdGl0bGU+CjxkZXNjIGlkPSJhcnQtZGVzYyI+5Lul5oq96LGh5Yeg5L2V6KGo546w6aOO5ZGz55qE6KOF6aWw5o+S55S777yM6Z2e5Lqn5ZOB5oiW5Lqn5Zyw5a6e5ouN44CCPC9kZXNjPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iI2Q0ODI2NCIvPgoKPHBhdGggZD0iTS0yNSA0NDdDLTMgMjgyIDYxIDE5MSAxNzQgMTYyIDE4NSAzMjYgMTI5IDQyMy0yNSA0NDdaIiBmaWxsPSIjNDU2MjRlIi8+CjxwYXRoIGQ9Ik00MSAzODVjMzMtNjcgNjMtMTI1IDEwMi0xNzMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y0ZGVjMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxnIGZpbGw9IiNmNGRlYzAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMyAyMTUpIj48ZWxsaXBzZSBjeT0iLTgxIiByeD0iNjEiIHJ5PSIxMjIiIHRyYW5zZm9ybT0icm90YXRlKC04KSIvPjxlbGxpcHNlIGN5PSItODEiIHJ4PSI2MSIgcnk9IjEyMiIgdHJhbnNmb3JtPSJyb3RhdGUoNjQpIi8+PGVsbGlwc2UgY3k9Ii04MSIgcng9IjYxIiByeT0iMTIyIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzYpIi8+PGVsbGlwc2UgY3k9Ii04MSIgcng9IjYxIiByeT0iMTIyIiB0cmFuc2Zvcm09InJvdGF0ZSgyMDgpIi8+PGVsbGlwc2UgY3k9Ii04MSIgcng9IjYxIiByeT0iMTIyIiB0cmFuc2Zvcm09InJvdGF0ZSgyODApIi8+PC9nPgo8Y2lyY2xlIGN4PSIzMjMiIGN5PSIyMTUiIHI9IjYyIiBmaWxsPSIjZWZiMTkzIi8+CjxjaXJjbGUgY3g9IjMyMyIgY3k9IjIxNSIgcj0iMjQiIGZpbGw9IiM0NTYyNGUiLz4KPGcgc3Ryb2tlPSIjZDQ4MjY0IiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSI+PHBhdGggZD0ibTMwNiAxMzEtNy01N00zODYgMTYzbDQ4LTI2TTM4MyAyNTdsNDQgMzhNMjg5IDI4NmwtMjAgNDNNMjQ2IDE5N2wtNDgtOSIvPjwvZz4KPHBhdGggZD0iTTQzNiA0MjdjLTMtODQgNDMtMTMxIDEyOC0xMjktNyA4MC01MSAxMjctMTI4IDEyOVoiIGZpbGw9IiM0NTYyNGUiLz4KPHBhdGggZD0ibTQ1NSAzOTQgODQtNjkiIHN0cm9rZT0iI2Y0ZGVjMCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cgo8L3N2Zz4K"};
+(function () {
+  'use strict';
+  const products = JSON.parse(document.getElementById('catalog-data').textContent);
+  const role = document.body.dataset.role;
+  const leader = role === 'leader';
+  const productMap = new Map(products.map(p => [p.id, p]));
+  const selectedSizes = new Map(products.map(p => [p.id, p.sizes[0].grams]));
+  const picks = new Map();
+  const byId = id => document.getElementById(id);
+  const esc = value => String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const money = cents => (cents / 100).toFixed(cents % 100 === 0 ? 0 : cents % 10 === 0 ? 1 : 2);
+  const category = {'item-01':'aroma','item-02':'rich','item-03':'fruit','item-04':'aroma','item-05':'rich','item-06':'fruit','item-07':'rich','item-08':'fruit','item-09':'aroma'};
+  const themes = {fruit:'花果清甜',rich:'坚果与黑巧',aroma:'独特香气'};
+  let filter = 'all';
+  let query = '';
+  let detailId = null;
+  let lastFocused = null;
+  let copyReturn = null;
+  let toastTimer;
 
-    <main id="app">
-        <!-- 开始 -->
-        <section id="start-screen" class="text-center fade-in">
-            <div class="mb-10 flex justify-center">
-                <div class="w-20 h-20 rounded-full border border-gold/30 flex items-center justify-center">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c4a484" stroke-width="1.5">
-                        <path d="M12 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
-                        <path d="M12 2c-4 4-4 12 0 16"/>
-                    </svg>
-                </div>
-            </div>
-            <h1 class="text-4xl font-bold mb-5 gradient-text leading-tight">灵魂咖啡寻踪</h1>
-            <p class="text-gray-400 mb-10 leading-relaxed px-4 text-sm">
-                只需 9 道选择题，<br>
-                看看你的潜意识最爱哪支豆子。
-            </p>
-            <button onclick="startQuiz()" class="w-full py-4 bg-gold text-black rounded-full font-bold tracking-[0.2em] active:scale-95 transition-all shadow-xl shadow-gold/10">
-                开启寻踪
-            </button>
-        </section>
-
-        <!-- 答题 -->
-        <section id="quiz-screen" class="hidden">
-            <div class="flex justify-between items-center mb-10">
-                <span id="question-number" class="text-gold font-mono tracking-widest text-xs">01 / 09</span>
-                <span class="text-[10px] uppercase tracking-widest text-gray-600">Quick Test</span>
-            </div>
-            
-            <div id="question-content" class="fade-in">
-                <h2 id="question-text" class="text-2xl font-bold mb-8 leading-snug"></h2>
-                <div id="options-container"></div>
-            </div>
-
-            <div class="mt-8">
-                <button id="prev-btn" onclick="prevQuestion()" class="text-xs text-gray-600 hover:text-white transition-colors">
-                    ← 返回
-                </button>
-            </div>
-        </section>
-
-        <!-- 加载 -->
-        <section id="loading-screen" class="hidden text-center fade-in py-20">
-            <div class="w-14 h-14 mx-auto mb-6 relative">
-                <div class="absolute inset-0 border-2 border-gold/10 rounded-full"></div>
-                <div class="absolute inset-0 border-t-2 border-gold rounded-full animate-spin"></div>
-            </div>
-            <h2 class="text-lg font-light tracking-widest mb-4 text-gold/80">正在匹配风味...</h2>
-        </section>
-
-        <!-- 结果 -->
-        <section id="result-screen" class="hidden fade-in">
-            <div class="glass-card overflow-hidden mb-8">
-                <div class="p-8 text-center border-b border-white/5 bg-white/[0.01]">
-                    <h3 class="text-gold text-[10px] tracking-[0.3em] mb-4 uppercase">测试结果</h3>
-                    <h2 id="personality-title" class="text-3xl font-bold mb-6 gradient-text"></h2>
-                    <div id="personality-insight" class="text-left bg-white/[0.02] p-5 rounded-xl border-l-2 border-gold text-sm leading-relaxed text-gray-300"></div>
-                </div>
-                
-                <div class="p-6">
-                    <h4 class="text-center text-[10px] mb-6 tracking-widest text-gray-500 uppercase">—— 专属推荐 ——</h4>
-                    <div id="recommendations" class="space-y-4"></div>
-                    <div class="mt-6 p-4 bg-gold/10 border border-dashed border-gold rounded-xl text-center">
-                        <p class="text-[10px] text-gold font-bold leading-relaxed">
-                            购买后上传此截图为备注<br>将收到随机惊喜试喝装 (15g)
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="space-y-4">
-                <button onclick="saveAsImage()" id="save-btn" class="w-full py-4 bg-gold text-black rounded-full font-bold tracking-[0.2em] active:scale-95 transition-all">
-                    保存海报
-                </button>
-                <button onclick="location.reload()" class="w-full py-4 text-gray-500 text-xs tracking-widest">
-                    重新开始
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- 海报模板 -->
-    <div id="poster-wrapper">
-        <div class="poster-title">COFFEE SOUL TEST</div>
-        <div class="poster-main-title" id="poster-personality"></div>
-        
-        <div class="poster-insight-box">
-            <div class="poster-insight-title">测评摘要</div>
-            <div class="poster-insight-content" id="poster-insight"></div>
-        </div>
-
-        <div style="margin-bottom: 10px; font-size: 10px; color: #666; letter-spacing: 2px;">推荐单品</div>
-        <div id="poster-beans"></div>
-
-        <div class="poster-promo-box">
-            <div class="poster-promo-text">
-                购买后上传此截图为备注<br>将收到随机惊喜试喝装 (15g)
-            </div>
-        </div>
-
-        <div class="poster-footer">
-            COFFEE SOUL EXPLORER @luckycoffee.top
-        </div>
-    </div>
-
-    <script>
-        const questions = [
-            {
-                text: "如果现在要喝一杯，你更想选？",
-                options: [
-                    { text: "酸甜清爽的果汁感", scores: { acid: 5, floral: 2 } },
-                    { text: "浓郁顺滑的巧克力感", scores: { body: 5, bitterness: 2 } },
-                    { text: "带点发酵酒香的微醺感", scores: { sweetness: 4, body: 3 } },
-                    { text: "清淡高雅的花香感", scores: { floral: 5, acid: 2 } }
-                ]
-            },
-            {
-                text: "你对咖啡“酸味”的看法是？",
-                options: [
-                    { text: "非常喜欢，越明亮越好", scores: { acid: 5 } },
-                    { text: "可以接受，像水果那样的酸", scores: { acid: 3, sweetness: 3 } },
-                    { text: "不太喜欢，希望低酸柔和", scores: { acid: 1, sweetness: 4 } },
-                    { text: "完全拒绝，只想喝浓郁的", scores: { bitterness: 5, body: 5 } }
-                ]
-            },
-            {
-                text: "喝咖啡时，你更在意？",
-                options: [
-                    { text: "第一口的香气爆发", scores: { floral: 5, acid: 2 } },
-                    { text: "咽下去后的回甘和醇厚", scores: { body: 5, sweetness: 3 } },
-                    { text: "整体平衡，不偏不倚", scores: { sweetness: 4, body: 2 } },
-                    { text: "清醒感，够劲儿就行", scores: { bitterness: 5 } }
-                ]
-            },
-            {
-                text: "如果心情不好，你会选什么治愈？",
-                options: [
-                    { text: "一颗酸甜多汁的橙子", scores: { acid: 4, floral: 1 } },
-                    { text: "一整块浓郁黑巧克力", scores: { bitterness: 4, body: 3 } },
-                    { text: "一大杯温热的奶茶", scores: { sweetness: 5, body: 2 } },
-                    { text: "一朵刚开放的茉莉花", scores: { floral: 5 } }
-                ]
-            },
-            {
-                text: "你平时的性格更接近？",
-                options: [
-                    { text: "活力四射，爱冒险", scores: { acid: 5 } },
-                    { text: "稳重内敛，讲效率", scores: { body: 5, bitterness: 2 } },
-                    { text: "温柔随和，好相处", scores: { sweetness: 5 } },
-                    { text: "感性细腻，重细节", scores: { floral: 5 } }
-                ]
-            },
-            {
-                text: "你最希望咖啡带来的状态是？",
-                options: [
-                    { text: "清晨的一针强心剂", scores: { bitterness: 5, body: 3 } },
-                    { text: "午后阳光下的悠闲", scores: { acid: 3, sweetness: 4 } },
-                    { text: "独处时的灵感火花", scores: { floral: 5 } },
-                    { text: "深夜里的安静陪伴", scores: { body: 4, sweetness: 2 } }
-                ]
-            },
-            {
-                text: "哪种质感最让你舒服？",
-                options: [
-                    { text: "轻盈如风的丝滑", scores: { floral: 4, acid: 2 } },
-                    { text: "扎实厚重的包裹感", scores: { body: 5 } },
-                    { text: "冷冽干净的剔透感", scores: { acid: 5 } },
-                    { text: "软糯香甜的细腻感", scores: { sweetness: 5 } }
-                ]
-            },
-            {
-                text: "如果咖啡有颜色，你希望它是？",
-                options: [
-                    { text: "明亮的柠檬黄", scores: { acid: 4, floral: 2 } },
-                    { text: "深沉的焦糖褐", scores: { body: 4, sweetness: 3 } },
-                    { text: "神秘的墨黑色", scores: { bitterness: 5 } },
-                    { text: "清透的琥珀色", scores: { floral: 4, acid: 2 } }
-                ]
-            },
-            {
-                text: "最后，你此刻最直觉的想法？",
-                options: [
-                    { text: "想要极致的爽快", scores: { acid: 5 } },
-                    { text: "想要温暖的安抚", scores: { sweetness: 5 } },
-                    { text: "想要清醒的专注", scores: { bitterness: 4, body: 4 } },
-                    { text: "想要轻盈的自由", scores: { floral: 5 } }
-                ]
-            }
-        ];
-
-        const inventory = [
-            { name: "特批雪莉", tags: ["酒香", "甜美"], desc: "像香草冰淇淋一样顺滑，带点果酱甜感。", icon: "🍦", profile: { acid: 3, floral: 2, sweetness: 5, body: 4, bitterness: 2 }, review: { nick: "王**二", txt: "妈呀，真的一股奶油雪糕味儿，甜丝丝的太好喝了！" } },
-            { name: "云野", tags: ["花香", "柑橘"], desc: "典型的耶加风味，柠檬橙子加茉莉花香。", icon: "🍋", profile: { acid: 5, floral: 5, sweetness: 3, body: 2, bitterness: 2 }, review: { nick: "张**花", txt: "好清亮！像喝柠檬茶一样，茉莉花香特别持久。" } },
-            { name: "典藏曼特宁", tags: ["浓郁", "巧克力"], desc: "黑巧克力质感，完全没酸味，非常醇厚。", icon: "🍫", profile: { acid: 1, floral: 1, sweetness: 2, body: 5, bitterness: 4 }, review: { nick: "李**强", txt: "老咖啡人的最爱，够苦够浓，巧克力回甘太正了。" } },
-            { name: "雨漫春尘", tags: ["浪漫", "玫瑰"], desc: "玫瑰花香和提子甜感，像在喝高级果汁。", icon: "🌹", profile: { acid: 5, floral: 5, sweetness: 4, body: 3, bitterness: 1 }, review: { nick: "陈**儿", txt: "这包装和味道都绝了，满屋子玫瑰香，甜而不腻。" } },
-            { name: "丹荔露", tags: ["荔枝", "甜感"], desc: "爆发性的蓝莓和葡萄甜感，像奶油蛋糕。", icon: "🍇", profile: { acid: 3, floral: 4, sweetness: 5, body: 3, bitterness: 2 }, review: { nick: "周**七", txt: "甜度真的炸裂，像在喝葡萄汁，完全不像苦咖啡。" } },
-            { name: "金标瑰夏", tags: ["高雅", "明亮"], desc: "强劲的玉兰花香和明亮的柠檬酸感。", icon: "✨", profile: { acid: 5, floral: 5, sweetness: 4, body: 2, bitterness: 1 }, review: { nick: "赵**磊", txt: "这就是瑰夏啊！酸质特别高级，每一口都是钱的味道。" } },
-            { name: "沉舟", tags: ["酒桶", "硬朗"], desc: "威士忌和橡木桶味，非常深邃有力量。", icon: "🥃", profile: { acid: 2, floral: 1, sweetness: 4, body: 5, bitterness: 4 }, review: { nick: "刘**阳", txt: "威士忌味儿好浓，深夜加班来一杯真的绝配。" } }
-        ];
-
-        const insights = {
-            acid: { title: "极光追寻者", desc: "你偏爱明亮、爽快的体验。这几支豆子都有着极佳的果酸和花香，正好能呼应你对“清爽感”的极致要求，一点都不拖泥带水。" },
-            body: { title: "大地的守望者", desc: "你喜欢踏实、厚重的质感。为你选的豆子都有着极好的醇厚度和巧克力感，能给你带来最直接的温暖和包裹感。" },
-            sweetness: { title: "温柔的造梦师", desc: "你天生拒绝苦涩，偏爱甘甜。这几款豆子几乎都是“甜感炸弹”，像甜点一样治愈，最适合你这种怕苦、爱生活的人。" },
-            floral: { title: "林间漫步者", desc: "你追求的是细节和优雅。这几支豆子充满了各种花香和茶感，轻盈又不失层次，最能打动你细腻的感官。" },
-            bitterness: { title: "深海沉思者", desc: "你追求的是纯粹和清醒。为你推的豆子够苦、够浓、够深邃，能让你在每一个需要专注的瞬间，感受到咖啡最原始的力量。" }
-        };
-
-        let currentIdx = 0;
-        let userScores = { acid: 0, bitterness: 0, body: 0, sweetness: 0, floral: 0 };
-        let history = [];
-
-        function startQuiz() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            updateQuestion();
-        }
-
-        function updateQuestion() {
-            const q = questions[currentIdx];
-            document.getElementById('question-number').innerText = `${String(currentIdx + 1).padStart(2, '0')} / 09`;
-            document.getElementById('question-text').innerText = q.text;
-            
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            q.options.forEach((opt) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt.text;
-                btn.onclick = () => selectOption(opt);
-                container.appendChild(btn);
-            });
-
-            document.getElementById('progressFill').style.width = `${((currentIdx) / 9) * 100}%`;
-            document.getElementById('prev-btn').style.opacity = currentIdx === 0 ? '0' : '1';
-        }
-
-        function selectOption(opt) {
-            history.push({ ...userScores });
-            for (let key in opt.scores) {
-                userScores[key] += opt.scores[key];
-            }
-
-            if (currentIdx < questions.length - 1) {
-                currentIdx++;
-                updateQuestion();
-            } else {
-                showLoading();
-            }
-        }
-
-        function prevQuestion() {
-            if (currentIdx > 0) {
-                currentIdx--;
-                userScores = history.pop();
-                updateQuestion();
-            }
-        }
-
-        function showLoading() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('loading-screen').classList.remove('hidden');
-            document.getElementById('progressFill').style.width = `100%`;
-
-            setTimeout(() => {
-                showResults();
-            }, 800);
-        }
-
-        function showResults() {
-            document.getElementById('loading-screen').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-
-            const maxScore = Math.max(...Object.values(userScores));
-            const topTrait = Object.keys(userScores).find(key => userScores[key] === maxScore);
-            const result = insights[topTrait] || insights['sweetness'];
-
-            document.getElementById('personality-title').innerText = result.title;
-            document.getElementById('personality-insight').innerText = result.desc;
-            
-            document.getElementById('poster-personality').innerText = result.title;
-            document.getElementById('poster-insight').innerText = result.desc;
-
-            const scoredInventory = inventory.map(item => {
-                let diff = 0;
-                for (let key in userScores) {
-                    const normalizedUserScore = (userScores[key] / 20) * 5; 
-                    diff += Math.pow(normalizedUserScore - item.profile[key], 2);
-                }
-                return { ...item, match: 100 - Math.sqrt(diff) * 6 };
-            }).sort((a, b) => b.match - a.match);
-
-            const recContainer = document.getElementById('recommendations');
-            const posterBeans = document.getElementById('poster-beans');
-            recContainer.innerHTML = '';
-            posterBeans.innerHTML = '';
-
-            scoredInventory.slice(0, 3).forEach((item, idx) => {
-                const card = document.createElement('div');
-                card.className = `glass-card p-4 flex flex-col bg-white/5 border border-white/10 fade-in`;
-                card.style.animationDelay = `${idx * 0.1}s`;
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-2">
-                        <h5 class="text-base font-bold text-gold"><span class="bean-icon">${item.icon}</span>${item.name}</h5>
-                        <span class="text-[10px] text-gray-500 font-mono">${Math.round(item.match)}%</span>
-                    </div>
-                    <p class="text-[10px] text-gray-400 leading-relaxed">${item.desc}</p>
-                    <div class="review-bubble">
-                        <span class="review-nickname">${item.review.nick} 说：</span>
-                        <p class="review-content">“${item.review.txt}”</p>
-                    </div>
-                `;
-                recContainer.appendChild(card);
-
-                const pItem = document.createElement('div');
-                pItem.className = 'poster-bean-item';
-                pItem.innerHTML = `
-                    <div class="poster-bean-header">
-                        <div class="poster-bean-name">${item.icon} ${item.name}</div>
-                        <div class="poster-bean-match">${Math.round(item.match)}%</div>
-                    </div>
-                    <div class="poster-review-box">
-                        ${item.review.nick}: “${item.review.txt}”
-                    </div>
-                `;
-                posterBeans.appendChild(pItem);
-            });
-        }
-
-        async function saveAsImage() {
-            const btn = document.getElementById('save-btn');
-            btn.innerText = "生成中...";
-            btn.disabled = true;
-
-            try {
-                const canvas = await html2canvas(document.getElementById('poster-wrapper'), {
-                    backgroundColor: '#0a0a0c',
-                    scale: 3,
-                    useCORS: true
-                });
-                
-                const link = document.createElement('a');
-                link.download = `Coffee-Soul-${new Date().getTime()}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                btn.innerText = "已保存";
-            } catch (e) {
-                alert("生成失败，请截图分享");
-                btn.innerText = "生成失败";
-            } finally {
-                setTimeout(() => {
-                    btn.innerText = "保存海报";
-                    btn.disabled = false;
-                }, 2000);
-            }
-        }
-    </script>
-</body>
-</html>
+  function selectedSku(p) { return p.sizes.find(s => s.grams === selectedSizes.get(p.id)) || p.sizes[0]; }
+  function gain(s) {
+    const cents = s.retailCents - s.supplyCents;
+    return {cents, rate:s.supplyCents > 0 ? (cents/s.supplyCents*100).toFixed(2) : '—', margin:s.retailCents > 0 ? (cents/s.retailCents*100).toFixed(2) : '—'};
+  }
+  function profileTags(p) {
+    const f=p.profile;
+    return '<div class="profile-tags"><span>'+esc(f.roast)+'</span>'+(f.enhanced?'<span class="enhanced-tag">增味处理</span>':'<span>传统处理</span>')+(f.processPending?'<span class="pending-tag">工艺待确认</span>':'')+'</div>';
+  }
+  function cupEstimate(s) {
+    return '<span>约 '+(s.grams/15).toFixed(1)+' 杯</span><span>豆款约 ¥'+(s.retailCents/100*15/s.grams).toFixed(2)+'/杯</span>';
+  }
+  function brewText(p) {
+    const f=p.profile;
+    return '【'+p.name+' · 手冲参考】\n'+f.brew.text+'\n\n参数供起步参考，可按器具、用水与口味调整。研磨刻度仅对应所列机型。'+(f.processPending?'\n具体处理工艺及本批参数适用性待确认。':'');
+  }
+  function brewBlock(p) {
+    const f=p.profile,b=f.brew;
+    if(!b)return '<section class="brew-pending"><h3>'+(p.id==='item-05'?'意式萃取参考':'冲煮参考')+'</h3><p>'+(p.id==='item-05'?'资料提供了浓缩与奶咖的风味描述，粉量、出液量与时间尚待补充。':'这支豆的专属冲煮参数尚待补充。')+'</p></section>';
+    const ratioMin=b.waterMinG/b.powderG,ratioMax=b.waterMaxG/b.powderG;
+    const ratio='1 : '+(ratioMin===ratioMax?Number(ratioMin.toFixed(2)):Number(ratioMin.toFixed(2))+'–'+Number(ratioMax.toFixed(2)));
+    return '<details class="info-fold brew-fold"><summary><span>手冲参考<small>'+esc(b.temperature)+' · '+b.powderG+'g粉 · '+(b.waterMinG===b.waterMaxG?b.waterMinG:b.waterMinG+'–'+b.waterMaxG)+'g水</small></span><span class="fold-sign" aria-hidden="true">＋</span></summary><div class="fold-body"><div class="brew-summary"><div><small>水温</small><strong>'+esc(b.temperature)+'</strong></div><div><small>粉水比</small><strong>'+ratio+'</strong></div></div><p class="brew-reference">'+esc(b.text)+'</p><p class="reference-note">参数供起步参考，可按器具、用水与口味调整。研磨刻度仅对应所列机型。'+(f.processPending?'本款具体处理工艺及参数适用性待确认。':'')+'</p><button class="secondary-btn copy-brew" data-action="copy-brew" data-id="'+p.id+'">复制冲煮参考</button></div></details>';
+  }
+  function originBlock(p) {
+    const f=p.profile;
+    const facts=[['产地',p.origin],['庄园 / 处理站 / 批次',f.place],['品种',f.variety],['种植海拔',f.altitude],['处理方式',p.process],['烘焙方向',f.roast],['豆号',f.beanId]];
+    return '<details class="info-fold"><summary><span>产地与豆子资料<small>'+esc(f.variety)+' · '+esc(f.altitude)+'</small></span><span class="fold-sign" aria-hidden="true">＋</span></summary><div class="fold-body"><dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'+(leader&&f.roastNote?'<p class="reference-note">'+esc(f.roastNote)+'</p>':'')+(leader&&f.agtron?'<p class="reference-note">原资料 Agtron 色值（豆色 / 粉色）：'+esc(f.agtron)+'。为资料记录，不代表每一批次的测量结果。</p>':'')+'</div></details>';
+  }
+  function sizeButtons(p, scope) {
+    return p.sizes.map(s => '<button class="size-btn" type="button" data-action="size" data-id="'+esc(p.id)+'" data-grams="'+s.grams+'" data-scope="'+scope+'" aria-pressed="'+(selectedSizes.get(p.id)===s.grams)+'" aria-label="'+esc(p.name)+' '+s.grams+'克">'+s.grams+'g</button>').join('');
+  }
+  function priceBlock(p, large) {
+    const s = selectedSku(p);
+    if (!leader) return '<div class="price"><small>¥</small>'+money(s.retailCents)+'<span class="price-caption">'+s.grams+'g · 零售价</span></div>';
+    const g = gain(s);
+    return '<div class="leader-prices"><div class="price"><span class="price-caption">供货价 / '+s.grams+'g</span><small>¥</small>'+money(s.supplyCents)+'</div><div class="price secondary"><span class="price-caption">建议零售价</span><small>¥</small>'+money(s.retailCents)+'</div></div><div class="leader-gain"><span>预计商品毛利 <strong>¥'+money(g.cents)+'</strong></span><span>销售毛利率 <strong>'+g.margin+(g.margin==='—'?'':'%')+'</strong></span><span>成本加成率 <strong>'+g.rate+(g.rate==='—'?'':'%')+'</strong></span><small class="gain-basis">按建议零售价测算；毛利率以零售价为分母，加成率以供货价为分母。</small></div>';
+  }
+  function addButton(p) {
+    const s = selectedSku(p), key = p.id+':'+s.grams, has = picks.has(key);
+    return '<button class="add-btn'+(has?' selected':'')+'" data-action="toggle" data-id="'+esc(p.id)+'" data-grams="'+s.grams+'" aria-pressed="'+has+'">'+(has?'已选入 ✓':leader?'选入清单 ＋':'加入选豆单 ＋')+'</button>';
+  }
+  function card(p, index) {
+    return '<article class="product-card" data-product="'+p.id+'"><button class="cover-button" data-action="detail" data-id="'+p.id+'" aria-label="查看'+esc(p.name)+'详情"><img src="'+coffeeAssets[p.id]+'" alt="'+esc(p.name)+'风味示意插画，非商品实拍" loading="lazy" width="600" height="440"><span class="cover-index">'+String(index+1).padStart(2,'0')+'</span><span class="cover-theme">'+themes[category[p.id]]+'</span></button><p class="card-origin">'+esc(p.origin)+'</p><div class="card-title"><h3><button class="title-button" data-action="detail" data-id="'+p.id+'">'+esc(p.name)+'</button></h3><span class="detail-arrow" aria-hidden="true">↗</span></div><p class="card-flavor">'+esc(p.descriptor)+'</p>'+profileTags(p)+'<p class="card-pitch">'+esc(p.profile.pitch)+'</p><div class="size-row" aria-label="选择规格">'+sizeButtons(p,'card')+'</div>'+(leader?priceBlock(p)+'<div class="card-tools">'+addButton(p)+'<button class="copy-one" data-action="copy-one" data-id="'+p.id+'">复制推广文案</button></div>':'<div class="card-bottom">'+priceBlock(p)+addButton(p)+'</div>')+'<p class="card-cup">'+cupEstimate(selectedSku(p))+'<small>按零售价、每杯15g估算，仅计豆款</small></p></article>';
+  }
+  function renderGrid(focus) {
+    const q = query.trim().toLocaleLowerCase();
+    const shown = products.filter(p => (filter==='all'||category[p.id]===filter) && (!q || [p.name,p.origin,p.descriptor,p.process,p.profile.beanId,p.profile.roast,p.profile.variety,p.profile.place,p.profile.guide,p.profile.enhanced?'增味处理':'传统处理'].join(' ').toLocaleLowerCase().includes(q)));
+    byId('product-grid').innerHTML = shown.length ? shown.map(p => card(p,products.indexOf(p))).join('') : '<div class="empty-state"><h3>换个关键词试试</h3><p>可以搜豆名、产地，或“荔枝”“黑巧”这样的风味。</p><button class="clear-filter" data-action="reset">清除筛选</button></div>';
+    byId('result-count').textContent = '找到 '+shown.length+' 支豆 · 规格价格见下方';
+    byId('clear-filter').hidden = filter==='all'&&!query;
+    if (focus) {
+      const element = document.querySelector('[data-product="'+focus.id+'"] [data-action="'+focus.action+'"][data-grams="'+focus.grams+'"]');
+      if (element) element.focus({preventScroll:true});
+    }
+    updateBar();
+  }
+  function updateBar() {
+    let total = 0, units = 0;
+    picks.forEach(x => { const p = productMap.get(x.id), s = p.sizes.find(s=>s.grams===x.grams); total += (leader?s.supplyCents:s.retailCents)*x.quantity; units+=x.quantity; });
+    document.querySelectorAll('[data-pick-count]').forEach(e=>{e.textContent=picks.size;});
+    byId('bar-title').textContent = picks.size ? (leader?'已选 '+picks.size+' 个商品规格':'已选 '+units+' 包咖啡豆') : (leader?'选几支，带走本周推广文案':'先选喜欢的豆，再看看规格');
+    byId('bar-subtitle').textContent = picks.size ? (leader?'按当前数量，供货合计 ¥'+money(total):'商品小计 ¥'+money(total)+' · 未计运费') : (leader?'供货价、商品毛利与顾客文案，一起整理':'无需注册 · 选好可复制下单文案');
+  }
+  function announce(text) { byId('toast').textContent=text;byId('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>byId('toast').classList.remove('visible'),3800); }
+  function toggle(p, grams, element) {
+    const key=p.id+':'+grams;
+    if(picks.has(key)){picks.delete(key);announce('已从清单移除');}else{picks.set(key,{id:p.id,grams:grams,quantity:1});announce('已加入'+(leader?'选品清单':'选豆单'));}
+    const inDetail=detailId===p.id&&byId('detail-overlay').classList.contains('open');
+    renderGrid(inDetail?null:{id:p.id,action:'toggle',grams:grams});
+    if(inDetail){renderDetail(p);const target=byId('detail-content').querySelector('[data-action="toggle"]');if(target)target.focus({preventScroll:true});}
+  }
+  function openOverlay(id) {
+    lastFocused = document.activeElement;
+    document.querySelectorAll('.overlay.open').forEach(el=>{el.classList.remove('open');el.setAttribute('aria-hidden','true');});
+    const overlay=byId(id);overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.classList.add('locked');
+    const close=overlay.querySelector('.sheet-close');if(close)close.focus({preventScroll:true});
+  }
+  function closeOverlay() {
+    if(byId('copy-overlay').classList.contains('open')&&copyReturn){
+      const restore=copyReturn;copyReturn=null;
+      byId('copy-overlay').classList.remove('open');byId('copy-overlay').setAttribute('aria-hidden','true');
+      const previous=byId(restore.overlay);previous.classList.add('open');previous.setAttribute('aria-hidden','false');
+      lastFocused=restore.outer;
+      if(restore.focus&&document.contains(restore.focus))restore.focus.focus({preventScroll:true});
+      else previous.querySelector('.sheet-close').focus({preventScroll:true});
+      return;
+    }
+    document.querySelectorAll('.overlay.open').forEach(el=>{el.classList.remove('open');el.setAttribute('aria-hidden','true');});
+    document.body.classList.remove('locked');detailId=null;
+    if(lastFocused&&document.contains(lastFocused))lastFocused.focus({preventScroll:true});
+  }
+  function renderDetail(p) {
+    const s=selectedSku(p),f=p.profile;
+    const reminders=leader && p.supplyReminders && p.supplyReminders.length ? '<p class="detail-note">供货提醒：'+esc(Array.isArray(p.supplyReminders)?p.supplyReminders.join('；'):p.supplyReminders)+'</p>' : '';
+    byId('detail-content').innerHTML='<div class="detail-layout"><div class="detail-art"><img src="'+coffeeAssets[p.id]+'" alt="'+esc(p.name)+'风味示意，非商品实拍" width="600" height="440"></div><div class="detail-copy"><div class="eyebrow">'+esc(f.guide)+'</div><h2 id="detail-title">'+esc(p.name)+'</h2><p class="detail-flavor">'+esc(p.descriptor)+'</p>'+profileTags(p)+'<p class="detail-description">'+esc(f.pitch)+'</p><div class="selection-advice"><strong>选豆提示</strong><p>'+esc(f.guideText)+'</p></div><div class="detail-size-label">选一份适合自己的量</div><div class="size-row">'+sizeButtons(p,'detail')+'</div>'+priceBlock(p,true)+'<p class="detail-estimate">'+cupEstimate(s)+'<small>按零售价、每杯15g估算，仅计豆款；实际用量随器具和习惯调整。</small></p>'+addButton(p)+'<section class="taste-story"><h3>风味参考</h3><p>'+esc(f.taste)+'</p></section>'+brewBlock(p)+originBlock(p)+reminders+'</div></div>';
+  }
+  function customerCopy(p, grams) {
+    const s=p.sizes.find(s=>s.grams===grams);
+    return '【'+p.name+'】\n'+p.origin+'｜'+p.profile.roast+'｜'+p.process+'\n风味：'+p.descriptor+'\n'+p.profile.pitch+'\n'+(p.profile.enhanced?'采用增味处理，请按自己的风味偏好选择。\n':'')+s.grams+'g / ¥'+money(s.retailCents)+'\n按每杯15g、上述零售价估算，豆款约¥'+(s.retailCents/100*15/s.grams).toFixed(2)+'/杯。\n具体可供及批次请以团长确认信息为准。';
+  }
+  function makeDraft() {
+    if(!picks.size)return '';
+    if(leader){return Array.from(picks.values()).map(x=>customerCopy(productMap.get(x.id),x.grams)).join('\n\n──────────\n\n')+'\n\n想了解具体批次或下单方式，请联系发布这份豆单的团长。';}
+    let total=0;
+    const lines=Array.from(picks.values()).map(x=>{const p=productMap.get(x.id),s=p.sizes.find(s=>s.grams===x.grams);total+=s.retailCents*x.quantity;return p.name+'｜'+x.grams+'g × '+x.quantity+'｜¥'+money(s.retailCents*x.quantity);});
+    return '你好，我要下单以下咖啡豆：\n\n'+lines.join('\n')+'\n\n商品小计：¥'+money(total)+'（未计运费）\n请帮我确认优惠和运费后的应付金额，并发我付款方式，谢谢。';
+  }
+  function renderSelection() {
+    let total=0;
+    byId('selection-list').innerHTML=picks.size?Array.from(picks.entries()).map(([key,x])=>{
+      const p=productMap.get(x.id),s=p.sizes.find(s=>s.grams===x.grams);const price=leader?s.supplyCents:s.retailCents;total+=price*x.quantity;
+      return '<div class="selection-item"><img class="selection-thumb" src="'+coffeeAssets[p.id]+'" alt=""><div><h3>'+esc(p.name)+'</h3><p>'+x.grams+'g'+(leader?' · 供货 ¥'+money(price):'')+'</p><div class="selected-price">¥'+money(price*x.quantity)+'</div><div class="quantity"><button data-action="quantity" data-key="'+key+'" data-delta="-1" aria-label="减少'+esc(p.name)+'数量" '+(x.quantity<=1?'disabled':'')+'>−</button><span>'+x.quantity+'</span><button data-action="quantity" data-key="'+key+'" data-delta="1" aria-label="增加'+esc(p.name)+'数量" '+(x.quantity>=99?'disabled':'')+'>＋</button></div></div><button class="remove-item" data-action="remove" data-key="'+key+'">移除</button></div>';
+    }).join(''):'<div class="empty-state"><h3>还没有选豆</h3><p>回到豆单，选一支喜欢的口味。</p><button class="clear-filter" data-action="close">去选豆</button></div>';
+    byId('selection-total').textContent='¥'+money(total);
+    byId('draft-text').value=makeDraft();
+    byId('copy-draft').disabled=!picks.size;
+    document.querySelectorAll('[data-requires-picks]').forEach(e=>{e.disabled=!picks.size;});
+    byId('selection-help').textContent=leader?'供货合计按当前选择数量估算。推广文案只含顾客零售价；下级分配、实际优惠及运费另算。':'优惠及运费以团长确认为准。同一顾客同址订单，优惠后商品实付满188元包邮。';
+    updateBar();
+  }
+  async function copyText(text) {
+    if(!text.trim()){announce('还没有可复制的内容');return false;}
+    try {if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);announce('已复制，可以粘贴到微信');return true;}}catch(e){}
+    const previous=document.querySelector('.overlay.open');
+    copyReturn=previous?{overlay:previous.id,focus:document.activeElement,outer:lastFocused}:null;
+    byId('manual-copy-text').value=text;openOverlay('copy-overlay');byId('manual-copy-text').focus();byId('manual-copy-text').select();
+    announce('请长按文字或使用全选、复制');return false;
+  }
+  function download(filename, content, type) {
+    const blob=new Blob([content],{type:type});
+    if(navigator.msSaveOrOpenBlob){navigator.msSaveOrOpenBlob(blob,filename);return;}
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);
+    announce('已准备下载；微信内若未出现文件，可用浏览器打开后重试。');
+  }
+  function csvCell(value){let text=String(value);if(/^[=+@\-\t\r]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"';}
+  function exportCsv(){
+    if(!leader||!picks.size)return;
+    const rows=[['名称','产地','规格g','供货价元','建议零售价元','预计商品毛利元（建议零售价−供货价）','成本加成率%（预计商品毛利÷供货价）','销售毛利率%（预计商品毛利÷建议零售价）','风味','处理方式','测算口径','烘焙方向','品种','海拔','增味处理','豆号']];
+    picks.forEach(x=>{const p=productMap.get(x.id),s=p.sizes.find(s=>s.grams===x.grams),g=gain(s);rows.push([p.name,p.origin,s.grams,money(s.supplyCents),money(s.retailCents),money(g.cents),g.rate,g.margin,p.descriptor,p.process,'按建议零售价、成本仅按团长供货价测算；未计实际优惠、额外运费、下级分配及其他费用，非净利润。',p.profile.roast,p.profile.variety,p.profile.altitude,p.profile.enhanced?'是':'资料标注否',p.profile.beanId]);});
+    download('团长选品清单_9月价格.csv','\ufeff'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');
+  }
+  document.addEventListener('click',function(event){
+    const button=event.target.closest('[data-action]');if(!button)return;
+    const action=button.dataset.action,p=productMap.get(button.dataset.id);
+    if(action==='filter'){filter=button.dataset.filter;document.querySelectorAll('.filter-pill').forEach(e=>e.setAttribute('aria-pressed',e===button?'true':'false'));renderGrid();}
+    if(action==='reset'){filter='all';query='';byId('search').value='';document.querySelectorAll('.filter-pill').forEach(e=>e.setAttribute('aria-pressed',e.dataset.filter==='all'?'true':'false'));renderGrid();}
+    if(action==='size'&&p){const grams=Number(button.dataset.grams);if(!p.sizes.some(s=>s.grams===grams))return;selectedSizes.set(p.id,grams);renderGrid(button.dataset.scope==='card'?{id:p.id,action:'size',grams:grams}:null);if(detailId===p.id){renderDetail(p);const target=byId('detail-content').querySelector('[data-action="size"][data-grams="'+grams+'"]');if(target)target.focus({preventScroll:true});}}
+    if(action==='detail'&&p){detailId=p.id;renderDetail(p);openOverlay('detail-overlay');}
+    if(action==='toggle'&&p)toggle(p,Number(button.dataset.grams),button);
+    if(action==='selection'){renderSelection();openOverlay('selection-overlay');}
+    if(action==='close')closeOverlay();
+    if(action==='quantity'){const key=button.dataset.key,delta=button.dataset.delta,x=picks.get(key);if(!x)return;x.quantity=Math.min(99,Math.max(1,x.quantity+Number(delta)));renderSelection();const same=byId('selection-list').querySelector('[data-key="'+key+'"][data-delta="'+delta+'"]');const fallback=byId('selection-list').querySelector('[data-key="'+key+'"][data-action="quantity"]:not(:disabled)');const target=same&&!same.disabled?same:fallback;if(target)target.focus({preventScroll:true});}
+    if(action==='remove'){picks.delete(button.dataset.key);renderSelection();renderGrid();}
+    if(action==='curated'){['item-02','item-03','item-08'].forEach(id=>{const p=productMap.get(id),s=p.sizes.find(s=>s.grams===227)||p.sizes[0];selectedSizes.set(id,s.grams);picks.set(id+':'+s.grams,{id:id,grams:s.grams,quantity:1});});renderGrid();announce('已选入3支演示精选，可继续调整');}
+    if(action==='copy-one'&&p)copyText(customerCopy(p,selectedSku(p).grams));
+    if(action==='copy-brew'&&p&&p.profile.brew)copyText(brewText(p));
+    if(action==='copy-draft')copyText(byId('draft-text').value);
+    if(action==='export-csv')exportCsv();
+    if(action==='export-copy'&&picks.size)download('顾客推广文案.txt',byId('draft-text').value,'text/plain;charset=utf-8');
+    if(action==='select-manual'){byId('manual-copy-text').focus();byId('manual-copy-text').select();announce('文字已选中，请复制');}
+  });
+  byId('search').addEventListener('input',function(){query=this.value;renderGrid();});
+  document.querySelectorAll('.overlay').forEach(el=>el.addEventListener('click',function(event){if(event.target===el)closeOverlay();}));
+  document.addEventListener('keydown',function(event){
+    const overlay=document.querySelector('.overlay.open');if(!overlay)return;
+    if(event.key==='Escape'){event.preventDefault();closeOverlay();}
+    if(event.key==='Tab'){
+      const controls=Array.from(overlay.querySelectorAll('button:not(:disabled),a[href],input,select,textarea,summary')).filter(e=>e.getClientRects().length>0);
+      if(!controls.length)return;const first=controls[0],last=controls[controls.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  renderGrid();
+})();
+</script>
+</body></html>
