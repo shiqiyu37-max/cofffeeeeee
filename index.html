@@ -30,6 +30,9 @@
 .section-sketch{display:block;width:76px;height:64px;flex:0 0 76px;object-fit:contain;color:var(--accent);pointer-events:none}.reading-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}.reading-heading h3{margin:0}.info-fold summary>span:first-child{flex:1;min-width:0}.info-fold summary .section-sketch{margin:-5px 0}.info-fold summary .fold-sign{flex:0 0 auto}.taste-story{margin-top:18px}@media (max-width:419px){.section-sketch{width:65px;height:57px;flex-basis:65px}.info-fold summary{gap:10px}}@media print{.section-sketch{display:none}}
 
 .section-sketch .sketch-fill{fill:var(--pale);stroke:none}.section-sketch .sketch-detail{stroke:#829aaa}.sketch-steam{animation:sketch-breathe 1.6s ease-in-out 2;transform-origin:center}.sketch-pour{stroke-dasharray:3 5;animation:sketch-pour 2.4s ease-out 1}@keyframes sketch-breathe{0%,100%{opacity:.75;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}@keyframes sketch-pour{from{stroke-dashoffset:8}to{stroke-dashoffset:0}}@media (prefers-reduced-motion:reduce){.sketch-steam,.sketch-pour{animation:none}}
+
+/* Flavor notes echo each coffee's flat-color artwork, while retaining readable names. */
+.detail-flavor-list{display:flex;flex-wrap:wrap;gap:8px 20px;margin:14px 0 18px;align-items:center}.flavor-note{display:inline-flex;align-items:center;gap:7px;min-width:0;color:var(--ink);font:500 16px/1.4 var(--serif)}.flavor-note svg{display:block;width:40px;height:44px;flex:0 0 40px}.flavor-context{display:block;color:var(--soft);font-size:11px;margin-top:14px}.flavor-context+.detail-flavor-list{margin-top:3px}@media(max-width:419px){.detail-flavor-list{gap:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}.flavor-note{flex-direction:column;gap:3px;text-align:center;font-size:14px}.flavor-note svg{width:42px;height:45px;flex-basis:45px}.flavor-note:only-child{flex-direction:row;grid-column:1/-1;text-align:left}}
 </style>
 </head>
 <body class="customer" data-role="customer">
@@ -91,6 +94,42 @@
   function brewText(p) {
     const f=p.profile;
     return '【'+p.name+' · 手冲参考】\n'+f.brew.text+'\n\n参数供起步参考，可按器具、用水与口味调整。研磨刻度仅对应所列机型。'+(f.processPending?'\n具体处理工艺及本批参数适用性待确认。':'');
+  }
+  function flavorNotes(p) {
+    const notes={
+      'item-01':[['berry','浆果'],['vanilla','香草'],['milk','奶香']],
+      'item-02':[['caramel','焦糖'],['chocolate','黑巧'],['nut','烤榛子']],
+      'item-03':[['lychee','荔枝方向甜香']],
+      'item-04':[['berry','蓝莓'],['grape','葡萄'],['flower','花香']],
+      'item-05':[['citrus','橘皮'],['nut','坚果'],['berry','莓干']],
+      'item-06':[['flower','白花'],['grape','白葡萄'],['citrus','青柠']],
+      'item-07':[['chocolate','黑巧'],['nut','坚果'],['caramel','焦糖奶油']],
+      'item-08':[['flower','白花'],['peach','杏桃'],['grape','茉莉青提']],
+      'item-09':[['lychee','荔枝'],['passion','百香果'],['peach','黄桃']]
+    };
+    const palettes={
+      'item-01':['#512a40','#a75970','#f0dfcc'], 'item-02':['#163f34','#d2ad78','#efe5cd'],
+      'item-03':['#315d43','#af4d57','#f7eed7'], 'item-04':['#39344e','#7e719c','#eddfc5'],
+      'item-05':['#132f43','#cf9d66','#dcd5c1'], 'item-06':['#677a54','#b49e63','#f7f0d9'],
+      'item-07':['#224d45','#83a98c','#e6dfc5'], 'item-08':['#597451','#ce834c','#f9edd0'],
+      'item-09':['#45624e','#d48264','#f4dec0']
+    };
+    const forms={
+      berry:'<circle cx="21" cy="36" r="12" fill="var(--fruit)"/><circle cx="42" cy="35" r="12" fill="var(--dark)"/><circle cx="31" cy="49" r="11" fill="var(--fruit)"/><path d="M28 25C15 24 13 14 16 9c13 0 21 7 17 16M33 24c0-12 9-19 19-17-1 11-8 17-19 17" fill="var(--dark)"/><path d="m18 33 3-3 3 3-3 3Z" fill="var(--light)"/>',
+      vanilla:'<path d="M17 56C42 41 49 21 49 8c-9 21-20 32-38 41Z" fill="var(--dark)"/><path d="M25 56C49 42 55 26 56 15c-11 18-21 27-36 35Z" fill="var(--fruit)"/><g fill="var(--light)"><ellipse cx="19" cy="16" rx="6" ry="11"/><ellipse cx="19" cy="16" rx="6" ry="11" transform="rotate(60 19 16)"/><ellipse cx="19" cy="16" rx="6" ry="11" transform="rotate(120 19 16)"/></g><circle cx="19" cy="16" r="4" fill="var(--fruit)"/>',
+      milk:'<path d="M19 12h24v9l7 11v24H12V32l7-11Z" fill="var(--light)"/><path d="M19 12h24v7H19Z" fill="var(--dark)"/><path d="M12 37c12-7 24 7 38 0v19H12Z" fill="var(--fruit)"/><path d="M25 21v10" stroke="var(--dark)" stroke-width="2"/>',
+      caramel:'<path d="m9 29 19-9 17 10-20 10Z" fill="var(--light)"/><path d="m9 29 16 11v19L9 48Z" fill="var(--dark)"/><path d="m25 40 20-10v20L25 59Z" fill="var(--fruit)"/><path d="m33 10 16-5 11 10-17 6Z" fill="var(--light)"/><path d="m33 10 10 11v14L33 24Z" fill="var(--fruit)"/><path d="m43 21 17-6v15L43 35Z" fill="var(--dark)"/>',
+      chocolate:'<g transform="rotate(-15 32 33)"><rect x="13" y="9" width="38" height="49" rx="2" fill="var(--dark)"/><g fill="var(--fruit)"><rect x="18" y="14" width="12" height="10" rx="1"/><rect x="34" y="14" width="12" height="10" rx="1"/><rect x="18" y="28" width="12" height="10" rx="1"/><rect x="34" y="28" width="12" height="10" rx="1"/><rect x="18" y="42" width="12" height="10" rx="1"/><rect x="34" y="42" width="12" height="10" rx="1"/></g><path d="M19 16h8M35 30h8" stroke="var(--light)" stroke-width="1.2"/></g>',
+      nut:'<path d="M31 15C6 19 5 44 21 55c13 9 34-4 34-20 0-12-11-18-24-20Z" fill="var(--fruit)"/><path d="M27 22C13 36 20 52 32 55c15-8 17-25-5-33Z" fill="var(--light)"/><path d="M28 25c9 10 8 20 4 29" fill="none" stroke="var(--dark)" stroke-width="1.7"/><path d="M29 17C26 7 42 5 54 11 48 22 38 24 29 17" fill="var(--dark)"/>',
+      lychee:'<circle cx="29" cy="38" r="23" fill="var(--fruit)"/><path d="M31 16c17 1 22 13 19 28-3 14-14 20-25 14-14-8-13-24 6-42Z" fill="var(--light)"/><path d="M23 14C26 3 44 3 53 8 46 20 32 23 23 14" fill="var(--dark)"/><g fill="var(--light)"><circle cx="14" cy="32" r="1.5"/><circle cx="13" cy="42" r="1.5"/><circle cx="18" cy="50" r="1.5"/></g>',
+      grape:'<path d="M31 18c1-9 9-14 19-10-2 9-9 13-19 10M31 19V9" fill="var(--dark)" stroke="var(--dark)" stroke-width="2"/><g fill="var(--fruit)"><circle cx="21" cy="29" r="9"/><circle cx="40" cy="29" r="9"/><circle cx="16" cy="42" r="8"/><circle cx="32" cy="43" r="10"/><circle cx="48" cy="42" r="8"/><circle cx="31" cy="56" r="7"/></g><path d="M17 25q3-3 6-1M28 39q4-4 7-1" fill="none" stroke="var(--light)" stroke-width="2"/>',
+      flower:'<path d="M33 59V35M33 51c-14 0-22-8-23-16 16-1 24 5 23 16M34 55c1-14 11-20 23-18-3 13-12 20-23 18" fill="var(--dark)"/><g fill="var(--light)"><ellipse cx="30" cy="22" rx="9" ry="18"/><ellipse cx="30" cy="22" rx="9" ry="18" transform="rotate(60 30 22)"/><ellipse cx="30" cy="22" rx="9" ry="18" transform="rotate(120 30 22)"/></g><circle cx="30" cy="22" r="7" fill="var(--fruit)"/>',
+      citrus:'<path d="M8 22a25 25 0 0 0 49 0Z" fill="var(--dark)"/><path d="M12 23a21 21 0 0 0 41 0Z" fill="var(--light)"/><path d="M17 26a16 16 0 0 0 31 0Z" fill="var(--fruit)"/><path d="m32 26-10 15m10-15v18m0-18 10 15" stroke="var(--light)" stroke-width="2"/><path d="M35 17C31 6 45 4 55 8c-3 10-12 14-20 9" fill="var(--dark)"/>',
+      peach:'<path d="M31 23C8 8-1 45 17 56c8 5 12 2 16 1 7 2 15 2 21-6 14-18-3-42-23-28Z" fill="var(--fruit)"/><path d="M31 23C9 19 12 46 23 54c6 4 9 3 10 3-8-12-6-21-2-34Z" fill="var(--light)"/><path d="M31 23c8-8 3-15 8-19" fill="none" stroke="var(--dark)" stroke-width="2"/><path d="M33 17C43 3 54 7 60 13c-9 11-20 13-27 4" fill="var(--dark)"/>',
+      passion:'<ellipse cx="31" cy="36" rx="27" ry="21" transform="rotate(-18 31 36)" fill="var(--dark)"/><ellipse cx="31" cy="34" rx="24" ry="18" transform="rotate(-18 31 34)" fill="var(--light)"/><ellipse cx="31" cy="34" rx="19" ry="13" transform="rotate(-18 31 34)" fill="var(--fruit)"/><g fill="var(--dark)"><ellipse cx="20" cy="32" rx="2" ry="3"/><ellipse cx="28" cy="26" rx="2" ry="3"/><ellipse cx="38" cy="29" rx="2" ry="3"/><ellipse cx="44" cy="35" rx="2" ry="3"/><ellipse cx="32" cy="38" rx="2" ry="3"/><ellipse cx="23" cy="41" rx="2" ry="3"/></g>'
+    };
+    const colors=palettes[p.id];
+    return (p.id==='item-05'?'<span class="flavor-context">浓缩风味</span>':'')+'<div class="detail-flavor-list" role="list" aria-label="'+esc(p.descriptor)+'" style="--dark:'+colors[0]+';--fruit:'+colors[1]+';--light:'+colors[2]+'">'+notes[p.id].map(([kind,label])=>'<span class="flavor-note" role="listitem"><svg viewBox="0 0 64 68" aria-hidden="true" focusable="false">'+forms[kind]+'</svg><span>'+label+'</span></span>').join('')+'</div>';
   }
   function readingSketch(kind) {
     const drawings = {
@@ -177,7 +216,7 @@
   }
   function renderDetail(p) {
     const s=selectedSku(p),f=p.profile;
-    byId('detail-content').innerHTML='<div class="detail-layout"><div class="detail-art"><img src="'+coffeeAssets[p.id]+'" alt="'+esc(p.name)+'风味示意，非商品实拍" width="600" height="440"></div><div class="detail-copy"><div class="eyebrow">'+esc(f.guide)+'</div><h2 id="detail-title">'+esc(p.name)+'</h2><p class="detail-flavor">'+esc(p.descriptor)+'</p>'+profileTags(p)+'<p class="detail-description">'+esc(f.pitch)+'</p><div class="selection-advice"><strong>选豆提示</strong><p>'+esc(f.guideText)+'</p></div><div class="detail-size-label">选一份适合自己的量</div><div class="size-row">'+sizeButtons(p,'detail')+'</div>'+priceBlock(p,true)+'<p class="detail-estimate">'+cupEstimate(s)+'<small>按零售价、每杯15g估算，仅计豆款；实际用量随器具和习惯调整。</small></p>'+addButton(p)+'<section class="taste-story"><div class="reading-heading"><h3>风味参考</h3>'+readingSketch('flavor')+'</div><p>'+esc(f.taste)+'</p></section>'+brewBlock(p)+originBlock(p)+'</div></div>';
+    byId('detail-content').innerHTML='<div class="detail-layout"><div class="detail-art"><img src="'+coffeeAssets[p.id]+'" alt="'+esc(p.name)+'风味示意，非商品实拍" width="600" height="440"></div><div class="detail-copy"><div class="eyebrow">'+esc(f.guide)+'</div><h2 id="detail-title">'+esc(p.name)+'</h2>'+flavorNotes(p)+profileTags(p)+'<p class="detail-description">'+esc(f.pitch)+'</p><div class="selection-advice"><strong>选豆提示</strong><p>'+esc(f.guideText)+'</p></div><div class="detail-size-label">选一份适合自己的量</div><div class="size-row">'+sizeButtons(p,'detail')+'</div>'+priceBlock(p,true)+'<p class="detail-estimate">'+cupEstimate(s)+'<small>按零售价、每杯15g估算，仅计豆款；实际用量随器具和习惯调整。</small></p>'+addButton(p)+'<section class="taste-story"><div class="reading-heading"><h3>风味参考</h3>'+readingSketch('flavor')+'</div><p>'+esc(f.taste)+'</p></section>'+brewBlock(p)+originBlock(p)+'</div></div>';
   }
   function customerCopy(p, grams) {
     const s=p.sizes.find(s=>s.grams===grams);
