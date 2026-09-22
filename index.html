@@ -92,7 +92,7 @@
     return '<div class="profile-tags"><span>'+esc(f.roast)+'</span>'+(f.enhanced?'<span class="enhanced-tag">增味处理</span>':'<span>传统处理</span>')+(f.processPending?'<span class="pending-tag">工艺待确认</span>':'')+'</div>';
   }
   function cupEstimate(s) {
-    return '<span>≈ '+(s.grams/15).toFixed(1)+' 杯</span><span>≈ ¥'+(s.retailCents/100*15/s.grams).toFixed(2)+'/杯</span>';
+    return '<span>≈ '+(s.grams/15).toFixed(1)+' 杯</span>';
   }
   function brewText(p) {
     const f=p.profile;
