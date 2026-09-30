@@ -41,7 +41,7 @@
 
 .profile-tags .milk-tag{background:#294d40;border-color:#294d40;color:#f5e9d2}
 
-[data-product="item-09"] .cover-button img{object-fit:contain;background:#edf2f5}[data-product="item-09"] .cover-index,[data-product="item-09"] .cover-theme{display:none}.detail-art:has(img[src*="huajian-ai"]){aspect-ratio:1}.detail-art img{object-fit:contain}
+.detail-art img{object-fit:contain}
 
 /* Confirmed restrained flavor markers */
 .detail-flavor-list .flavor-note svg{width:28px;height:30px;flex:0 0 28px}.detail-flavor-list{gap:12px 22px}.flavor-note{gap:8px}
@@ -243,7 +243,7 @@ Object.assign(coffeeAssets,window.coffeeLaunchPhotoAssets);
     const f=p.profile;
     return [['产区风土',f.terroir],['庄园与种植者',f.estateStory],['认识品种',f.varietyStory],['认识处理法',f.processStory],['关于包装',f.packaging]].filter(([,v])=>v).map(([k,v])=>'<section class="origin-story"><h4>'+esc(k)+'</h4><p>'+esc(v)+'</p></section>').join('')+photoBlock(p)+(f.sourceLinks?'<p class="source-links">'+f.sourceLinks.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+'</a>').join(' · ')+'</p>':'');
   }
-  function productArt(p){return p.id==='item-09'?assetUrl('huajian-minimal.jpg'):typeof coffeeAssets!=='undefined'?coffeeAssets[p.id]:''+coffeeAssets[p.id]+'';}
+  function productArt(p){return typeof coffeeAssets!=='undefined'?coffeeAssets[p.id]:'';}
   function assetUrl(file){return typeof coffeeAssets!=='undefined'&&coffeeAssets[file]?coffeeAssets[file]:'assets/'+file;}
   function photoBlock(p){return p.profile.photos?'<div class="estate-gallery">'+p.profile.photos.map(x=>'<figure><img src="'+assetUrl(x.file)+'" alt="'+esc(x.caption)+'" loading="lazy"><figcaption>'+esc(x.caption)+'</figcaption></figure>').join('')+'</div>':'';}
   function disclosureBlock(p){return p.profile.processDisclosure?'<div class="process-disclosure"><strong>关于增味处理</strong><p>'+esc(p.profile.processDisclosure)+'</p></div>':'';}
