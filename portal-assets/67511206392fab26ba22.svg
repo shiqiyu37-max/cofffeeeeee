@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">蓝山脂玉风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#224d45"/>
+
+<circle cx="392" cy="137" r="139" fill="#e6dfc5"/>
+<path d="M-80 451 208 55 455 441Z" fill="#83a98c"/>
+<path d="m208 55 29 226 65 22 28 137H455Z" fill="#a8c9b5"/>
+<path d="M111 451 371 158 641 448Z" fill="#224d45"/>
+<path d="m371 158 23 170 56 5 62 112h129Z" fill="#83a98c"/>
+<path d="M-22 384h166l61-69h106l67 80h90" fill="none" stroke="#e6dfc5" stroke-width="3"/>
+<path d="M-22 400h174l61-69h91l67 80h97" fill="none" stroke="#e6dfc5" stroke-width="1" opacity=".55"/>
+<path d="M89 31v25M77 43h25" stroke="#a8c9b5" stroke-width="2"/>
+
+</svg>

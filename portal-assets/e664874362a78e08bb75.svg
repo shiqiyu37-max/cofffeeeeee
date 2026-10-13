@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 780" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">抽象风味卡片风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="900" height="780" fill="#e9e4d2"/>
+
+<defs>
+<pattern id="paper" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M1 3h2M8 10h2" stroke="#244b3c" stroke-width=".75" opacity=".10"/></pattern>
+<clipPath id="clip-a"><rect width="355" height="462" rx="2"/></clipPath>
+<clipPath id="clip-b"><rect width="355" height="462" rx="2"/></clipPath>
+<clipPath id="clip-c"><rect width="355" height="462" rx="2"/></clipPath>
+</defs>
+<circle cx="459" cy="372" r="308" fill="none" stroke="#d4c9ac" stroke-width="1"/>
+<circle cx="459" cy="372" r="336" fill="none" stroke="#d4c9ac" stroke-width="1" opacity=".42"/>
+<g transform="translate(106 130) rotate(-13 177 231)">
+<rect x="9" y="12" width="355" height="462" rx="2" fill="#c9c3a9"/>
+<rect width="355" height="462" rx="2" fill="#244b3c"/>
+<g clip-path="url(#clip-a)">
+<circle cx="241" cy="201" r="182" fill="none" stroke="#f0e7d0" stroke-width="67"/>
+<circle cx="241" cy="201" r="221" fill="none" stroke="#9da784" stroke-width="2"/>
+<path d="M-41 430C24 213 95 144 151 128c46 144-17 257-192 302Z" fill="#9da784"/>
+<path d="M11 374c36-79 72-146 108-195" fill="none" stroke="#244b3c" stroke-width="2"/>
+<rect width="355" height="462" fill="url(#paper)"/>
+</g></g>
+<g transform="translate(380 113) rotate(13 177 231)">
+<rect x="9" y="12" width="355" height="462" rx="2" fill="#c9c3a9"/>
+<rect width="355" height="462" rx="2" fill="#f7f0da"/>
+<g clip-path="url(#clip-b)">
+<path d="M-54 480c-43-188 93-377 275-357 101 11 161 111 143 215" fill="none" stroke="#ce825b" stroke-width="95"/>
+<path d="M-30 478c-32-163 84-340 247-323 83 9 130 96 119 182" fill="none" stroke="#244b3c" stroke-width="2"/>
+<circle cx="185" cy="319" r="91" fill="#244b3c"/>
+<path d="M134 297c33-25 66-19 97 11M124 313c39-25 79-19 112 12M122 332c38-25 79-19 112 12M130 351c34-20 65-15 95 6" fill="none" stroke="#f7f0da" stroke-width="1.2"/>
+<rect width="355" height="462" fill="url(#paper)"/>
+</g></g>
+<g transform="translate(300 283) rotate(-4 177 231)">
+<rect x="8" y="12" width="355" height="462" rx="2" fill="#c9c3a9"/>
+<rect width="355" height="462" rx="2" fill="#ce825b"/>
+<g clip-path="url(#clip-c)">
+<path d="M-71 344C-77 98 142 18 346 121" fill="none" stroke="#f7f0da" stroke-width="93"/>
+<path d="M-68 382C-88 113 150-4 382 92" fill="none" stroke="#244b3c" stroke-width="2"/>
+<path d="M-66 400C-94 106 151-28 394 72" fill="none" stroke="#244b3c" stroke-width="1" opacity=".5"/>
+<path d="M170 434C146 263 237 177 369 193c-5 144-70 219-199 241Z" fill="#244b3c"/>
+<path d="M196 389c46-74 88-123 125-153" fill="none" stroke="#f7f0da" stroke-width="2"/>
+<circle cx="104" cy="286" r="26" fill="#f7f0da"/>
+<rect width="355" height="462" fill="url(#paper)"/>
+</g></g>
+
+</svg>

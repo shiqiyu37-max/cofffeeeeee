@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">银河高速公路风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#132f43"/>
+
+<ellipse cx="286" cy="236" rx="345" ry="115" transform="rotate(-31 286 236)" fill="none" stroke="#3f6774" stroke-width="70"/>
+<ellipse cx="286" cy="236" rx="346" ry="115" transform="rotate(-31 286 236)" fill="none" stroke="#dcd5c1" stroke-width="2"/>
+<ellipse cx="286" cy="236" rx="345" ry="90" transform="rotate(-31 286 236)" fill="none" stroke="#dcd5c1" stroke-width="1" opacity=".42"/>
+<circle cx="295" cy="208" r="112" fill="#cf9d66"/>
+<path d="M184 216c73-25 150-17 218 19M188 234c72-23 142-13 207 17M199 254c64-16 124-7 182 17M215 275c46-8 93-3 139 14" fill="none" stroke="#132f43" stroke-width="2" opacity=".44"/>
+<path d="m97 76 6 19 20 5-20 6-6 20-5-20-20-6 20-5Z" fill="#dcd5c1"/>
+<circle cx="491" cy="312" r="18" fill="#dcd5c1"/><circle cx="511" cy="84" r="4" fill="#cf9d66"/>
+
+</svg>

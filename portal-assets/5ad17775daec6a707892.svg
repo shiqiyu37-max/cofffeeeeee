@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">丹荔盏风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#ebc0b5"/>
+
+<path d="M335-40c30 115 108 176 215 191-18-117-102-185-215-191Z" fill="#315d43"/>
+<path d="M352 20c57 68 112 96 170 110" fill="none" stroke="#f7eed7" stroke-width="2"/>
+<path d="M265 72C130 89 90 220 171 324c64 49 145 28 184-30 38-76 10-174-90-222Z" fill="#af4d57"/>
+<g stroke="#ebc0b5" stroke-width="1.1" fill="none" opacity=".68"><path d="M190 126 313 272M173 144 298 291M159 163 280 306M150 185 258 310M179 289 324 166M164 269 311 143M154 247 295 123M151 222 276 108"/></g>
+<ellipse cx="373" cy="279" rx="110" ry="130" transform="rotate(28 373 279)" fill="#f7eed7"/>
+<path d="M362 206c47 9 65 43 48 78-12 23-34 39-54 43-35-25-41-57-23-87 10-17 18-24 29-34Z" fill="#af4d57"/>
+<path d="M-30 421c53-129 144-141 231-75-64 67-139 81-231 75Z" fill="#315d43"/>
+<path d="M37 391c44-17 92-25 125-33" fill="none" stroke="#f7eed7" stroke-width="2"/>
+
+</svg>

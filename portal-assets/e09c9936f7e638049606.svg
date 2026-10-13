@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">如梦令风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#39344e"/>
+
+<circle cx="428" cy="122" r="118" fill="#eddfc5"/>
+<circle cx="475" cy="86" r="105" fill="#39344e"/>
+<path d="M-31 373C123 166 305 161 649 279" fill="none" stroke="#b0b8b1" stroke-width="2"/>
+<path d="M-31 389C125 185 305 180 649 298" fill="none" stroke="#b0b8b1" stroke-width="1" opacity=".45"/>
+<g fill="#7e719c"><circle cx="212" cy="149" r="71"/><circle cx="319" cy="183" r="71"/><circle cx="176" cy="253" r="71"/><circle cx="285" cy="288" r="71"/><circle cx="231" cy="369" r="71"/></g>
+<g fill="none" stroke="#eddfc5" stroke-width="1.5" opacity=".75"><path d="M168 132c7-25 32-43 56-39M275 167c7-25 32-43 56-39M133 237c7-25 32-43 56-39M243 270c7-25 32-43 56-39M189 353c7-25 32-43 56-39"/></g>
+<path d="M224 88c14-65 53-84 105-75-17 43-57 68-105 75Z" fill="#b0b8b1"/>
+<circle cx="548" cy="356" r="7" fill="#eddfc5"/>
+
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">花间风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#d48264"/>
+
+<path d="M-25 447C-3 282 61 191 174 162 185 326 129 423-25 447Z" fill="#45624e"/>
+<path d="M41 385c33-67 63-125 102-173" fill="none" stroke="#f4dec0" stroke-width="2"/>
+<g fill="#f4dec0" transform="translate(323 215)"><ellipse cy="-81" rx="61" ry="122" transform="rotate(-8)"/><ellipse cy="-81" rx="61" ry="122" transform="rotate(64)"/><ellipse cy="-81" rx="61" ry="122" transform="rotate(136)"/><ellipse cy="-81" rx="61" ry="122" transform="rotate(208)"/><ellipse cy="-81" rx="61" ry="122" transform="rotate(280)"/></g>
+<circle cx="323" cy="215" r="62" fill="#efb193"/>
+<circle cx="323" cy="215" r="24" fill="#45624e"/>
+<g stroke="#d48264" stroke-width="1.5" fill="none"><path d="m306 131-7-57M386 163l48-26M383 257l44 38M289 286l-20 43M246 197l-48-9"/></g>
+<path d="M436 427c-3-84 43-131 128-129-7 80-51 127-128 129Z" fill="#45624e"/>
+<path d="m455 394 84-69" stroke="#f4dec0" stroke-width="2"/>
+
+</svg>

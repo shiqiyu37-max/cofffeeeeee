@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">74158风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#f0c276"/>
+
+<path d="M464-30c-127 70-138 183-65 253 116-47 145-142 65-253Z" fill="#597451"/>
+<path d="M459 28 407 189" fill="none" stroke="#f9edd0" stroke-width="2"/>
+<ellipse cx="251" cy="278" rx="151" ry="146" fill="#ce834c"/>
+<ellipse cx="297" cy="265" rx="93" ry="119" transform="rotate(-17 297 265)" fill="#f9edd0"/>
+<path d="M315 197c24 26 35 66 20 91-13 22-27 35-48 42-25-26-32-62-16-89 10-17 26-34 44-44Z" fill="#ce834c"/>
+<g fill="#f9edd0" transform="translate(155 105)"><ellipse cy="-26" rx="21" ry="39"/><ellipse cy="-26" rx="21" ry="39" transform="rotate(72)"/><ellipse cy="-26" rx="21" ry="39" transform="rotate(144)"/><ellipse cy="-26" rx="21" ry="39" transform="rotate(216)"/><ellipse cy="-26" rx="21" ry="39" transform="rotate(288)"/></g>
+<circle cx="155" cy="105" r="13" fill="#ce834c"/>
+<path d="M453 403c31-69 93-91 157-55-38 56-86 69-157 55Z" fill="#597451"/>
+<path d="m479 386 101-25" stroke="#f9edd0" stroke-width="1.5"/>
+
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">典藏曼特宁风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#163f34"/>
+
+<circle cx="381" cy="239" r="217" fill="none" stroke="#d2ad78" stroke-width="49"/>
+<circle cx="381" cy="239" r="173" fill="none" stroke="#efe5cd" stroke-width="2"/>
+<circle cx="381" cy="239" r="118" fill="#3f654e"/>
+<path d="M247 308C182 250 163 177 207 122c66-17 145 13 170 76 24 70-39 129-130 110Z" fill="#efe5cd"/>
+<path d="M218 144c41 31 77 82 111 148" fill="none" stroke="#163f34" stroke-width="3"/>
+<path d="M455 150c58 15 90 63 68 105-51 20-103 0-120-44-12-31 12-58 52-61Z" fill="#d2ad78"/>
+<path d="m421 193 88 41" stroke="#163f34" stroke-width="3"/>
+<path d="M-10 405c96-102 180-121 245-92C150 401 67 441-10 449Z" fill="#3f654e"/>
+<g fill="none" stroke="#efe5cd" opacity=".25"><path d="M32 380c73-32 112-39 158-39M31 389c73-31 112-38 159-39M30 399c74-31 113-38 160-39"/></g>
+
+</svg>

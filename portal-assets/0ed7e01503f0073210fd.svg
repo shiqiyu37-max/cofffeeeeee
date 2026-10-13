@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">特批雪莉风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#512a40"/>
+
+<defs><pattern id="grain" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 12 12 0" stroke="#f0dfcc" stroke-width=".6" opacity=".12"/></pattern></defs>
+<path d="M-60 405A306 306 0 0 1 515 52" fill="none" stroke="#a75970" stroke-width="76"/>
+<path d="M340 43C430 46 476 125 476 222S430 397 340 399L230 370C171 337 153 271 158 207S183 82 231 59Z" fill="#f0dfcc"/>
+<path d="M257 56C199 149 198 288 257 377M329 43C284 151 282 290 325 397M399 65C375 156 372 285 396 375" fill="none" stroke="#512a40" stroke-width="2"/>
+<path d="M176 139 466 149M160 273 465 278" fill="none" stroke="#512a40" stroke-width="18"/>
+<circle cx="455" cy="330" r="74" fill="#a75970"/><circle cx="517" cy="274" r="41" fill="#351e30"/><circle cx="518" cy="364" r="43" fill="#351e30"/>
+<path d="M453 237c12-35 39-55 69-62-6 38-33 62-69 62Z" fill="#f0dfcc"/>
+<rect width="600" height="440" fill="url(#grain)"/>
+
+</svg>

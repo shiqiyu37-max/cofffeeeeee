@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">满庭芳风味示意</title>
+<desc id="art-desc">以抽象几何表现风味的装饰插画，非产品或产地实拍。</desc>
+<rect width="600" height="440" fill="#ded9b9"/>
+
+<path d="M-70 435C64 237 199 192 337 236S564 360 652 225" fill="none" stroke="#677a54" stroke-width="114"/>
+<path d="M391 279c38-30 80-58 122-91-20 56-50 88-109 110" fill="#b49e63"/>
+<g fill="#f7f0d9" transform="translate(285 191)"><ellipse cy="-79" rx="49" ry="103"/><ellipse cy="-79" rx="49" ry="103" transform="rotate(72)"/><ellipse cy="-79" rx="49" ry="103" transform="rotate(144)"/><ellipse cy="-79" rx="49" ry="103" transform="rotate(216)"/><ellipse cy="-79" rx="49" ry="103" transform="rotate(288)"/></g>
+<circle cx="285" cy="191" r="36" fill="#b49e63"/>
+<g fill="none" stroke="#677a54" stroke-width="1.2" opacity=".55"><path d="M279 135 276 69M306 163l64-43M314 207l63 25M289 225l-6 74M258 198l-72 13"/></g>
+<circle cx="507" cy="64" r="22" fill="#f7f0d9"/>
+
+</svg>
