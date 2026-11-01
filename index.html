@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffffff"><title>海市咖啡 · 精品咖啡豆</title>
-  <meta name="description" content="在海市咖啡的手作产地画布上，看看9个产地国家的18款精品咖啡豆。">
+  <meta name="description" content="在海市咖啡的手作产地画布上，看看10个产地国家的29款精品咖啡豆。">
   <link rel="icon" href="data:,"><link rel="stylesheet" href="dialogs.css"><link rel="stylesheet" href="canvas.css"><link rel="stylesheet" href="gallery-cards.css"><link rel="stylesheet" href="theatre.css">
 <link rel="stylesheet" href="unified.css"><link rel="stylesheet" href="reading.css"><link rel="stylesheet" href="echo.css"></head>
 <body data-site-root=".">
   <a class="skip-link" href="#origin-picker">直接选择产地</a>
-  <a class="skip-link" href="#main-content">跳到内容</a><header class="site-header"><a class="wordmark" href="./index.html" aria-label="海市咖啡首页"><span class="brand-bean" aria-hidden="true"></span><span>海市咖啡<small>HAISHI COFFEE</small></span></a><nav aria-label="主导航"><a class="map-link" href="./index.html#origin-map" aria-current="page">产地选豆</a><a class="brew-link" href="./brew-guide.html"><span class="nav-wide">冲煮参考</span><span class="nav-short">冲煮</span></a><button type="button" data-bean-action="catalog"><span class="nav-wide">完整豆单</span><span class="nav-short">豆单</span><small>18</small></button><button class="wechat-link" type="button" data-action="wechat">微信下单 ↗</button><button class="basket-button" type="button" data-action="cart">选豆单 <b data-cart-count>0</b></button></nav></header>
+  <a class="skip-link" href="#main-content">跳到内容</a><header class="site-header"><a class="wordmark" href="./index.html" aria-label="海市咖啡首页"><span class="brand-bean" aria-hidden="true"></span><span>海市咖啡<small>HAISHI COFFEE</small></span></a><nav aria-label="主导航"><a class="map-link" href="./index.html#origin-map" aria-current="page">产地选豆</a><a class="brew-link" href="./brew-guide.html"><span class="nav-wide">冲煮参考</span><span class="nav-short">冲煮</span></a><button type="button" data-bean-action="catalog"><span class="nav-wide">完整豆单</span><span class="nav-short">豆单</span><small>29</small></button><button class="wechat-link" type="button" data-action="wechat">微信下单 ↗</button><button class="basket-button" type="button" data-action="cart">选豆单 <b data-cart-count>0</b></button></nav></header>
   <main id="main-content">
     <section class="origin-canvas" aria-labelledby="canvas-title">
       <div class="canvas-intro">
         <div class="brand-title"><h1 id="canvas-title">海市咖啡<span class="tiny-flower" aria-hidden="true">✳</span></h1><p><span>精品咖啡豆</span><small>手冲 · 浓缩 · 加奶</small></p></div>
-        <div class="intro-aside"><span class="hand-note">今天，喝哪里的咖啡？</span><svg aria-hidden="true" viewBox="0 0 130 60"><path d="M5 7Q115-4 107 46m-13-8 13 10 10-13"/></svg><p>9 个产地国家 · 18 款咖啡豆</p></div>
+        <div class="intro-aside"><span class="hand-note">今天，喝哪里的咖啡？</span><svg aria-hidden="true" viewBox="0 0 130 60"><path d="M5 7Q115-4 107 46m-13-8 13 10 10-13"/></svg><p>10 个产地国家 · 29 款咖啡豆</p></div>
       </div>
       <div class="map-stage" id="origin-map">
         <svg id="origin-world" viewBox="0 0 1440 560" aria-label="咖啡产地地图，点击国家名字展开豆款"></svg>
@@ -25,13 +25,13 @@
     <section class="bean-shelf" id="bean-shelf" aria-labelledby="selected-country-title">
       <svg class="shelf-line" viewBox="0 0 1440 25" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14C180 27 283 2 457 13S691 19 844 11s321-5 596 3"/></svg>
       <div class="shelf-inner"><div class="origin-heading" id="origin-heading"></div><div class="bean-display" id="bean-display"></div></div>
-      <p class="shelf-footnote">拼配豆会列在相应产地，共 18 款。点豆卡可看资料、选择规格。</p>
+      <p class="shelf-footnote">拼配豆会列在相应产地，共 29 款。点豆卡可看资料、选择规格。</p>
     </section>
   </main>
   <footer class="site-footer"><a class="footer-signature" href="./index.html">海市咖啡</a><p>精品咖啡豆</p><nav aria-label="页脚导航"><a href="./index.html#bean-shelf">产地选豆</a><a href="./brew-guide.html">冲煮参考</a><button type="button" data-action="wechat">微信下单 ↗</button></nav></footer>
   <p class="sr-only" id="canvas-status" role="status" aria-live="polite"></p>
   <dialog class="bean-inspector" id="bean-inspector" aria-labelledby="inspector-title"></dialog>
-  <dialog class="catalog-dialog" id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-heading"><p>海市咖啡 · 精品咖啡豆</p><h2 id="catalog-title">完整豆单</h2><span>18 款</span><button class="sheet-close" type="button" data-bean-action="close-catalog" aria-label="关闭豆单">×</button></div><div class="catalog-list" id="catalog-list"></div></dialog>
+  <dialog class="catalog-dialog" id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-heading"><p>海市咖啡 · 精品咖啡豆</p><h2 id="catalog-title">完整豆单</h2><span>29 款</span><button class="sheet-close" type="button" data-bean-action="close-catalog" aria-label="关闭豆单">×</button></div><div class="catalog-list" id="catalog-list"></div></dialog>
   <script src="assets/d3.v7.min.js"></script><script src="assets/geography.js"></script><script src="catalog-data.js"></script><script src="./availability.js"></script><script src="flavors.js"></script><script src="bean-details.js"></script><script src="canvas.js"></script><script src="commerce.js"></script>
 <script src="theatre.js"></script><script src="shell.js"></script><script src="echo.js"></script></body>
 </html>

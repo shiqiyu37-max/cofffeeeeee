@@ -6,7 +6,8 @@
   const storageKey = 'haishi-coffee-unified-selection-v1';
   const money = cents => '¥' + Number((cents / 100).toFixed(2));
   const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const cover = p => `${root}/assets/${p.id}-scene.png`;
+  const weightLabel = g => g === 5000 ? '5kg整批' : g + 'g';
+  const cover = p => `${root}/assets/${p.scene||p.id+'-scene.png'}`;
   let cart = [];
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
@@ -50,14 +51,14 @@
   function priceOf(row) { return byId.get(row.id).sizes.find(s => s.grams === row.grams).retailCents; }
   function total() { return cart.reduce((n, row) => n + priceOf(row) * row.quantity, 0); }
   function selectionText() {
-    return ['海市咖啡｜选豆单', ...cart.map((row, i) => `${i+1}. ${byId.get(row.id).name} ${row.grams}g × ${row.quantity}，${money(priceOf(row) * row.quantity)}`), '', '商品小计：' + money(total()) + '（未含运费及优惠）', '研磨需求：请与我确认', '请确认当前批次、库存、发货安排及应付金额后再付款。'].join('\n');
+    return ['海市咖啡｜选豆单', ...cart.map((row, i) => `${i+1}. ${byId.get(row.id).name} ${weightLabel(row.grams)} × ${row.quantity}，${money(priceOf(row) * row.quantity)}`), '', '商品小计：' + money(total()) + '（未含运费及优惠）', '研磨需求：请与我确认', '请确认当前批次、库存、发货安排及应付金额后再付款。'].join('\n');
   }
 
   function choose(id) {
     chosen = byId.get(id); if (!chosen) return;
     if (chosen.soldOut) { toast(chosen.name + '已售罄'); return; }
     grams = chosen.sizes[0].grams; quantity = 1;
-    open(`<div class="dialog-product"><img src="${escape(cover(chosen))}" alt="" width="98" height="98"><div><p class="dialog-eyebrow">选择规格</p><h2 id="dialog-title">${escape(chosen.name)}</h2><p>${escape(chosen.descriptor)}</p></div></div><fieldset><legend>请选择重量</legend><div class="size-options">${chosen.sizes.map((s, i) => `<label class="size-option"><input type="radio" name="bean-size" value="${s.grams}" ${i === 0 ? 'checked' : ''}><b>${s.grams}g</b><span>${money(s.retailCents)}</span>${s.grams === 454 ? '<small>227g × 2 包装</small>' : ''}</label>`).join('')}</div></fieldset><div class="quantity-row"><span>数量</span><div class="stepper"><button type="button" data-action="quantity-minus" aria-label="减少数量">−</button><output id="chosen-quantity" aria-live="polite">1</output><button type="button" data-action="quantity-plus" aria-label="增加数量">＋</button></div></div><button class="clay-button dialog-add" type="button" data-action="add-selection">加入选豆单 <span aria-hidden="true">＋</span><strong id="chosen-total">${money(chosen.sizes[0].retailCents)}</strong></button><p class="dialog-note">需要研磨时，请在微信说明使用器具并确认研磨选项。选豆单用于整理意向，批次与库存以下单确认为准。</p>`, 'choose');
+    open(`<div class="dialog-product"><img src="${escape(cover(chosen))}" alt="" width="98" height="98"><div><p class="dialog-eyebrow">选择规格</p><h2 id="dialog-title">${escape(chosen.name)}</h2><p>${escape(chosen.descriptor)}</p></div></div><fieldset><legend>请选择重量</legend><div class="size-options${chosen.bulkOnly?' is-bulk':''}">${chosen.sizes.map((s, i) => `<label class="size-option"><input type="radio" name="bean-size" value="${s.grams}" ${i === 0 ? 'checked' : ''}><b>${weightLabel(s.grams)}</b><span>${money(s.retailCents)}</span>${s.grams === 454 ? '<small>227g × 2 包装</small>' : s.grams===5000?'<small>整批售卖，不拆分</small>':''}</label>`).join('')}</div></fieldset><div class="quantity-row"><span>数量</span><div class="stepper"><button type="button" data-action="quantity-minus" aria-label="减少数量">−</button><output id="chosen-quantity" aria-live="polite">1</output><button type="button" data-action="quantity-plus" aria-label="增加数量">＋</button></div></div><button class="clay-button dialog-add" type="button" data-action="add-selection">加入选豆单 <span aria-hidden="true">＋</span><strong id="chosen-total">${money(chosen.sizes[0].retailCents)}</strong></button><p class="dialog-note">${chosen.bulkOnly?'仅按5kg整批售卖，不提供其他拆分规格。':''}需要研磨时，请在微信说明使用器具并确认研磨选项。选豆单用于整理意向，批次与库存以下单确认为准。</p>`, 'choose');
     updateChosen();
   }
   function updateChosen() {
@@ -76,7 +77,7 @@
     }
     const rows = cart.map((row, i) => {
       const p = byId.get(row.id);
-      return `<article class="cart-row"><img src="${escape(cover(p))}" alt="" width="62" height="62"><div><h3>${escape(p.name)}</h3><p>${row.grams}g${row.grams === 454 ? ' · 227g × 2' : ''} / ${money(priceOf(row))}</p><div class="stepper"><button type="button" data-action="cart-minus" data-index="${i}" aria-label="减少${escape(p.name)}数量">−</button><output aria-label="${escape(p.name)}数量">${row.quantity}</output><button type="button" data-action="cart-plus" data-index="${i}" aria-label="增加${escape(p.name)}数量">＋</button></div></div><div class="cart-row-total"><strong>${money(priceOf(row)*row.quantity)}</strong><button type="button" data-action="cart-remove" data-index="${i}">移除</button></div></article>`;
+      return `<article class="cart-row"><img src="${escape(cover(p))}" alt="" width="62" height="62"><div><h3>${escape(p.name)}</h3><p>${weightLabel(row.grams)}${row.grams === 454 ? ' · 227g × 2' : ''} / ${money(priceOf(row))}</p><div class="stepper"><button type="button" data-action="cart-minus" data-index="${i}" aria-label="减少${escape(p.name)}数量">−</button><output aria-label="${escape(p.name)}数量">${row.quantity}</output><button type="button" data-action="cart-plus" data-index="${i}" aria-label="增加${escape(p.name)}数量">＋</button></div></div><div class="cart-row-total"><strong>${money(priceOf(row)*row.quantity)}</strong><button type="button" data-action="cart-remove" data-index="${i}">移除</button></div></article>`;
     }).join('');
     const shipping = total() >= 18800 ? '商品小计已达 188 元。优惠后商品实付仍满 188 元时，同一顾客、同一收货地址一单顺丰包邮，偏远地区除外。' : `距 188 元包邮门槛还差 ${money(18800 - total())}。按优惠后商品实付计算，同一顾客、同一收货地址一单，偏远地区除外。`;
     open(`<p class="dialog-eyebrow">确认规格与数量</p><h2 id="dialog-title">你的选豆单</h2><div class="cart-rows">${rows}</div><div class="cart-total"><span>商品小计</span><strong>${money(total())}</strong></div><p class="dialog-note">未含运费及优惠，实际应付金额在微信确认。</p><div class="shipping-hint">${shipping}</div><div class="cart-cta"><button type="button" class="clay-button" data-action="copy-selection">复制选豆单 <span aria-hidden="true">↗</span></button><button class="text-button" type="button" data-action="wechat">联系海市工作微信 ↗</button></div><details class="cart-draft"><summary>查看下单文案</summary><label class="sr-only" for="order-draft">可复制的下单文案</label><textarea id="order-draft" readonly>${escape(selectionText())}</textarea></details>`, 'cart');
@@ -116,7 +117,7 @@
       if (!chosen || chosen.soldOut) return;
       const row = cart.find(r => r.id === chosen.id && r.grams === grams);
       if (row) row.quantity = Math.min(99, row.quantity + quantity); else cart.push({id:chosen.id,grams,quantity});
-      save(); close(); toast(`${chosen.name} ${grams}g 已加入选豆单`);
+      save(); close(); toast(`${chosen.name} ${weightLabel(grams)} 已加入选豆单`);
       document.dispatchEvent(new CustomEvent('haishi:selection-added', {detail: {id: chosen.id, grams, quantity}}));
     }
     if (action === 'cart-minus' || action === 'cart-plus' || action === 'cart-remove') {
