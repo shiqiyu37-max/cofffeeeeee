@@ -11,7 +11,7 @@
 .inspector-head h2.echo-signed::after,.dialog-product h2.echo-signed::after{width:22px;height:4px;margin-top:5px}
 .echo-origin-en{display:inline-block;font:10px/1.8 var(--body);color:#99a68e;letter-spacing:.045em;margin-left:13px;vertical-align:1px}
 .gallery-entry{position:relative;border-bottom:0;background-image:none}
-.gallery-entry::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:18px;display:block;background:url('assets/clay-divider.svg') center/100% 100% no-repeat;pointer-events:none}
+.gallery-entry::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:9px;display:block;background:url('assets/clay-divider.svg') center/100% 100% no-repeat;pointer-events:none}
 .gallery-entry:nth-child(even)::after{transform:scaleX(-1)}
 .detail-page .section-nav{border-bottom:0;background-color:#fffffff5;background-image:var(--echo-rule);background-position:left bottom;background-size:100% 7px;background-repeat:no-repeat;padding-bottom:8px}
 .detail-page .section-nav a.current{text-decoration-color:color-mix(in srgb,var(--echo-hue,#c7d6b8) 68%,#b5c7a6)}
@@ -21,4 +21,4 @@
 .photo figcaption{font-size:11px;padding-top:9px;line-height:1.8}
 .guide-card{border-bottom-color:#e2ead9}
 @media(max-width:600px){.echo-bean{width:9px;height:13px;vertical-align:-2px;margin-right:7px}.echo-bean::after{left:4px;height:9px}.bean-name.echo-signed::after{width:22px;height:4px;margin-top:7px}.name-hand.echo-signed::after{width:31px;height:5px;margin-top:9px}.echo-origin-en{display:block;margin:4px 0 0;font-size:9px;letter-spacing:.04em}.guide-title h2.echo-signed::after{width:18px;height:4px;margin-top:5px}.related-card b.echo-signed::after{width:17px;height:3px}.photo figcaption{font-size:10px}.site-footer{padding-top:28px}}
-@media(max-width:600px){.gallery-entry::after{height:14px;bottom:-1px}}
+@media(max-width:600px){.gallery-entry::after{height:7px;bottom:-1px}}

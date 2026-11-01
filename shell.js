@@ -67,3 +67,23 @@ const motion=matchMedia('(prefers-reduced-motion:reduce)');
   box.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();show(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();show(current-1)}});
   box.addEventListener('click',e=>{if(e.target!==box)return;const b=box.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)close()});
 })();
+
+/* Local coffee PNG downloads: 20261102. */
+
+(() => {
+  'use strict';
+  if(!document.body.dataset.productId||!document.querySelector('.detail-header,.card-header'))return;
+  const root=document.body.dataset.siteRoot||'.';let loading=false;
+  const stylesheet=document.createElement('link');stylesheet.rel='stylesheet';stylesheet.href=root+'/coffee-downloads.css';document.head.append(stylesheet);
+  const loadScript=name=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=root+'/'+name;script.onload=resolve;script.onerror=()=>{script.remove();reject(new Error(name));};document.head.append(script);});
+  async function load(){
+    if(loading||window.HaishiDownloads)return;loading=true;
+    try{
+      if(!window.HAISHI_DOWNLOAD_DATA)await loadScript('download-data.js');
+      await loadScript('coffee-downloads.js');document.querySelector('.download-loader-error')?.remove();
+    }catch(error){
+      if(!document.querySelector('.download-loader-error')){const notice=document.createElement('div');notice.className='download-loader-error';notice.setAttribute('role','status');notice.append('资料下载暂未加载。');const retry=document.createElement('button');retry.type='button';retry.textContent='重新加载';retry.addEventListener('click',load);notice.append(retry);document.querySelector('.detail-header,.card-header').after(notice);}
+    }finally{loading=false;}
+  }
+  load();
+})();
