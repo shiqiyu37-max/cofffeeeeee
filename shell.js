@@ -47,7 +47,7 @@ const motion=matchMedia('(prefers-reduced-motion:reduce)');
     document.querySelectorAll('.flavor-tokens').forEach(el=>{el.classList.add('flavor-tags');el.innerHTML=HaishiFlavors.tags(product,root)});
   }
   const from=new URLSearchParams(location.search).get('origin');
-  if(from&&/^(CRI|HND|JAM|COL|PER|ETH|KEN|CHN|IDN)$/.test(from)){
+  if(from&&/^(all|CRI|HND|JAM|COL|PER|ETH|KEN|CHN|IDN)$/.test(from)){
     document.body.dataset.originCode=from;
     document.querySelectorAll('a[href*="index.html"][href*="#bean-shelf"]').forEach(a=>a.href=root+'/index.html?origin='+from+'#bean-shelf');
   }

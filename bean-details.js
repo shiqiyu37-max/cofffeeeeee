@@ -1,13 +1,14 @@
 (() => {
   'use strict';
   const products=window.HAISHI_DATA||[],byId=new Map(products.map(p=>[p.id,p]));
+  const availableFirst=list=>[...list].sort((a,b)=>Number(Boolean(a.soldOut))-Number(Boolean(b.soldOut)));
   const root=document.body.dataset.siteRoot;
   const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money=c=>'¥'+Number((c/100).toFixed(2));
   const cover=p=>`${root}/assets/${p.id}-scene.png`;
   const inspector=document.getElementById('bean-inspector'),catalog=document.getElementById('catalog-dialog');
   let previousInspectorFocus,previousCatalogFocus;
-  document.getElementById('catalog-list').innerHTML=products.map(p=>`<button type="button" class="catalog-row" data-bean-action="inspect" data-id="${p.id}"><img src="${esc(cover(p))}" alt="" width="65" height="65" loading="lazy"><span><span class="catalog-name">${esc(p.name)}</span><span class="catalog-description">${esc(p.descriptor)}</span><small>${esc(p.origin)}</small></span><span class="catalog-row-price">${money(p.sizes[0].retailCents)}<small>/ ${p.sizes[0].grams}g</small></span></button>`).join('');
+  document.getElementById('catalog-list').innerHTML=availableFirst(products).map(p=>`<button type="button" class="catalog-row" data-bean-action="inspect" data-id="${p.id}"${p.soldOut?' disabled aria-disabled="true" tabindex="-1"':''}><img src="${esc(cover(p))}" alt="" width="65" height="65" loading="lazy"><span><span class="catalog-name">${esc(p.name)}</span><span class="catalog-description">${esc(p.descriptor)}</span><small>${esc(p.origin)}</small></span><span class="catalog-row-price">${money(p.sizes[0].retailCents)}<small>/ ${p.sizes[0].grams}g</small></span></button>`).join('');
   function closeInspector(){if(inspector.open){inspector.close();previousInspectorFocus?.focus({preventScroll:true})}}
   function closeCatalog(){if(catalog.open){catalog.close();previousCatalogFocus?.focus({preventScroll:true})}}
   function inspect(id){
