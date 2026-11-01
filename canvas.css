@@ -31,3 +31,9 @@
 @media(max-width:600px){.map-stage #origin-world{overflow:hidden}.canvas-intro{display:block}.brand-title h1{display:inline-block}.intro-aside{position:static;padding-top:20px;margin:0 0 0 2px;top:auto;left:auto;right:auto}.map-stage{margin-top:18px;overflow:hidden}.origin-choice{font:500 15px/1.35 var(--body);color:#60765f;letter-spacing:0;gap:5px}.origin-choice small{color:#94a18d}.origin-choice.selected{color:#334e38}.origin-choice.selected::before{background:#f2f6f0;border-color:#d5e0cf;border-radius:5px 8px 5px 8px;transform:rotate(-1deg)}.choice-english{font:400 9px/1.3 'Avenir Next',var(--body);letter-spacing:.035em;color:#8d9a87}.origin-heading h2>.heading-english{display:block;margin:5px 0 0;font-size:11px}}
 @media(max-width:359px){.origin-choice{font-size:13px}.choice-english{font-size:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Keep the way back to all coffees beside the filtered bean collection. */
+.origin-heading .origin-show-all{display:inline-flex;align-items:center;justify-content:center;justify-self:start;box-sizing:border-box;width:auto;min-width:0;max-width:100%;height:44px;min-height:44px;margin-top:14px;padding:0 14px;border:1px solid #bdcebb;border-radius:10px 14px 11px 13px;background:#eef4ec;color:#3f5947;font:500 12px/1.4 var(--body);letter-spacing:.01em;white-space:nowrap;cursor:pointer}
+.origin-heading .origin-show-all:hover{background:#e5eee2;border-color:#8fa68b}
+.origin-heading .origin-show-all:focus-visible{outline:2px solid #6b8168;outline-offset:3px}
+@media(max-width:900px){.origin-heading .origin-show-all{grid-column:1/-1;grid-row:4;margin-top:14px}}
