@@ -134,7 +134,7 @@
     records(p.flavor.records);paragraphs(p.flavor.notes);
     y+=30;ops.push({kind:'rule',x:M,y,width:CW});y+=31;
     text('海市咖啡 · 精品咖啡豆',{size:27,line:42,gap:4,color:'#84917b'});
-    text('资料按网站公开记录整理 · '+String(data.date||'').replaceAll('-','.'),{size:25,line:40,gap:0,color:'#98a18f'});
+    text('资料按网站公开记录整理 · '+String(p.updatedDate||data.date||'').replaceAll('-','.'),{size:25,line:40,gap:0,color:'#98a18f'});
     const height=Math.ceil(y+60);
     return{width:W,height,ops,bounds,id:p.id,type,titleY};
   }
